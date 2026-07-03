@@ -1,0 +1,335 @@
+\documentclass[UTF8]{ctexart}
+
+%\RequirePackage{amsmath} \RequirePackage{amssymb}
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{fullpage}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+%\usetikzlibrary{quotes,angles}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{decorations.pathreplacing}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+
+
+\newcommand{\BC}{{\mathbb {C}}}
+
+\newcommand{\BN}{{\mathbb {N}}}
+\newcommand{\BQ}{{\mathbb {Q}}}
+\newcommand{\BR}{{\mathbb {R}}}
+\newcommand{\BZ}{{\mathbb {Z}}}
+\newcommand{\bv}{{\bm v}}
+\newcommand{\bw}{{\bm w}}
+\newcommand{\bu}{{\bm u}}
+\newcommand{\bx}{{\bm x}}
+\newcommand{\by}{{\bm y}}
+
+\newcommand{\bb}{{\bm b}}
+\newcommand{\Coker}{{\mathrm{Coker}}}
+
+
+\newcommand{\End}{{\mathrm{End}}}
+\newcommand{\GL}{{\mathrm{GL}}}
+
+\newcommand{\SO}{{\mathrm{GSO}}}
+\newcommand{\Hom}{{\mathrm{Hom}}}
+
+\renewcommand{\Im}{{\mathrm{Im}}}
+
+\newcommand{\Isom}{{\mathrm{Isom}}}
+\newcommand{\Id}{{\mathrm{Id}}}
+
+
+
+\newcommand{\Ker}{{\mathrm{Ker}}}
+
+
+
+\newcommand{\rank}{{\mathrm{rank}}}
+
+
+\newcommand{\SU}{{\mathrm{SU}}}
+\newcommand{\Sym}{{\mathrm{Sym}}}
+
+\newcommand{\sub}{{\mathrm{sub}}}
+
+\newcommand{\tr}{{\mathrm{tr}}}
+
+\newcommand{\matrixx}[4]{\begin{pmatrix}
+		#1 & #2 \\ #3 & #4
+	\end{pmatrix} }
+	
+	
+	
+	\newcommand{\wt}{\widetilde}
+	\newcommand{\wh}{\widehat}
+	\newcommand{\pp}{\frac{\partial\bar\partial}{\pi i}}
+	\newcommand{\pair}[1]{\langle {#1} \rangle}
+	\newcommand{\wpair}[1]{\left\{{#1}\right\}}
+	\newcommand{\intn}[1]{\left( {#1} \right)}
+	\newcommand{\norm}[1]{\|{#1}\|}
+	\newcommand{\sfrac}[2]{\left( \frac {#1}{#2}\right)}
+	\newcommand{\ds}{\displaystyle}
+	\newcommand{\ov}{\overline}
+	\newcommand{\incl}{\hookrightarrow}
+	\newcommand{\lra}{\longrightarrow}
+	\newcommand{\lla}{\longleftarrow}
+	\newcommand{\ra}{\rightarrow}
+	\newcommand{\imp}{\Longrightarrow}
+	\newcommand{\lto}{\longmapsto}
+	\newcommand{\bs}{\backslash}
+	
+	
+	
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+	\newcommand{\sk}{\medskip}\newcommand{\bsk}{\bigskip}
+	\newcommand{\s}{\sk\noindent}\newcommand{\bigs}{\bsk\noindent}
+	
+	
+	%accented words
+
+	\def\mat(#1,#2,#3,#4){
+		\left[\begin{array}{cc}
+			#1 & #2 \\ #3 & #4\end{array}
+		\right]
+	}
+		\def\clm(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ #2 \end{array}
+\right]
+	}
+		\def\clmn(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ \vdots\\ #2 \end{array}
+\right]
+	}
+		\def\clmt(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ #3\end{array}
+\right]
+	}
+		\def\clmf(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ \vdots \\ #3\end{array}
+\right]
+	}
+
+
+		
+\begin{document}
+
+
+\title{习题课材料（一）简要解答}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+
+
+
+
+
+\begin{ex}
+设 $A=\begin{bmatrix} 1 & 1 & 0 & \\ -1 & 0 & 1 \\ 0 & -1 & -1 \\ \end{bmatrix}, \bb=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \\ \end{bmatrix}$， 证明：
+\begin{enumerate}
+\item  $A \bx=\bb$ 有解当且仅当 $b_1+b_2+b_3=0$.
+\item 齐次线性方程组 $A \bx=\bm{0}$ 的解集是 $\{k \bx_1, k \in \mathbb{R}\}, \bx_1=\begin{bmatrix} 1 \\ -1 \\ 1 \\ \end{bmatrix}$.
+\item 当 $A \bx=\bb$ 有解时， 设$\bx_0$ 是一个解， 则解集是 $\{\bx_0 + k \bx_1, k \in \mathbb{R}\}$.
+\end{enumerate}
+\end{ex}
+
+
+\begin{ex}
+	令 $A=\begin{bmatrix} 1 & 1 & 1 \\ 1 & 3 & 1\end{bmatrix}$.
+	\begin{enumerate}
+		\item 求所有的 $3\times 2$ 矩阵 $X$, 使得 $AX=\mat(0,0,0,0)
+		$.
+		\item 求一个 $3\times 2$ 矩阵 $X$, 使得 $AX=\mat(1,0,0,1)$.
+		\item 求所有 $3\times 2$ 矩阵 $X$, 使得 $AX=\mat(1,0,0,1)$.
+	\end{enumerate}
+	\end{ex}
+\begin{ex}
+	设 $A\in M_3(\BR)$, 考虑方程组 $A\bx=\clmt(2,4,2)$. 已知 $\left\{\clmt(2,0,0)+c\clmt(1,1,0)+d\clmt(0,0,1):c,d\in\BR\right\}$ 是它所有的解; 请求出 $A$.
+\end{ex}
+
+
+\begin{ex}
+设 $\triangle ABC$ 是平面中的三角形，三边 $BC$, $AC$, $AB$ 上的垂线分别记为 $\ell_1, \ell_2, \ell_3$.
+用点积证明 $\ell_1, \ell_2, \ell_3$ 交于一点.
+
+（提示：将 $\triangle ABC$ 放在直角坐标系中，
+$P$ 为平面上的任意一点，
+则点 $P \in \ell_1$ 当且仅当 $P, A, B, C$ 四点的坐标满足什么关系？
+类似的 $P \in \ell_2$ 或 $P \in \ell_3$
+当且仅当 $P, A, B, C$ 四点的坐标满足什么关系？）
+\end{ex}
+
+
+
+
+\begin{ex}
+证明：
+\begin{enumerate}
+	\item 设 $n$ 维向量 $\bx$ 的每个分量都是 $1$， 则 $n$ 阶方阵  $A$ 的各行元素之和为 $1$ 当且仅当 $A \bx=\bx$.
+	\item 若 $n$ 阶方阵 $A, B$ 的各行元素之和均为$1$, 则 $AB$ 的各行元素之和也均为 $1$.
+	\item 若 $n$ 阶方阵 $A, B$ 的各列元素之和均为$1$, 则 $AB$ 的各列元素之和也均为 $1$.
+\end{enumerate}
+\end{ex}
+
+
+\begin{ex}
+	\begin{itemize}
+\item[(a)] 设 $2$ 阶方阵
+\[
+R_{\theta}=\begin{bmatrix}
+\cos\theta & -\sin\theta\\
+\sin\theta & \cos\theta
+\end{bmatrix}.
+\]
+由矩阵和向量的乘法给出 $\mathbb{R}^2$ 上的变换 $f_{\theta}:\mathbb{R}^2 \to \mathbb{R}^2, \bx \mapsto R_{\theta}\bx$.
+\begin{enumerate}
+\item[(1)] 证明: $f_{\theta}$ 是逆时针旋转角度 $\theta$ 的变换.
+\item[(2)] 证明: 设 $\theta \ne k\pi$, 不存在非零向量 $\bx$, 满足 $R_{\theta}\bx=\pm\bx$.
+\item[(3)] 计算 $R_{\theta}^n$, $n$是整数.
+\end{enumerate}
+
+\item[(b)] 设
+\[
+H_{\theta}=\begin{bmatrix}
+\cos2\theta & \sin2\theta\\
+\sin2\theta & -\cos2\theta
+\end{bmatrix}, \bv=\begin{bmatrix}
+\cos\theta \\
+\sin\theta
+\end{bmatrix}, \bw=\begin{bmatrix}
+\sin\theta \\
+-\cos\theta
+\end{bmatrix}.
+\]
+\begin{enumerate}
+	\item[(1)] 证明: $H_{\theta}^2=I_2, H_{\theta}=I_2-2\bw\bw^{T}$.
+    \item[(2)] 证明: $\bv \perp \bw, |\bv|=|\bw|=1; H_{\theta}\bv=\bv, H_{\theta}\bw=-\bw$. 试分析变换$\bx \mapsto H_{\theta}\bx$ 的几何意义.
+    \end{enumerate}
+\item[(c)] 证明: $R_{-\theta}H_{\phi}R_{\theta}=H_{\phi-\theta}, H_{\phi}R_{\theta}H_{\phi}=R_{-\theta}$, 并分析其几何意义.
+
+\end{itemize}
+	\end{ex}
+
+
+
+\begin{ex}
+设 $n$ 阶方阵
+$$T=\begin{bmatrix} 1 & -1 & 0 & \cdots & 0 \\ -1 & 2 & -1 & \cdots & 0 \\ 0 & -1 & 2 & \ddots & \vdots \\  \vdots & \ddots & \ddots & \ddots & -1 \\ 0 & \cdots & 0 & -1 & 2 \\ \end{bmatrix}.$$
+利用初等变换证明: 存在分解式 $T=LU$, 其中 $L$ 是下三角矩阵, $U$ 是上三角矩阵. 据此求出 $T^{-1}$.
+\end{ex}
+
+\begin{ex}
+证明: 对角线元素全非零的上三角阵 $U$ 可逆, 其逆矩阵 $U^{-1}$ 也是上三角阵,
+且 $U^{-1}$ 的对角线元素是 $U$ 的对角线元素的倒数.
+\end{ex}
+\begin{proof}[提示]
+	这是高斯消元法的直接推论: 用最后一行的合适的倍数加到前 $n-1$ 行, 可将第 $n$ 列对角线上方全部消掉. 再将得到的新矩阵的第 $n-1$ 行的合适的倍数加到前 $n-2$ 行, 可将第 $n-1$ 列对角线上方全部消掉. 于是逐次作初等行变换可将 $U$ 变为对角线非零而其他位置全是零的矩阵, 显然这是可逆的.
+	
+	设 $V=(b_{ij})$ 是 $U=(a_{ij})$ 的逆矩阵. 我们对 $j$ 作归纳, 证明当 $j<i$ 时 $b_{ij}=0$. 考虑 $VU=I_n$ 的第 $1$ 列, 那么当 $i>1$ 时$b_{i1}a_{11}=0$, 故 $b_{i1}=0$. 再考虑 $VU=I_n$ 的第 $2$ 列:  $\sum_{k=1}^nb_{ik}a_{k2}=0$; 利用 $j=1$ 的情形, 当 $i>2$ 时 $b_{i2}a_{22}=0$, 故 $b_{i2}=0$. 以此类推.
+	\end{proof}
+
+ \begin{ex}[$\heartsuit $]
+假设 $i\neq j$. 我们把单位矩阵 $I$ 的 $(i,j)$ 项改成 $1$, 其他项保持不变, 这样得到的矩阵记作 $E_{ij}$. 单位矩阵 $I$ 的 $(i,i)$ 项和 $(j,j)$ 项改成零, 再把 $(i,j)$ 项和 $(j,i)$ 项改成 $1$, 这样得到的矩阵记作 $P_{ij}$.
+\begin{itemize}	
+	\item[(a)] 证明: 对于矩阵 $P_{ij} (i<j)$, 以下性质成立:
+	\begin{enumerate}
+		\item 若 $\forall i<k<j$, 则
+		\begin{itemize}
+			\item $P_{ik}P_{ij}=P_{kj}P_{ik}=P_{ij}P_{kj}$;
+			\item $P_{ij}P_{ik}=P_{kj}P_{ij}=P_{ik}P_{kj}$;
+			\item $(P_{ik}P_{ij})^3=I$.
+		\end{itemize}
+		\item 若 $i,j,k,\ell$ 互不相等，则
+		\begin{itemize}
+			\item $P_{k\ell}P_{ij}=P_{ij}P_{k\ell}$;
+			\item$(P_{k\ell}P_{ij})^2=I$.
+		\end{itemize}
+	\end{enumerate}
+	
+	\item[(b)] 对于任意两个矩阵 $A,B$, 我们定义 $[A,B]=AB-BA$.
+	\begin{enumerate}
+		\item 假设 $i,j,k$ 两两不同, 计算 $[E_{ij},E_{jk}], [E_{ij},P_{jk}]$ 和 $[P_{ij},P_{jk}]$. (除生算外, 也可以直接考虑作为行操作或列操作, 两个矩阵的顺序调换后, 到底差别在哪里.)
+		\item 令 $D={\rm diag}(d_1,...,d_n)$ 为对角矩阵; 假设 $i\neq j$, 计算 $[E_{ij},E_{ji}], [E_{ij},D]$ 和 $[P_{ij},D]$. (除生算外, 也可以直接考虑作为行操作或列操作, 两个矩阵的顺序调换后, 到底差别在哪里.)
+	\end{enumerate}
+	\end{itemize}
+\end{ex}
+\begin{proof}[提示]
+	(a) 我们用初等行变换的观点来考虑这些矩阵乘法. 在矩阵 $A$ 的左边乘以 $P_{ij}$ 即交换 $A$的第 $i,j$ 行.  那么在矩阵 $A$ 左边乘 $P_{ik}P_{ij}$ 就是先交换 $A$ 的第 $i,j$ 行, 再交换 $P_{ij}A$ 的第 $i,k$ 行, 总的效果是: 把矩阵 $A$ 的第 $i$ 行变成原第 $k$ 行, 第 $j$ 变成原第 $i$ 行, 第 $k$ 行变成原第 $j$ 行.简单的图示:
+	$$i\to k,\quad j\to i,\quad k\to j.$$
+	其他的矩阵运算都可以同样考虑.
+	
+	要计算 $(P_{ij}P_{ij})^3$, 我们看它乘在矩阵 $A$ 左边是哪个初等行变换. 令 $A_1=(P_{ij}P_{ij})(A),A_2=(P_{ij}P_{ij})^2A_1,A_3=(P_{ij}P_{ij})^3 A$. 那么 有上面的讨论, $A_1$ 的第 $i,j,k$ 行分别是 $A$ 的第 $k,i,j$ 行; $A_2$ 的第 $i,j,k$ 行分别是 $A_1$ 的第 $k,i,j$ 行, 即 $A$ 的第 $j,k,i$ 行分别是 $A$ 的第 $k,i,j$ 行; $A_3$ 的第 $i,j,k$ 行分别是 $A_2$ 的第 $k,i,j$ 行, 即 $A$ 的第 $i,j,k$ 行; 而 $A_3$ 的其他行与 $A$ 的对应行都一样, 所以 $A_3=A$. 这就得到: $(P_{ij}P_{ij})^3=I_n$
+	
+	(b) 我们同样用初等行变换来考虑这个矩阵乘法. $E_{ij}E_{jk}$ 采用上面的简单图示可以这样表示:
+	$$i\to i,\quad j\to i+j,\quad k\to j+k.$$
+	$E_{jk}E_{ij}$ 可以这样表示:
+	$$i\to i,\quad j\to i+j,\quad k\to i+j+k.$$
+	因此在矩阵 $A$ 左边乘 $E_{ij}E_{jk}-E_{jk}E_{ij}$ 就是把 $A$ 的第 $k$ 行变称原第 $i$ 行的 $-1$ 倍, 其他行全变称 $\bm{0}$. 因此 $[E_{ij},E_{jk}]$ 的第 $(i,k)$ 项为 $-1$, 其他项全为 $0$. 其他的类似.
+	\end{proof}
+
+\begin{ex}[$\heartsuit $]
+	\begin{enumerate}
+	\item 定义 $m \times n$ 阶实矩阵 $A=(a_{ij})$ 的范数为
+	$$ 	\|A\|= \sqrt{ \sum_{i=1}^m \sum_{j=1}^n a_{ij}^2}. 	$$
+	证明：
+	\begin{enumerate}
+		\item $\|A\| \geq 0$; 且 $\|A\|=0$ 当且仅当 $A=0$,
+		\item $\|cA\| = |c|\cdot\|A\|$,
+		\item $\|A+B\|\leq\|A\|+\|B\|$,
+		\item $\|AB\|\leq\|A\|\cdot\|B\|$.
+	\end{enumerate}
+   \item 证明范数
+	$$ \|A\|_{\infty} = \max_{1\leq i\leq m} \sum_{j=1}^n |a_{ij}|.
+	$$
+	也满足性质(a)-(d).
+	\end{enumerate}
+\end{ex}
+\begin{proof}[提示]
+对于 $\norm{\cdot}$. (c) 如下:
+$$\begin{array}{ll}
+\norm{A+B}\leq\norm{A}+\norm{B} &\Leftrightarrow \displaystyle{\sum_{i,j}(a_{ij}+b_{ij})^2\leq\left((\sum_{i,j}a_{ij}^2)^{1/2}+(\sum_{i,j}b_{ij}^2)^{1/2}\right)^2} \\ &\Leftrightarrow \displaystyle{\sum_{ij}a_{ij}b_{ij}\leq\left(\sum_{i,j}a_{ij}^2\sum_{i,j}b_{ij}^2\right)^{1/2}}
+\end{array}$$
+最后一个不等式是 Cauchy-Schwartz 不等式. (d) 如下:
+$$\norm{AB}^2=\sum_{i,j}\left(\sum_ka_{ik}b_{kj}\right)^2\leq\sum_{i,j}\left(\sum_{k}a_{ik}^2\sum_\ell b_{\ell j}^2\right)=\left(\sum_{i,k}a_{ik}^2\right)\left(\sum_{\ell,j}b_{\ell j}^2\right)=\norm{A}^2\norm{B}^2,$$
+其中第一个不等号也是因为 Cauchy-Schwartz 不等式.
+
+对于 $\|\cdot\|_\infty$,  (d) 如下: 对任意 $1\leq i\leq m$,
+$$\sum_{k=1}^p|(AB)_{ik}|=\sum_{k=1}^p\left|\sum_{j=1}^na_{ij}b_{jk}\right|\leq \sum_{k=1}^p\sum_{j=1}^n|a_{ij}||b_{jk}|=\sum_{j=1}^n|a_{ij}|\left(\sum_{k=1}^p|b_{jk}|\right)\leq \sum_{j=1}^n|a_{ij}|\norm{B}_\infty\leq \norm{A}_\infty\norm{B}_\infty.$$
+	\end{proof}
+
+
+
+
+\end{document}

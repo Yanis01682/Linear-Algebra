@@ -1,0 +1,387 @@
+\documentclass[UTF8]{ctexart}
+
+%\RequirePackage{amsmath} \RequirePackage{amssymb}
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{fullpage}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+%\usetikzlibrary{quotes,angles}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{decorations.pathreplacing}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+
+
+
+\newcommand{\BC}{{\mathbb {C}}}
+
+\newcommand{\BN}{{\mathbb {N}}}
+\newcommand{\BQ}{{\mathbb {Q}}}
+\newcommand{\BR}{{\mathbb {R}}}
+\newcommand{\BZ}{{\mathbb {Z}}}
+\newcommand{\bv}{{\bm v}}
+\newcommand{\bw}{{\bm w}}
+\newcommand{\bu}{{\bm u}}
+\newcommand{\bx}{{\bm x}}
+\newcommand{\by}{{\bm y}}
+
+\newcommand{\bb}{{\bm b}}
+\newcommand{\Coker}{{\mathrm{Coker}}}
+
+
+\newcommand{\End}{{\mathrm{End}}}
+\newcommand{\GL}{{\mathrm{GL}}}
+
+\newcommand{\SO}{{\mathrm{GSO}}}
+\newcommand{\Hom}{{\mathrm{Hom}}}
+
+\renewcommand{\Im}{{\mathrm{Im}}}
+
+\newcommand{\Isom}{{\mathrm{Isom}}}
+\newcommand{\Id}{{\mathrm{Id}}}
+
+
+
+\newcommand{\Ker}{N}
+\newcommand{\Ran}{R}
+\newcommand{\nullspace}{N}
+\newcommand{\range}{R}
+
+\newcommand{\rank}{{\mathrm{rank}}}
+
+
+\newcommand{\SU}{{\mathrm{SU}}}
+\newcommand{\Sym}{{\mathrm{Sym}}}
+
+\newcommand{\sub}{{\mathrm{sub}}}
+
+\newcommand{\tr}{{\mathrm{tr}}}
+
+\newcommand{\matrixx}[4]{\begin{pmatrix}
+		#1 & #2 \\ #3 & #4
+	\end{pmatrix} }
+	
+	
+	
+	\newcommand{\wt}{\widetilde}
+	\newcommand{\wh}{\widehat}
+	\newcommand{\pp}{\frac{\partial\bar\partial}{\pi i}}
+	\newcommand{\pair}[1]{\langle {#1} \rangle}
+	\newcommand{\wpair}[1]{\left\{{#1}\right\}}
+	\newcommand{\intn}[1]{\left( {#1} \right)}
+	\newcommand{\norm}[1]{\|{#1}\|}
+	\newcommand{\sfrac}[2]{\left( \frac {#1}{#2}\right)}
+	\newcommand{\ds}{\displaystyle}
+	\newcommand{\ov}{\overline}
+	\newcommand{\incl}{\hookrightarrow}
+	\newcommand{\lra}{\longrightarrow}
+	\newcommand{\lla}{\longleftarrow}
+	\newcommand{\ra}{\rightarrow}
+	\newcommand{\imp}{\Longrightarrow}
+	\newcommand{\lto}{\longmapsto}
+	\newcommand{\bs}{\backslash}
+	
+	
+	
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+	\newcommand{\sk}{\medskip}\newcommand{\bsk}{\bigskip}
+	\newcommand{\s}{\sk\noindent}\newcommand{\bigs}{\bsk\noindent}
+	
+	
+	%accented words
+
+	\def\mat(#1,#2,#3,#4){
+		\left[\begin{array}{cc}
+			#1 & #2 \\ #3 & #4\end{array}
+		\right]
+	}
+		\def\clm(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ #2 \end{array}
+\right]
+	}
+		\def\clmn(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ \vdots\\ #2 \end{array}
+\right]
+	}
+		\def\clmt(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ #3\end{array}
+\right]
+	}
+		\def\clmf(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ \vdots \\ #3\end{array}
+\right]
+	}
+
+
+		
+\begin{document}
+
+
+\title{习题课材料（五）简要解答}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+\medskip
+
+\noindent{\bfseries 记号}: 如不加说明，我们只考虑实矩阵。对于矩阵$A$, 它的四个基本子空间是列空间$C(A)$, 零空间$N(A)$, 行空间$C(A^T)$和$A^T$的零空间$N(A^T)$。
+
+\medskip
+
+
+
+
+\begin{ex}
+请构造以下满足条件的矩阵，或者指明为什么不存在满足条件的矩阵：
+\begin{enumerate}
+\item 列空间包含向量$\begin{bmatrix}1\\2\\-3\end{bmatrix},\begin{bmatrix}2\\-3\\5\end{bmatrix}$，零空间包含向量$\begin{bmatrix}1\\1\\1\end{bmatrix}$；
+\item 行空间包含向量$\begin{bmatrix}1\\2\\-3\end{bmatrix},\begin{bmatrix}2\\-3\\5\end{bmatrix}$，零空间包含向量$\begin{bmatrix}1\\1\\1\end{bmatrix}$；
+\item $A\bm x=\begin{bmatrix}1\\1\\1\end{bmatrix}$有解，且$A$的左零空间包含$\begin{bmatrix}1\\0\\0\end{bmatrix}$；
+\item $A$不是零矩阵，且$A$的所有行垂直于$A$的所有列；
+%\item $A$非零，且它的列空间等于零空间；
+\item $A$的所有列向量的和是零向量，但是所有行向量的和是一个分量均为$1$的向量；
+\item $A,B$均为非零的正交投影矩阵，且$A+B$仍是一个正交投影矩阵；
+\item $A,B$均为正交投影矩阵，然而$A+B$并不是一个正交投影矩阵；
+\item $A,B,C$均为非对角的三阶正交投影矩阵，且$A+B+C=I_3$。
+\end{enumerate}
+\end{ex}
+
+\begin{proof}[解答]
+仅仅是一些范例，有的答案可能不唯一。
+\begin{enumerate}
+\item $\begin{bmatrix}1&2&-3\\2&-3&1\\-3&5&2\end{bmatrix}$或其他满足条件的矩阵；
+\item 不可能，因为行空间的$\begin{bmatrix}2\\-3\\5\end{bmatrix}$与列空间的$\begin{bmatrix}1\\1\\1\end{bmatrix}$不正交；
+\item 不可能，因为列空间与左零空间正交；
+\item $\begin{bmatrix}0&1\\0&0\end{bmatrix}$或者与之相似的矩阵；
+%\item 不可能，所有列都在列空间中，因此都是零向量，所以$A=0$；
+\item 不可能。从列的角度看，矩阵内所有元素和是零。从行的角度看，矩阵的元素和不是零，矛盾；
+\item $\begin{bmatrix}1&0\\0&0\end{bmatrix}+\begin{bmatrix}0&0\\0&1\end{bmatrix}=I$，实际上只要两个投影的像彼此正交即可；
+\item $\begin{bmatrix}1&0\\0&0\end{bmatrix}+\frac{1}{2}\begin{bmatrix}1&1\\1&1\end{bmatrix}=\frac{1}{2}\begin{bmatrix}3&1\\1&1\end{bmatrix}$，然而它的平方不等于自己（实际上只要两个投影的像彼此不正交即可）；
+\item 任取标准正交基，比如$\bm u=\frac{1}{\sqrt{3}}\begin{bmatrix}1\\1\\1\end{bmatrix},\bm v=\frac{1}{\sqrt{2}}\begin{bmatrix}1\\-1\\0\end{bmatrix},\bm w=\frac{1}{\sqrt{6}}\begin{bmatrix}1\\1\\-2\end{bmatrix}$，令$A=\bm u\bm u^T,B=\bm v\bm v^T,C=\bm w\bm w^T$。
+\end{enumerate}
+\end{proof}
+
+
+
+
+\begin{ex}
+请将以下向量$\bm x$分解成在$\Ker(A)$中的部分与在$C(A^{T})$中的部分的和，然后点积验证它们确实垂直。
+\begin{enumerate}
+\item $\bm x=\begin{bmatrix}2\\0\end{bmatrix},A=\begin{bmatrix}1&-1\\0&0\\0&0\end{bmatrix}$；
+\item $\bm x=\begin{bmatrix}1\\0\end{bmatrix},A=\begin{bmatrix}1&1\\1&1\end{bmatrix}$；
+\item $\bm x=\begin{bmatrix}5\\5\\9\end{bmatrix},A=\begin{bmatrix}1&2&3\\2&2&4\\2&3&5\end{bmatrix}$；
+\end{enumerate}
+\end{ex}
+
+
+
+\begin{ex}
+考虑矩阵$A=\begin{bmatrix}3&6&6\\4&8&8\end{bmatrix}$。
+\begin{enumerate}
+\item 计算向着$\begin{bmatrix}3&6&6\\4&8&8\end{bmatrix}$的列空间的正交投影矩阵$P_1$；
+\item 计算向着$\begin{bmatrix}3&6&6\\4&8&8\end{bmatrix}$的行空间的正交投影矩阵$P_2$；
+\item 计算$P_1AP_2$。结果意不意外？为什么会有如此结果？
+\end{enumerate}
+\end{ex}
+
+\begin{ex}[$\heartsuit$]
+（Fredholm二择一定理）
+\begin{enumerate}
+\item 证明方程组$A\bm x=\bm b$有解当且仅当$\Ker(A^T)$与$\bm b$正交；
+\item 证明$\Ker(A^T)$与$\bm b$不正交当且仅当存在$\bm y$，使得$\bm y^T \bm A =0, \bm y^T \bm b =1$；
+\item 说明当方程组$A\bm x=\bm b$无解时，方程组的一个伪解（即一个假定的$A\bm x=\bm b$的解）给出标准矛盾等式$0=1$。
+
+\end{enumerate}
+\end{ex}
+
+\begin{proof}[证明]
+\begin{enumerate}
+\item 有解意味着$\bm b=A\bm x\in C(A)$，因此必须和$\Ker(A^T)$正交。
+\item 由于$\Ker(A^T)$与$\bm b$不正交，存在向量$\bm y_0\in\Ker(A^T)$满足$\bm y_0^T\bm b\neq \bm 0$。令$\bm y=\frac{\bm y_0}{\bm y_0^T\bm b}$即可。
+\item  方程组$A\bm x=\bm b$无解当且仅当$\Ker(A^T)$与$\bm b$不正交。因此有$\bm y$使得$\bm y^T \bm A =0, \bm y^T \bm b =1$。设$\bm x_0$为方程组一伪解，即满足$A\bm x_0=\bm b,$ 两边同时左乘$\bm y^T$，得到标准矛盾等式$0=1$。
+\end{enumerate}
+\end{proof}
+
+
+
+
+\begin{ex}
+考虑$\mathbb{R}^n$中两个子空间$\mathcal{M},\mathcal{N}$。通过把对应的一组基当成列向量，不妨假设可以找到列满秩矩阵$A,B$，使得$C(A)=\mathcal{M}, C(B)=\mathcal{N}$。
+\begin{enumerate}
+\item 证明$\mathcal{M}\subseteq\mathcal{N}$当且仅当存在矩阵$X$使得$A=BX$；
+\item 仿照集合论中补集的性质，我们期待正交补有类似的性质。假设$\mathcal{M}\subseteq\mathcal{N}$，请证明$\mathcal{N}^\perp\subseteq\mathcal{M}^\perp$。（能否从前一小问，看出一个矩阵角度的证明？）
+\end{enumerate}
+\end{ex}
+
+
+
+\begin{proof}[证明]
+\begin{enumerate}
+\item 假设$A=\begin{bmatrix}\bm a_1&\dots&\bm a_k\end{bmatrix}$，那么所有$\bm a_i$都在$C(B)$中，因此存在$\bm x_i$满足$\bm a_i=B\bm x_i$。令$X=\begin{bmatrix}\bm x_1&\dots&\bm x_k\end{bmatrix}$即可。
+\item 由于$A=BX$，我们有$A^T=X^TB^T$。所以$B^T\bm x=\bm 0$意味着$A^T\bm x=\bm 0$。因此$\mathcal{N}^\perp= C(B)^\perp=\Ker(B^T)\subseteq\Ker(A^T)= C(A)^\perp=\mathcal{M}^\perp$。
+\end{enumerate}
+\end{proof}
+
+\begin{ex}[$\heartsuit $]
+考虑$\mathbb{R}^n$中两个子空间$\mathcal{M},\mathcal{N}$。通过把对应的一组基当成列向量，不妨假设可以找到列满秩矩阵$A,B$，使得$C(A)=\mathcal{M}, C(B)=\mathcal{N}$。
+\begin{enumerate}
+\item $\mathcal{M}+\mathcal{N}$是哪个由$A,B$构造出的矩阵的列空间？这意味着$(\mathcal{M}+\mathcal{N})^\perp$是该矩阵的什么空间？
+\item $\mathcal{M}^\perp,\mathcal{N}^\perp$分别是哪个由$A,B$构造出的矩阵的零空间？这意味着$\mathcal{M}^\perp\cap\mathcal{N}^\perp$是哪个由$A,B$构造出的矩阵的零空间？
+\item 证明子空间版本的De Morgan定律：$(\mathcal{M}+\mathcal{N})^\perp=\mathcal{M}^\perp\cap\mathcal{N}^\perp,(\mathcal{M}\cap\mathcal{N})^\perp=\mathcal{M}^\perp+\mathcal{N}^\perp$。
+\item[注记:] 集合论中有De Morgan定律，它说对于两个子集$X,Y$，$X\cap Y$的补集等于$X$的补集并上$Y$的补集，且$X\cup Y$的补集等于$X$的补集交上$Y$的补集。对于子空间来说，正交补也有类似的性质。
+\end{enumerate}
+\end{ex}
+
+\begin{proof}[解答]
+\begin{enumerate}
+\item 对应着矩阵$\begin{bmatrix}A&B\end{bmatrix}$的列空间。所以正交补是它的左零空间。
+\item 分别是$A^T$和$B^T$的零空间，所以交集是$\begin{bmatrix}A^T\\B^T\end{bmatrix}$的零空间。
+\item 由1，2我们有$(\mathcal{M}+\mathcal{N})^\perp=\mathcal{M}^\perp\cap\mathcal{N}^\perp$。 现在，对$\mathcal{M}^\perp,\mathcal{N}^\perp$应用这个公式，再取正交补，就得到$(\mathcal{M}\cap\mathcal{N})^\perp=\mathcal{M}^\perp+\mathcal{N}^\perp$。
+\end{enumerate}
+\end{proof}
+
+
+\begin{ex}
+设$A$为列满秩矩阵。
+\begin{enumerate}
+\item 假设$\bm v=A\bm x$，我们希望找到$\bm y$使得$\bm v=AA^T\bm y$。请找到一个矩阵$C$（使用$A$来构造）使得$C\bm x$就是这里所需要的$\bm y$；（提示：$A^T$未必可逆，但是利用可逆矩阵$A^TA$，可以给它找一个右逆。）
+\item 证明$C(AA^T)=C(A)$。
+%\item 证明$C(AA^T+BB^T)$是$\mathcal{M}+\mathcal{N}$。（提示：将矩阵和写成$XX^T$的形式，再利用上一小问。）
+%\item 证明$\Ker(AA^T+BB^T)=\mathcal{M}^\perp\cap\mathcal{N}^\perp=(\mathcal{M}+\mathcal{N})^\perp$；
+%\item 证明或举出反例：$AA^T+BB^T$是到$\mathcal{M}+\mathcal{N}$的正交投影矩阵的若干倍。
+\end{enumerate}
+\end{ex}
+
+\begin{proof}[提示]
+\begin{enumerate}
+\item 令$C=A(A^TA)^{-1}$，此时$AA^TC\bm x=AA^TA(A^TA)^{-1}\bm x=A(A^TA)(A^TA)^{-1}\bm x=A\bm x=\bm v$即为所求。（助教可以顺便指出$A^TC=I$，而$CA^T$则是正交投影矩阵。）
+\item 上一小问证明了$C(A)\subseteq C(AA^T)$，而另一方面$C(AA^T)\subseteq C(A)$是显然的，因此二者相等。
+%\item 令$X=\begin{bmatrix}A&B\end{bmatrix}$，则$C(AA^T+BB^T)=C(XX^T)=C(X)=\mathcal{M}+\mathcal{N}$。
+%\item 注意$AA^T+BB^T$是对称矩阵，因此它的列空间和零空间互为正交补。
+%\item 反例，令$A=\begin{bmatrix}1\\1\end{bmatrix},B=\begin{bmatrix}1\\0\end{bmatrix}$，则$AA^T+BB^T=\begin{bmatrix}2&1\\1&1\end{bmatrix}\neq kI$。
+\end{enumerate}
+\end{proof}
+
+
+
+
+\begin{ex}[$\heartsuit $]
+任取$\mathbb{R}^m$中的子空间$\mathcal{M}_1,\mathcal{M}_2$，与$\mathbb{R}^n$中的子空间$\mathcal{N}_1,\mathcal{N}_2$，是否一定存在一个矩阵$A$，使得$C(A)=\mathcal{M}_1,\nullspace(A^{T})=\mathcal{M}_2, C(A^{T})=\mathcal{N}_1,\nullspace(A)=\mathcal{N}_2$？如果并不一定存在，请给四个子空间加上尽量少的条件，使得这样的矩阵一定存在。
+\end{ex}
+
+\begin{proof}[解答]
+不一定，因为未必满足线代基本定理要求的子空间关系。
+
+假设$\mathcal{M}_1,\mathcal{M}_2$互为正交补，$\mathcal{N}_1,\mathcal{N}_2$互为正交补，且$\dim\mathcal{M}=\dim\mathcal{N}$，则一定存在。为$\mathcal{M}_1$挑一组基$\bm a_1,\dots,\bm a_r$，作为列向量构成矩阵$A$。为$\mathcal{N}_1$挑一组基$\bm b_1,\dots,\bm b_r$，作为列向量构成矩阵$B$。我们断言$AB^T$即为所求。
+
+由于$A$列无关，因此$AB^T\bm x=\bm 0$当且仅当$B^T\bm x=\bm 0$当且仅当$\bm x\in\Ker(B^T)=C(B)^\perp=\mathcal{N}_1^\perp=\mathcal{N}_2$，因此零空间正确。同理观察$BA^T$，发现$AB^T$的左零空间也正确。根据线代基本定理，由此很容易推出其它子空间都符合要求。
+\end{proof}
+
+
+
+
+\begin{ex}
+日常生活中我们常说的两个平面垂直，是指平面的法向量正交。例如假设墙角是原点，那么竖直的墙面和地板是一对彼此垂直的平面。但是注意，它们之间并不是正交子空间的关系，因为它俩的交集包含的非零向量。我们下面来探索平面垂直与子空间正交之间的关系。
+\begin{enumerate}
+\item 考虑$A=\begin{bmatrix}1&2\\1&3\\1&2\end{bmatrix},B=\begin{bmatrix}5&4\\6&3\\-5&-4\end{bmatrix}$。 请找到这两个矩阵的列空间交集中的一个非零向量。他们的列空间平面的法向量是否垂直？是否是正交子空间？
+\item 找到以上矩阵对应的正交投影矩阵$P_A,P_B$，是否有$P_AP_B=P_BP_A$？
+\item 假设$\mathbb{R}^3$内一个二维子空间作为平面的单位法向量是$\bm v$，证明到该平面的正交投影是$I-\bm v\bm v^T$
+\item 给定$\mathbb{R}^3$中的任意两个二维子空间，假设其正交投影矩阵是$P_1,P_2$，证明$P_1P_2=P_2P_1$当且仅当两个子空间要么作为平面是垂直的（法向量垂直），要么相等。（对比之下，正交子空间的要求是$P_1P_2=P_2P_1=0$）
+\end{enumerate}
+\end{ex}
+
+\begin{proof}[解答]
+\begin{enumerate}
+\item $C(A)$的法向量是$\begin{bmatrix}1\\0\\-1\end{bmatrix}$，$C(B)$的法向量是$\begin{bmatrix}1\\0\\1\end{bmatrix}$，因此法向量正交，这是一对垂直的平面。但是由于作为子空间有交集，这不是正交子空间。
+\item 略。
+\item 首先可以验证$(I-\bm v\bm v^T)^2=I-\bm v\bm v^T,(I-\bm v\bm v^T)^T=I-\bm v\bm v^T$，因此这是一个正交投影矩阵。显然$(I-\bm v\bm v^T)\bm x=\bm 0$意味着$\bm x=\bm v(\bm v^T\bm x)$，因此$\Ker(I-\bm v\bm v^T)=\mathrm{span}\{\bm v\}$。这意味着$C(I-\bm v\bm v^T)$是与$\bm v$垂直的过原点的平面。（当然也可以直接从几何角度证明，$\bm v\bm v^T$是向着法向量的正交投影，因此去掉之后就是向着平行于平面的正交投影。）
+\item 假设单位法向量分别是$\bm v_1,\bm v_2$，则$P_i=I-\bm v_i\bm v_i^T$。于是计算发现$P_1P_2-P_2P_1=(\bm v_1^T\bm v_2)(\bm v_1\bm v_2^T-\bm v_2\bm v_1^T)$。因此交换意味着要么$\bm v_1,\bm v_2$垂直，要么$\bm v_1\bm v_2^T=\bm v_2\bm v_1^T$，而这意味着$\bm v_1,\bm v_2$平行，因此两个子空间重合。
+\end{enumerate}
+\end{proof}
+
+
+
+\begin{ex}
+给定$\bm a\neq \bm 0$，方程$\bm a^{T}\bm x=b$定义了$\mathbb{R}^n$中的一个超平面。给定一个向量$\bm v\in\mathbb{R}^n$，将它看成是空间中的一个点，超平面上距离点$\bm v$最近的点称为$\bm v$到该超平面的正交投影。我们想求点$\bm v$到这个超平面的正交投影。
+\begin{enumerate}
+\item 我们显然希望$\bm v$沿着一个垂直于该超平面的法向量$\bm n$的方向移动，直到$\bm v$碰到该超平面为止。这个法向量$\bm n$是什么？
+\item 设答案为$\bm v+x\bm n$，请求出所需要的$x$；
+\item 将$\bm v=\begin{bmatrix}1\\2\\3\end{bmatrix}$看成是空间$\mathbb{R}^3$中的一个点，且$\bm a=\begin{bmatrix}2\\1\\-1\end{bmatrix}$，求点$\bm v$到平面$\bm a^{T}\bm x=2$的正交投影和点到平面的距离。
+\end{enumerate}
+\end{ex}
+
+
+\begin{proof}[提示]
+\begin{enumerate}
+\item $\bm n$就是$\bm a$。超平面上任取两点$\bm x,\bm y$，都有$\bm a^T(\bm x-\bm y)=0$，因此$\bm a$和超平面内部的任意方向都垂直。
+\item 我们希望$\bm a^T(\bm v+x\bm a)=b$，解得$x=\frac{b-\bm a^T\bm v}{\bm a^T\bm a}$。
+
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+
+
+\begin{ex}
+假设$A=\begin{bmatrix}0&0&2\\0&3&0\\1&0&1\end{bmatrix},\bm b=\begin{bmatrix}2.1\\3\\2\end{bmatrix}$。我们考虑方程组$A\bm x=\bm b$的解。显然，$\bm x_0=\begin{bmatrix}1\\1\\1\end{bmatrix}$是一个非常接近正确答案的向量。
+\begin{enumerate}
+\item 注意，$A\bm x=\bm b$有三行，因此等于是在求解三个平面的交集。请将$\bm x_0$向第一个平面$2x_3=2.1$进行投影，得到$\bm x_1$；
+\item 请将$\bm x_1$向第二个平面$3x_2=3$进行投影，得到$\bm x_2$；
+\item 请将$\bm x_2$向第三个平面$x_1+x_3=2$进行投影，得到$\bm x_3$；
+\item 请将$\bm x_3$再向第一个平面$2x_3=2.1$进行投影，得到$\bm x_4$；
+\item （$\heartsuit $）在本题这样的情形中，这样无限循环下去，是否会越来越接近正确答案？
+\item[注记：] 实践中，我们想要解的方程组$A\bm x=\bm b$可能十分巨大，比方说做CT扫描时，将人体看成1000个像素块（未知数），用10000条射线以不同的方式穿过（不同的线性方程），那么这等价于在$A$为$10000\times 1000$的时候求解线性方程组。可以想象，用Gauss消元法解决需要花费很久很久的时间，并不现实。所以我们需要利用$A$的特殊性质来想办法加速计算。
+
+有时$A$确实有些很有趣的性质。注意，CT扫描时，$A$每一行对应着一条射线，每一列对应着一个待检测的像素块。然而，每条射线一般仅能穿过很极其有限的像素块，而完全不会碰到大多数像素块。因此$A$的每一行存在着大量的零。一个绝大多数元素都是零的矩阵，我们也称为稀疏矩阵。此时，是否有更快速地解方程的方法呢？我们这里介绍的方法叫做Kaczmarz方法。由于$A$是一个稀疏矩阵，每一行存在大量的零。因此投影计算非常快。所以实践中，可以采取这种Kaczmarz方法进行反复投影，直到足够接近正确答案为止。
+\end{enumerate}
+\end{ex}
+
+\begin{proof}[提示]
+\begin{enumerate}
+\item $\bm x_1=\begin{bmatrix}1\\1\\1.05\end{bmatrix}$；
+\item $\bm x_2=\begin{bmatrix}1\\1\\1.05\end{bmatrix}$；
+\item $\bm x_3=\begin{bmatrix}0.975\\1\\1.025\end{bmatrix}$；
+\item $\bm x_4=\begin{bmatrix}0.975\\1\\1.05\end{bmatrix}$；
+\item 会收敛，其中第二个分量$x_2=1$永远不变，第一个分量$x_1$单点递减，向着$0.95$收敛，而第三个分量$x_3$在$1.05$和$2-x_1$之间摇摆，但是由于$x_1$收敛于$0.95$，因此$x_3$收敛于$1.05$；
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,122 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+% \usepackage{CJK}
+\usepackage{arydshln}
+% \usepackage[11pt]{moresize}
+
+
+
+\newtheorem{thm}{定理}
+\newtheorem{cor}[thm]{推论}
+\newtheorem{lem}[thm]{引理}
+\newtheorem{prop}[thm]{命题}
+\newtheorem{defn}[thm]{定义}
+\newtheorem{ques}[thm]{问题}
+\newtheorem{eg}[thm]{例题}
+\newtheorem{ex}[thm]{习题}
+\newtheorem{rmk}[thm]{注释}
+\newtheorem{ntn}[thm]{记号}
+
+
+
+
+\begin{document}
+
+
+\title{习题课材料（七）}
+\date{}
+
+\maketitle
+
+
+%\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+\begin{ex}
+  奇数阶反对称矩阵不可逆.
+\end{ex}
+
+
+\begin{ex}
+  对分块上三角矩阵 \(X=\begin{bmatrix}A & C \\ O & B\end{bmatrix}\),
+  证明 \(\det X = \det A \cdot \det B\).
+\end{ex}
+
+
+\begin{ex}
+  设 \(A\), \(B\) 分别为 \(m\times n\), \(n\times m\) 矩阵.
+  证明 \(\det(I_m + AB) = \det(I_n+BA)\).
+\end{ex}
+
+ 
+
+\begin{ex}[\(\heartsuit\)]
+  设 \(T = [\boldsymbol{t}_1,\ldots,\boldsymbol{t}_n]\) 为 \(n\) 阶方阵.
+  证明 Hadamard 不等式
+  \[
+    |\det T| \leq \|\boldsymbol{t}_1\| \cdots \|\boldsymbol{t}_n\|.
+  \]
+\end{ex}
+
+
+
+
+\begin{ex}
+  计算行列式
+  \begin{equation*}
+    \begin{vmatrix}
+      1 & 0 & 0 & 2 \\
+      0 & 3 & 4 & 5 \\
+      5 & 4 & 0 & 3 \\
+      2 & 0 & 0 & 1
+    \end{vmatrix}
+  \end{equation*}
+\end{ex}
+
+
+
+\begin{ex}
+  \(\begin{vmatrix} 2x & x & 1 & 2 \\ 1 & x & 1 & -1\\ 3 & 2 & x & 1 \\ 1 & 1 & 1& x\end{vmatrix}\)
+  中 \(x^4\), \(x^3\) 系数.
+\end{ex}
+
+
+
+\begin{ex}
+  设方阵 \(A,B\) 满足 \(AB=BA\). 证明
+  \(\det\begin{bmatrix}A & B\\-B & A\end{bmatrix}=\det(A^2+B^2)\).
+\end{ex}
+
+
+\begin{ex}
+  \begin{enumerate}
+  \item
+    设 \(A\) 是正交矩阵, \(\det A < 0\). 证明 \(I_n + A\) 不可逆.
+  \item   设 \(A\) 为奇数阶正交矩阵, \(\det A > 0\).
+    证明 \(I_n - A\) 不可逆.
+  \end{enumerate}
+\end{ex}
+
+
+
+\begin{ex}[\(\heartsuit\)]
+  设 \(A\) 为对角占优方阵, 对角元素全为正数. 证明 \(\det A > 0\).
+\end{ex}
+
+
+
+\begin{ex}
+  设 \(A\) 是元素为整数的可逆矩阵. 证明, 若 \(A\) 可逆, 并且 \(A^{-1}\)
+  的元素也为整数的必要且充分条件是 \(|\det A| =  1\).
+\end{ex}
+
+
+\end{document}

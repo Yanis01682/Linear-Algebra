@@ -1,0 +1,315 @@
+\documentclass[UTF8]{ctexart}
+
+%\RequirePackage{amsmath} \RequirePackage{amssymb}
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{fullpage}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+%\usetikzlibrary{quotes,angles}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{decorations.pathreplacing}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+
+
+\newcommand{\BC}{{\mathbb {C}}}
+
+\newcommand{\BN}{{\mathbb {N}}}
+\newcommand{\BQ}{{\mathbb {Q}}}
+\newcommand{\BR}{{\mathbb {R}}}
+\newcommand{\BZ}{{\mathbb {Z}}}
+\newcommand{\bv}{{\bm v}}
+\newcommand{\bw}{{\bm w}}
+\newcommand{\bu}{{\bm u}}
+\newcommand{\bx}{{\bm x}}
+\newcommand{\by}{{\bm y}}
+
+\newcommand{\bb}{{\bm b}}
+\newcommand{\Coker}{{\mathrm{Coker}}}
+
+
+\newcommand{\End}{{\mathrm{End}}}
+\newcommand{\GL}{{\mathrm{GL}}}
+
+\newcommand{\SO}{{\mathrm{GSO}}}
+\newcommand{\Hom}{{\mathrm{Hom}}}
+
+\renewcommand{\Im}{{\mathrm{Im}}}
+
+\newcommand{\Isom}{{\mathrm{Isom}}}
+\newcommand{\Id}{{\mathrm{Id}}}
+
+
+
+\newcommand{\Ker}{{\mathrm{Ker}}}
+
+
+
+\newcommand{\rank}{{\mathrm{rank}}}
+
+
+\newcommand{\SU}{{\mathrm{SU}}}
+\newcommand{\Sym}{{\mathrm{Sym}}}
+
+\newcommand{\sub}{{\mathrm{sub}}}
+
+\newcommand{\tr}{{\mathrm{tr}}}
+
+\newcommand{\matrixx}[4]{\begin{pmatrix}
+		#1 & #2 \\ #3 & #4
+	\end{pmatrix} }
+	
+	
+	
+	\newcommand{\wt}{\widetilde}
+	\newcommand{\wh}{\widehat}
+	\newcommand{\pp}{\frac{\partial\bar\partial}{\pi i}}
+	\newcommand{\pair}[1]{\langle {#1} \rangle}
+	\newcommand{\wpair}[1]{\left\{{#1}\right\}}
+	\newcommand{\intn}[1]{\left( {#1} \right)}
+	\newcommand{\norm}[1]{\|{#1}\|}
+	\newcommand{\sfrac}[2]{\left( \frac {#1}{#2}\right)}
+	\newcommand{\ds}{\displaystyle}
+	\newcommand{\ov}{\overline}
+	\newcommand{\incl}{\hookrightarrow}
+	\newcommand{\lra}{\longrightarrow}
+	\newcommand{\lla}{\longleftarrow}
+	\newcommand{\ra}{\rightarrow}
+	\newcommand{\imp}{\Longrightarrow}
+	\newcommand{\lto}{\longmapsto}
+	\newcommand{\bs}{\backslash}
+	
+	
+	
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+	\newcommand{\sk}{\medskip}\newcommand{\bsk}{\bigskip}
+	\newcommand{\s}{\sk\noindent}\newcommand{\bigs}{\bsk\noindent}
+	
+	
+	%accented words
+
+	\def\mat(#1,#2,#3,#4){
+		\left[\begin{array}{cc}
+			#1 & #2 \\ #3 & #4\end{array}
+		\right]
+	}
+		\def\clm(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ #2 \end{array}
+\right]
+	}
+		\def\clmn(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ \vdots\\ #2 \end{array}
+\right]
+	}
+		\def\clmt(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ #3\end{array}
+\right]
+	}
+		\def\clmf(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ \vdots \\ #3\end{array}
+\right]
+	}
+
+
+		
+\begin{document}
+
+
+\title{习题11}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+
+\noindent{\bfseries 记号}: 对于线性映射$T$, 我们用$\ker(T)$表示$T$的核, $Im (T)$表示$T$的值域/像集。
+
+\medskip
+
+
+\begin{ex}
+	记实数域$\,\mathbb{R}$上的全体一元可导函数组成的集合为$\mathcal{C}^1(\mathbb{R})$，定义$\,\mathcal{C}^1(\mathbb{R})$ 上的变换：$\,\boldsymbol{A}\big(f(x)\big) = xf(x) \quad \forall f(x) \in \mathcal{C}^1(\mathbb{R})$.
+	
+	(1)证明 $\,\boldsymbol{A}$ 是 $\,\mathcal{C}^1(\mathbb{R})$ 上的一个线性变换。
+	
+	(2)设 $\,\boldsymbol{D}$ 是求导算子，证明 $\,\boldsymbol{D}\boldsymbol{A} - \boldsymbol{A}\boldsymbol{D} = \boldsymbol{I}$.
+\end{ex}
+\begin{proof}[答案]
+按照定义证明。
+\end{proof}
+\begin{ex}
+	考虑$xy$平面，设$T$为关于$x$轴的反射变换，$S$为关于$y$轴的反射变换。对于任意向量$\mathbf{v}=(x,y)$，写出$S(T(\mathbf{v}))$，并给出线性变换$ST$的更简单的描述。
+\end{ex}
+
+
+\begin{ex}
+	考虑函数空间的子空间 $\,{\rm span}(\sin^2x, \cos^2x)$.
+	
+	(1)证明 $\,\sin^2x, \cos^2 x$ 和 $\,1, \cos 2x$ 分别是子空间的一组基。
+	
+	(2)分别求从 $\,\sin^2x, \cos^2 x$ 到 $\,1, \cos 2x$， 和从 $\,1, \cos 2x$ 到 $\,\sin^2x, \cos^2 x$ 的过渡矩阵。
+	
+	(3)分别求 $\,1$ 和 $\,\sin^2 x$ 在两组基下的坐标。
+\end{ex}
+\begin{proof}[答案]
+	两个过渡矩阵为$\left[\begin{array}{rr} 1& -1 \\ 1& 1 \end{array}\right]$和$\frac12\left[\begin{array}{rr} 1& 1 \\ -1& 1\end{array}\right]$。
+\end{proof}
+
+\begin{ex}
+	考虑线性空间$P_2[x]:=\{y(x)|\, y(x)=a+bx+cx^2,\,a,b,c\in \mathbb{R}\}$。已知$w_1(x), w_2(x), w_3(x)\in P_2[x]$且满足$w_1(-1)=1, w_1(0)=0, w_1(1)=0$，$w_2(-1)=0, w_2(0)=1, w_2(1)=0$，$w_3(-1)=0, w_3(0)=0, w_3(1)=1$。
+	
+	（1）证明：$w_1(x), w_2(x), w_3(x)$构成$P_2[x]$的一组基。
+	
+	（2）取$\,v_1(x)=1, v_2(x)=x, v_3(x)=x^2$，分别求从$\,v_1,v_2,v_3$ 到$w_1, w_2, w_3$ 的过渡矩阵和从$\,w_1, w_2, w_3$ 到$\,v_1,v_2,v_3$ 的过渡矩阵。
+\end{ex}
+\begin{proof}[答案]
+	两个过渡矩阵为$\left[\begin{array}{rrr} 0& 1 &0 \\ 0.5& 0 & -0.5\\ 0.5& -1 &0.5 \end{array}\right]$和$\left[\begin{array}{rrr} 1& 1 &1 \\ 1& 0 & 0\\ 1& -1 &1 \end{array}\right]$。
+\end{proof}
+
+
+\begin{ex}
+	设 $\,\mathcal{V}$ 是所有 $\,2$ 阶对称矩阵构成的线性空间， $f$ 是其上的线性变换：$f(X) = A^{\rm T}XA$, 其中 $\,A = \left[\begin{array}{cc} a & b\\ c& d\end{array}\right].$ 
+	求 $\,f$ 在基 $\,E_{11}, E_{22}, E_{12} + E_{21}$ 下的矩阵。其中$\,E_{ij}$ 为$\,(i,j)$ 处元素为 $\,1$，其余元素都是$\,0$ 的矩阵。
+\end{ex}
+
+
+%\begin{ex}[$\heartsuit $]
+%设 $\,\mathcal{V}$ 是数域 $\,\mathbb{F}$ 上的 $\,n$ 维线性空间，$\mathbb{F}$ 可以看作自身上的线性空间，而 $\,\mathcal{V}$ 到 $\,\mathbb{F}$ 的线性映射称为 $\,\mathcal{V}$ 上的线性函数。
+%令 $\,\mathcal{V}^* = {\rm Hom}(\mathcal{V},\mathbb{F})$，称为 $\,\mathcal{V}$ 的对偶空间。证明：$\mathcal{V}^*$ 和 $\,\mathcal{V}$ 同构。
+%\end{ex}
+
+
+\begin{ex}
+	设 $\,3$ 维线性空间 $\,\mathcal{V}$ 有一组基 $\,\boldsymbol{e}_1,  \boldsymbol{e}_2, \boldsymbol{e}_3$，其上的线性变换 $\,f$ 在该组基下的矩阵是
+	\[
+	A = \left[\begin{array}{ccc} 2 & 3 & 2\\ 1& 8 & 2 \\ -2 & -14 & -3\end{array}\right].
+	\]
+	
+	(1)求 $\,f$ 的全部特征值和特征向量。
+	
+	(2)判断是否存在一组基，使得 $\,f$ 在该组基下的表示矩阵是对角矩阵。如果存在，写出这组基及对应的对角矩阵。
+\end{ex} 
+
+\begin{proof}[答案]
+求解 $\,A$ 的特征值 $\,\lambda_{1,2} = 3, \lambda_3 = 1$ 和相应的特征向量 $\,\boldsymbol{v}_1 = \left[\begin{array}{c} \frac12 \\-\frac12 \\1\end{array} \right],
+\boldsymbol{v}_3 = \left[\begin{array}{c} -2 \\0 \\1\end{array} \right]$。则 $\,f$ 的特征值和特征向量为
+\[
+(\lambda, \boldsymbol{x}) = (3, \frac12 \boldsymbol{e}_1 -\frac12 \boldsymbol{e}_2 + \boldsymbol{e}_3), 
+\text{ 和 } (1, -2 \boldsymbol{e}_1 + \boldsymbol{e}_3).
+\]
+\end{proof}
+
+
+
+
+
+	
+\begin{ex}
+考虑二阶矩阵空间$M_2(\mathbb{R})$上的线性变换
+$T(M)=AMB$，其中$\,A = \left[\begin{array}{cc} 1 & 0\\ 0& 0\end{array}\right],$ $\,B = \left[\begin{array}{cc} 0 & 0\\ 0& 1\end{array}\right]$。描述$\ker (T)$及$Im T$。 
+\end{ex}
+\begin{proof}[答案]
+$\ker(T)=\big\{\left[\begin{array}{cc} a & 0\\ c& d\end{array}\right]|\,\, a,c,d\in\mathbb{R}\big\}$。$Im (T)=\big\{\left[\begin{array}{cc} 0 & b\\ 0& 0\end{array}\right]|\,\, b\in\mathbb{R}\big\}$。可以验证$\dim \ker(T)+\dim Im(T)=\dim M_2(\mathbb{R})$。
+\end{proof}
+		
+\begin{ex}
+	在$\mathbb{R}^3$中，设线性变换$T$关于基$\mathbf{v}_1=(-1,1,1)$，$\mathbf{v}_2=(1,0,-1)$，$\mathbf{v}_3=(0,1,1)$的矩阵是
+	$$\,A = \left[\begin{array}{rrr} 
+	1 & 0 & 1\\ 
+	1 & 1 & 0\\
+	-1 & 2 & 1
+	\end{array}\right].$$ 	
+	
+	（1）求$T$关于基$\mathbf{e}_1=(1,0,0)$，$\mathbf{e}_2=(0,1,0)$，$\mathbf{e}_3=(0,0,1)$的矩阵。
+	
+	（2）设向量$\mathbf{v}=\mathbf{v}_1+6\mathbf{v}_2-\mathbf{v}_3$，$\mathbf{w}=\mathbf{e}_1-\mathbf{e}_2+\mathbf{e}_3$，求$T(\mathbf{v})$和$T(\mathbf{w})$关于基$\mathbf{v}_1$、$\mathbf{v}_2$、$\mathbf{v}_3$的坐标。
+\end{ex}
+\begin{proof}[解答]
+	（1）令$V=[\mathbf{v}_1\,\, \mathbf{v}_2\,\, \mathbf{v}_3]$。由题设，有$(\mathbf{v}_1,\mathbf{v}_2, \mathbf{v}_3)=(\mathbf{e}_1,\mathbf{e}_2, \mathbf{e}_3)V$。所以从基$\mathbf{v}_1,\mathbf{v}_2, \mathbf{v}_3$到基$\mathbf{e}_1,\mathbf{e}_2, \mathbf{e}_3$的过渡矩阵为$V^{-1}$。则$T$关于基$\mathbf{e}_1,\mathbf{e}_2, \mathbf{e}_3$的矩阵是
+	$$VAV^{-1}=\left[\begin{array}{rrr} 
+	-1 & 1 & -2\\ 
+	2 & 2 & 0\\
+	3 & 0 & 2
+	\end{array}\right].$$	
+	
+	（2）	$\mathbf{v}$关于基$\mathbf{v}_1$、$\mathbf{v}_2$、$\mathbf{v}_3$的坐标为$\mathbf{c}=[1, 6, -3]^T$，于是$T(\mathbf{v})$关于$\mathbf{v}_1$、$\mathbf{v}_2$、$\mathbf{v}_3$的坐标为
+	$A\mathbf{c}=[0,7,10]^T$。$T(\mathbf{w})$关于$\mathbf{e}_1$、$\mathbf{e}_2$、$\mathbf{e}_3$的坐标为$\mathbf{d}=VAV^{-1}\mathbf{w}$，则其关于$\mathbf{v}_1$、$\mathbf{v}_2$、$\mathbf{v}_3$的坐标为$V^{-1}\mathbf{d}=AV^{-1}\mathbf{w}=[-1,-5,1]^T$。
+\end{proof}
+
+
+\begin{ex}[$\heartsuit $]
+设$\dim V=n$，$\dim W=m$。$T$是$V$到$W$的线性映射，且$T$的秩为$r$。证明：可以分别选取$V$与$W$的合适基底，使得在此选取下$T$的矩阵表示为
+$$\,A = \left[\begin{array}{cc} 
+I_r & \mathbf{0}\\ 
+\mathbf{0}& \mathbf{0}
+\end{array}\right]_{m\times n}.$$ 	
+\end{ex}
+
+\begin{proof}
+由维数公式知：$$\dim \ker(T)=\dim V-\dim \Im(T)=n-r.$$
+取$\ker(T)$的一组基$\{\mathbf{v}_{r+1},\cdots, \mathbf{v}_n\}$，并将其扩充为$V$的一组基$\{\mathbf{v}_{1},\cdots, \mathbf{v}_n\}$。设$\mathbf{w}_i=T(\mathbf{v}_i)$，$i=1,\cdots,r$。
+
+先证$\{\mathbf{w}_1,\cdots,\mathbf{w}_r\}$线性无关。考虑
+$$t_1\mathbf{w}_1+\cdots+t_r\mathbf{w}_r=\mathbf{0},\qquad t_1,\cdots,t_r\in \mathbb{R}.$$	
+由于$T$是线性映射，有：
+$$T(t_1\mathbf{v}_1+\cdots+t_r\mathbf{v}_r)=t_1\mathbf{w}_1+\cdots+t_r\mathbf{w}_r=\mathbf{0}.$$		
+所以$t_1\mathbf{v}_1+\cdots+t_r\mathbf{v}_r\in \ker (T)$。从而存在$t_{r+1},\cdots,t_{n}\in\mathbb{R}$，使得
+$$t_1\mathbf{v}_1+\cdots+t_r\mathbf{v}_r= t_{r+1}\mathbf{v}_{r+1}+\cdots+t_n\mathbf{v}_n.$$
+但$\{\mathbf{v}_{r+1},\cdots, \mathbf{v}_n\}$线性无关，所以
+$$t_1=\cdots=t_n=0,$$
+即$\{\mathbf{w}_1,\cdots,\mathbf{w}_r\}$线性无关。
+
+现将$\{\mathbf{w}_1,\cdots,\mathbf{w}_r\}$扩充成$W$一组基$\{\mathbf{w}_1,\cdots,\mathbf{w}_m\}$。直接计算知，$T$在$\{\mathbf{v}_{1},\cdots, \mathbf{v}_n\}$及$\{\mathbf{w}_1,\cdots,\mathbf{w}_m\}$下的矩阵为$A$。
+\end{proof}
+
+	
+	
+\begin{ex}[$\heartsuit $]
+	设线性空间 $\,\mathcal{V}$ 有直和分解：$\,\mathcal{V} = \mathcal{M}_1 \bigoplus \mathcal{M}_2$（即$\,\mathcal{V} = \mathcal{M}_1 + \mathcal{M}_2$且满足$\mathcal{M}_1 \cap \mathcal{M}_2=\{\boldsymbol{0}\}$), 则任取 $\,\boldsymbol{a} \in \mathcal{V}$, 都有唯一的分解式：$\,\boldsymbol{a} = \boldsymbol{a}_1 + \boldsymbol{a}_2$, 其中 $\,\boldsymbol{a}_1 \in \mathcal{M}_1, \boldsymbol{a}_2 \in \mathcal{M}_2$. 定义 $\,\mathcal{V}$ 上的变换：
+	$$ 
+	\boldsymbol{P}_{\mathcal{M}_1}(\boldsymbol{a}) = \boldsymbol{a}_1, \qquad \boldsymbol{P}_{\mathcal{M}_2}(\boldsymbol{a}) = \boldsymbol{a}_2.
+	$$
+	
+	(1)证明，$\boldsymbol{P}_{\mathcal{M}_1}, \boldsymbol{P}_{\mathcal{M}_2}$ 都是 $\,\mathcal{V}$ 上的线性变换。
+	
+	(2)证明，$\ker(\boldsymbol{P}_{\mathcal{M}_1}) = \mathcal{M}_2, Im(\boldsymbol{P}_{\mathcal{M}_1}) = \mathcal{M}_1.$
+	
+	(3)证明，$\boldsymbol{P}_{\mathcal{M}_1}^2 = \boldsymbol{P}_{\mathcal{M}_1},\; \boldsymbol{P}_{\mathcal{M}_1} + \boldsymbol{P}_{\mathcal{M}_2} = \boldsymbol{I},\; \boldsymbol{P}_{\mathcal{M}_1}\boldsymbol{P}_{\mathcal{M}_2} = \boldsymbol{O}$.
+	
+	(4)分别求 $\,\boldsymbol{P}_{\mathcal{M}_1}, \boldsymbol{P}_{\mathcal{M}_2}$ 的特征值和特征向量。
+\end{ex}
+\begin{proof}[提示]
+与正交投影情况类似，特征值为$0,1$。
+\end{proof}
+
+\end{document}

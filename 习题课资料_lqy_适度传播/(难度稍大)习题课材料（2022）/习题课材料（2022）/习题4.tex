@@ -1,0 +1,434 @@
+% !TEX program = xelatex
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+%\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+\newcommand\bs[1]{\boldsymbol{ #1}}
+
+\newenvironment{bmatriX}[1]{\left[\hskip -\arraycolsep \begin{array}{#1}}{\end{array}\hskip -\arraycolsep\right]}
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+
+\newif\ifhideproofs
+\hideproofstrue
+\newif\iffinalver
+%\finalvertrue        
+\ifhideproofs
+    \usepackage[final]{changes}
+    \definechangesauthor[name=Error, color=red]{err}
+    \usepackage{environ}
+    \NewEnviron{hide}{}
+    \let\proof\hide
+    \let\endproof\endhide
+\else
+    \iffinalver
+        \usepackage[final]{changes}
+    \else
+        \usepackage{changes}
+    \fi
+    \definechangesauthor[name=Error, color=red]{err}
+\fi
+
+		
+\begin{document}
+
+
+\title{习题课材料（四）}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+%\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+\begin{ex}
+	梳理任意固定矩阵行秩等于列秩的证明过程以及线性方程组求解理论。
+\end{ex}
+
+\begin{ex}
+	设$m \times n$矩阵$A$的秩为$1$，证明：存在非零向量$a \in \mathbb{R}^m, b \in \mathbb{R}^n$，使得$A = ab^{\mathrm{T}}$。
+\end{ex}
+\begin{proof}
+	将矩阵$A$表示为$(\alpha_1, \alpha_2, \cdots, \alpha_n)$，其中$\alpha_i \in \mathbb{R}^m$。由条件可知向量组$\{\alpha_1, \alpha_2, \cdots, \alpha_n\}$的秩为$1$，其中必有非零向量，不妨设为$\alpha_1$，于是$\alpha_i(i \geq 2)$都可以由$\alpha_1$线性表示，换句话，存在$k_i \in \mathbb{R}, 2 \leq i \leq n$，使得
+	\[
+	\alpha_i = k_i \alpha_1.
+	\]
+	令$a = \alpha_1$, $b = \begin{bmatrix}
+		1 \\
+		k_2 \\
+		\vdots \\
+		k_{n}
+	\end{bmatrix}$，于是
+	$
+	ab^{\mathrm{T}} = \alpha_1(1, k_2, \cdots, k_n) = (\alpha_1, k_2 \alpha_1, \cdots, k_n $\replaced{$\alpha_1$}{$\alpha_n$}$) = (\alpha_1, \alpha_2, \cdots, \alpha_n) = A.
+	$
+\end{proof} 
+
+
+\begin{ex}
+	设$A, B, C$分别为$m \times n,  n \times k, k \times s$矩阵，证明：
+	\[
+	\mathrm{rank}(AB) + \mathrm{rank}(BC) \leq \mathrm{rank}(ABC) + \mathrm{rank}(B).   
+	\]
+\end{ex}
+\begin{proof}\footnote{做题前，先将矩阵的形状分析清楚，避免使用分块矩阵时出错。}
+	注意到下列矩阵等式：
+	\[
+	\begin{bmatrix}
+		\mathrm{I}_m & -A \\
+		0 & \mathrm{I}_n
+	\end{bmatrix}\begin{bmatrix}
+		AB & 0 \\
+		B & BC
+	\end{bmatrix} = \begin{bmatrix}
+		0 & -ABC \\
+		B & BC
+	\end{bmatrix}, 
+	\begin{bmatrix}
+		0 & -ABC \\
+		B & BC
+	\end{bmatrix}\begin{bmatrix}
+		\mathrm{I}_k & -C \\
+		0 & \mathrm{I}_s
+	\end{bmatrix}=\begin{bmatrix}
+		0 & -ABC \\
+		B & 0
+	\end{bmatrix}
+	\]
+	由于矩阵$\begin{bmatrix}
+		\mathrm{I}_m & -A \\
+		0 & \mathrm{I}_n
+	\end{bmatrix}, \begin{bmatrix}
+		\mathrm{I}_k & -C \\
+		0 & \mathrm{I}_s
+	\end{bmatrix}$可逆，故
+	\[
+	\mathrm{rank}(\begin{bmatrix}
+		AB & 0 \\
+		B & BC
+	\end{bmatrix}) = \mathrm{rank}(\begin{bmatrix}
+		0 & -ABC \\
+		B & BC
+	\end{bmatrix}) = \mathrm{rank}(\begin{bmatrix}
+		0 & -ABC \\
+		B & 0
+	\end{bmatrix}).
+	\]
+	由$\mathrm{rank}(\begin{bmatrix}
+		0 & -ABC \\
+		B & 0
+	\end{bmatrix}) = \mathrm{rank}(-ABC) + \mathrm{rank}(B) = \mathrm{rank}(ABC)+\mathrm{rank}(B)$以及
+	\[
+	\mathrm{rank}(\begin{bmatrix}
+		AB & 0 \\
+		B & BC
+	\end{bmatrix}) \geq \mathrm{rank}(AB) + \mathrm{rank}(BC),
+	\]
+	可得结论。
+\end{proof}
+\begin{ques}
+	构造矩阵$A, B, C$使得：
+	\[
+	\mathrm{rank}(\begin{bmatrix}
+		A & B \\
+		0 & C
+	\end{bmatrix}) > \mathrm{rank}(A) + \mathrm{rank}(C).
+	\]
+\end{ques}
+
+
+\begin{ex}
+	证明反对称矩阵的秩不能是$1$。
+\end{ex}
+\begin{proof}采用反证法。设$n$阶反对称矩阵$A$的秩为$1$，由习题2可知，存在非零向量$a = \begin{bmatrix}
+		a_1 \\
+		a_2 \\
+		\vdots \\
+		a_n
+	\end{bmatrix} \in \mathbb{R}^n, b = \begin{bmatrix}
+		b_1 \\
+		b_2 \\
+		\vdots \\
+		b_n
+	\end{bmatrix} \in \mathbb{R}^n$，使得$A = ab^{\mathrm{T}} = \{ a_{ij}\}$，这里$a_{ij} = a_i b_j$。由于$A$反对称，所以
+	$
+	a_{ii}=0, a_{ij} = -a_{ji}.
+	$
+	\
+	
+	假设$b_1 \neq 0$。于是$0 = a_{11} = a_1 b_1$，可知$a_1 = 0$。所以
+	\[
+	0 = a_1 b_j = a_{1j} = - a_{j1} = - a_j b_1,
+	\]
+	即$a_j = 0, \forall j$。这与向量$a$非零矛盾。同理，若$a_1 \neq 0$，则可推出向量$b=0$，与题意相矛盾。由此可知
+	\[
+	A = \begin{bmatrix}
+		0 \\
+		a_2 \\
+		\vdots \\
+		a_n
+	\end{bmatrix} \begin{bmatrix}
+		0 & b_2 & \cdots & b_n
+	\end{bmatrix} = 
+	\begin{bmatrix}
+		0 & 0 & \cdots & 0\\
+		0 & a_2b_2 & \cdots & a_2b_n\\
+		\cdots & \cdots & \cdots & \cdots \\
+		0 & a_nb_2 & \cdots & a_nb_n
+	\end{bmatrix}.
+	\]
+	我们不难发现：
+	\[
+	A_1 = \begin{bmatrix}
+		a_2b_2 & \cdots & a_2b_n\\
+		\cdots & \cdots & \cdots \\
+		a_nb_2 & \cdots & a_nb_n
+	\end{bmatrix} = \begin{bmatrix}
+		a_2 \\
+		\vdots \\
+		a_n
+	\end{bmatrix} \begin{bmatrix}
+		b_2 & \cdots & b_n
+	\end{bmatrix}.
+	\]
+	且$A_1$也是反对称矩阵。重复之前的推理，可知$a_2 = b_2 =0$，进一步下去可得$a_i = b_j = 0, \forall 1 \leq i,j \leq n$，与题意矛盾。
+\end{proof}
+\begin{ex}
+	设$x_0, x_1, \cdots, x_t$是线性方程组$Ax =b$的解，其中$b \neq 0$，证明：$c_0 x_0 + c_1x_1 + \cdots + c_t x_t$也是解当且仅当$c_0 + c_1 + \cdots + c_t = 1$。
+\end{ex}
+\begin{proof}
+	假设$c_0 x_0 + c_1x_1 + \cdots + c_t x_t$也是解，即
+	\begin{equation}
+		b = A(c_0 x_0 + c_1x_1 + \cdots + c_t x_t) = c_0 Ax_0+ \cdots + c_t Ax_t = (c_0+ \cdots + c_t)b.
+	\end{equation}
+	由于$b \neq 0$，故$c_0+ \cdots + c_t = 1$。
+	\
+	
+	反之，假设$c_0+ \cdots + c_t = 1$，于是
+	\begin{equation}
+		A(c_0 x_0 + c_1x_1 + \cdots + c_t x_t) = c_0 Ax_0+ \cdots + c_t Ax_t = (c_0+ \cdots + c_t)b = b.
+	\end{equation}
+\end{proof}
+\begin{ex}
+	对于$n$阶方阵$A$，求证：$A^2 = A$当且仅当$\mathrm{rank}(A) + \mathrm{rank}(\mathrm{I}_n - A) = n $。
+\end{ex}
+\begin{proof}
+	假设$A^2 = A$，于是$A(\mathrm{I}_n - A) =0$。由习题3（取$B$为单位阵）可知：
+	\[
+	\mathrm{rank}(A) + \mathrm{rank}(B) \leq \mathrm{rank}(AB) + n.  
+	\]
+	于是$\mathrm{rank}(A) + \mathrm{rank}(\mathrm{I}_n - A) \leq n$。另一方面，我们知道
+	\begin{equation} \label{3}
+		\mathrm{rank}(A) + \mathrm{rank}(B) \geq \mathrm{rank}(A+B).
+	\end{equation}
+	（为何？）于是$\mathrm{rank}(A) + \mathrm{rank}(\mathrm{I}_n - A)  \geq \mathrm{rank}(\mathrm{I}_n ) = n$。故$\mathrm{rank}(A) + \mathrm{rank}(\mathrm{I}_n - A) = n $。
+	\
+	
+	反之，假设$\mathrm{rank}(A) + \mathrm{rank}(\mathrm{I}_n - A) = n $。结合任意$x \in \mathbb{R}^n$，我们有
+	\[
+	x = Ax + (\mathrm{I}_n - A)x.
+	\]
+	这意味着：若$x \in \mathcal{N}(A)$，则$x \in \mathcal{R}(\mathrm{I}_n - A)$，换句话说，
+	\[
+	\mathcal{N}(A) \subset \mathcal{R}(\mathrm{I}_n - A).
+	\]
+	另一方面，$\dim(\mathcal{N}(A)) = n - \mathrm{rank}(A) = \mathrm{rank}(\mathrm{I}_n - A)  = \dim(\mathcal{R}(\mathrm{I}_n - A))$。所以
+	\[
+	\mathcal{N}(A) = \mathcal{R}(\mathrm{I}_n - A).
+	\]
+	于是对于任意$x \in \mathbb{R}^n$，$A(\mathrm{I}_n - A) x =0$，故$A(\mathrm{I}_n - A) =0$。
+	%于是$\mathcal{R}(A) + \mathcal{R}(\mathrm{I}_n - A) = \mathbb{R}^n$。由维数公式可知；
+	%\[
+	%\mathcal{R}(A) \cap \mathcal{R}(\mathrm{I}_n - A)  = \mathbf{0}.
+	%\]
+\end{proof}
+\added{
+	\begin{proof}
+		第二种证明：
+		由$$\begin{bmatrix}
+			I_n&I_n\\0&I_n
+		\end{bmatrix}
+		\begin{bmatrix}
+			A&0\\0&I_n-A
+		\end{bmatrix}
+		\begin{bmatrix}
+			I_n&I_n\\0&I_n
+		\end{bmatrix}
+		\begin{bmatrix}
+			I_n&0\\
+			-A&I_n
+		\end{bmatrix}=\begin{bmatrix}
+			A&I_n\\0&I_n-A
+		\end{bmatrix} \begin{bmatrix}
+			I_n&0\\
+			-A&I_n
+		\end{bmatrix}=
+		\begin{bmatrix}
+			0&I_n\\A-A^2&I_n-A
+		\end{bmatrix},$$若$A-A^2=0$，则$\mathrm{rank}(A)+\mathrm{rank}(A-A^2)=\mathrm{rank}(\begin{bmatrix}
+			0&I_n\\0&I_n-A
+		\end{bmatrix})=n$；若$\mathrm{rank}(A)+\mathrm{rank}(A-A^2)=n$，又由上面等式有$\mathrm{rank}(A)+\mathrm{rank}(A-A^2)\geq \mathrm{rank}(A-A^2)+n$，故有$A-A^2=0$。
+	\end{proof}
+}
+%\begin{ex}
+%证明$\mathbb{R}^m$的任意子空间是某个矩阵的零空间。
+%\end{ex}
+%\begin{proof}
+%\end{proof}
+\begin{ex}[$\heartsuit $]
+	线性方程组$Ax =b$有解当且仅当$\begin{bmatrix}
+		A^{\mathrm{T}} \\
+		b^{\mathrm{T}} 
+	\end{bmatrix} y= \begin{bmatrix}
+		0 \\
+		1 
+	\end{bmatrix}$无解。
+\end{ex}
+\begin{proof}
+	假设$Ax =b$有解，设为$x_0$，即$Ax_0 = b$。采用反证法，若$\begin{bmatrix}
+		A^{\mathrm{T}} \\
+		b^{\mathrm{T}} 
+	\end{bmatrix} y= \begin{bmatrix}
+		0 \\
+		1 
+	\end{bmatrix}$也有解，记为$y_0$。于是我们有：
+	\begin{equation}\label{9.1}
+		A^{\mathrm{T}} y_0 = 0 , b^{\mathrm{T}} y_0 = 1.
+	\end{equation}
+	将$b  =Ax_0$代入(\ref{9.1})，可得
+	\[
+	1 = b^{\mathrm{T}} y_0 = (Ax_0)^{\mathrm{T}} y_0 = (x_0^{\mathrm{T}}  A^{\mathrm{T}}) y_0 = x_0^{\mathrm{T}}  (A^{\mathrm{T}} y_0) = x_0^{\mathrm{T}} 0  = 0,
+	\]
+	矛盾。
+	\
+	
+	反之，我们假设$\begin{bmatrix}
+		A^{\mathrm{T}} \\
+		b^{\mathrm{T}} 
+	\end{bmatrix} y= \begin{bmatrix}
+		0 \\
+		1 
+	\end{bmatrix}$无解。所以$\mathrm{rank}(\begin{bmatrix}
+		A^{\mathrm{T}} \\
+		b^{\mathrm{T}} 
+	\end{bmatrix}) +1 = \mathrm{rank}(\begin{bmatrix}
+		A^{\mathrm{T}} & 0\\
+		b^{\mathrm{T}}  & 1
+	\end{bmatrix}) = \mathrm{rank}(\begin{bmatrix}
+		A & b\\
+		0  & 1
+	\end{bmatrix})$。如果$Ax =b$无解，则$\mathrm{rank}(A, b) = \mathrm{rank}(A) + 1$。于是，我们有：
+	\begin{equation} \label{9.2}
+		\mathrm{rank}(\begin{bmatrix}
+			A & b\\
+			0  & 1
+		\end{bmatrix}) = \mathrm{rank}(A, b) + 1 = \mathrm{rank}(A) + 2.
+	\end{equation}
+	另一方面，由$\mathrm{rank}([A, B]) \leq \mathrm{rank}(A)+\mathrm{rank}(B)$可知，\[\mathrm{rank}(\begin{bmatrix}
+		A & b\\
+		0  & 1
+	\end{bmatrix}) \leq \mathrm{rank}\begin{bmatrix}
+		A \\
+		0 
+	\end{bmatrix} + \mathrm{rank}\begin{bmatrix}
+		b \\
+		1 
+	\end{bmatrix} = \mathrm{rank}(A) + 1.\]
+	这与(\ref{9.2})矛盾。
+\end{proof}
+\added{
+	\begin{proof}		
+	右推左的第二种证明：\\
+	反之，我们假设$\begin{bmatrix}
+		A^{\mathrm{T}} \\
+		b^{\mathrm{T}} 
+	\end{bmatrix} y= \begin{bmatrix}
+		0 \\
+		1 
+	\end{bmatrix}$无解，即对任意$y\in\mathbb{R}^n$，若$A^Ty=0$，则$b^Ty=0$，换句话说$b\in\mathcal{N}(\mathcal{N}(A^T))=\mathcal{R}(A)$。
+\end{proof}
+}
+\begin{ex}[$\heartsuit $]
+	证明多项式
+	\[
+	f(x) = a_0 + a_1 x + \cdots +a_{n-1}x^{n-1}
+	\]
+	的根中有$k$个$n$次单位根的充要条件是矩阵
+	\[
+	\begin{bmatrix}
+		a_0 & a_1 & a_2 & \cdots & a_{n-2} & a_{n-1} \\
+		a_{n-1} & a_0 & a_1 &\cdots & a_{n-3} & a_{n-2} \\
+		\vdots & \vdots & \vdots & \cdots & \vdots & \vdots \\
+		a_1 & a_2 & a_3 & \cdots & a_{n-1} & a_{0} \\
+	\end{bmatrix}
+	\]
+	的秩为$n-k$。
+\end{ex}
+\begin{proof}[证明]设$\epsilon_1, \cdots, \epsilon_n$为$1$的$n$次单位根。令
+	\[
+	A = \begin{bmatrix}
+		a_0 & a_1 & a_2 & \cdots & a_{n-2} & a_{n-1} \\
+		a_{n-1} & a_0 & a_1 &\cdots & a_{n-3} & a_{n-2} \\
+		\vdots & \vdots & \vdots & \cdots & \vdots & \vdots \\
+		a_1 & a_2 & a_3 & \cdots & a_{n-1} & a_{0} \\
+	\end{bmatrix}, 
+	B = \begin{bmatrix}
+		1 & 1 &  \cdots & 1 & 1 \\
+		\epsilon_1 & \epsilon_2  &\cdots & \epsilon_{n-1} & \epsilon_{n} \\
+		\vdots & \vdots & \cdots & \vdots & \vdots \\
+		\epsilon_1^{n-1} & \epsilon_2^{n-1}  & \cdots & \epsilon_{n-1}^{n-1} & \epsilon_{n}^{n-1}
+	\end{bmatrix}.
+	\]
+	于是，
+	\[
+	AB = \begin{bmatrix}
+		f(\epsilon_1) & f(\epsilon_2)  &  \cdots & f(\epsilon_{n-1})  & f(\epsilon_{n}) \\
+		\epsilon_1f(\epsilon_1)  & \epsilon_2f(\epsilon_2)   &\cdots & \epsilon_{n-1}f(\epsilon_{n-1}) & \epsilon_{n}f(\epsilon_{n}) \\
+		\vdots & \vdots & \cdots & \vdots & \vdots \\
+		\epsilon_1^{n-1}f(\epsilon_1)  & \epsilon_2^{n-1}f(\epsilon_2)   & \cdots & \epsilon_{n-1}^{n-1}f(\epsilon_{n-1}) & \epsilon_{n}^{n-1}f(\epsilon_{n})
+	\end{bmatrix}.
+	\]
+	注意到：
+	\[
+	\begin{bmatrix}
+		f(\epsilon_1) & f(\epsilon_2)  &  \cdots & f(\epsilon_{n-1})  & f(\epsilon_{n}) \\
+		\epsilon_1f(\epsilon_1)  & \epsilon_2f(\epsilon_2)   &\cdots & \epsilon_{n-1}f(\epsilon_{n-1}) & \epsilon_{n}f(\epsilon_{n}) \\
+		\vdots & \vdots & \cdots & \vdots & \vdots \\
+		\epsilon_1^{n-1}f(\epsilon_1)  & \epsilon_2^{n-1}f(\epsilon_2)   & \cdots & \epsilon_{n-1}^{n-1}f(\epsilon_{n-1}) & \epsilon_{n}^{n-1}f(\epsilon_{n})
+	\end{bmatrix} = B \mathrm{diag}(f(\epsilon_1), f(\epsilon_2), \cdots, f(\epsilon_n)),
+	\]
+	这里$\mathrm{diag}(f(\epsilon_1), f(\epsilon_2), \cdots, f(\epsilon_n))$表示由元素$f(\epsilon_1), f(\epsilon_2), \cdots, f(\epsilon_n)$组成的对角阵。由于$B$可逆，所以
+	\[
+	\mathrm{rank}(A) = \mathrm{rank}(AB) = \mathrm{rank}(B\mathrm{diag}(f(\epsilon_1), f(\epsilon_2), \cdots, f(\epsilon_n))) = \mathrm{rank}[\mathrm{diag}(f(\epsilon_1), f(\epsilon_2), \cdots, f(\epsilon_n))].
+	\]
+	而$\mathrm{rank}[\mathrm{diag}(f(\epsilon_1), f(\epsilon_2), \cdots, f(\epsilon_n))]$为非零对角元的个数，即为$n - k$，其中$k$为集合$\{\epsilon_1, \cdots, \epsilon_n\}$中满足$f(x) = 0$的元素的个数，即证。
+\end{proof}
+\clearpage
+\listofchanges
+\end{document}

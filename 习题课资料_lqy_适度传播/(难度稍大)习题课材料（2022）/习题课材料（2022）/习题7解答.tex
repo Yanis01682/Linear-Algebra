@@ -1,0 +1,299 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+% \usepackage{CJK}
+\usepackage{arydshln}
+% \usepackage[11pt]{moresize}
+
+
+
+\newtheorem{thm}{定理}
+\newtheorem{cor}[thm]{推论}
+\newtheorem{lem}[thm]{引理}
+\newtheorem{prop}[thm]{命题}
+\newtheorem{defn}[thm]{定义}
+\newtheorem{ques}[thm]{问题}
+\newtheorem{eg}[thm]{例题}
+\newtheorem{ex}[thm]{习题}
+\newtheorem{rmk}[thm]{注释}
+\newtheorem{ntn}[thm]{记号}
+
+
+
+
+\begin{document}
+
+
+\title{习题课材料（七）}
+\date{}
+
+\maketitle
+
+
+%\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+\begin{ex}
+  奇数阶反对称矩阵不可逆.
+\end{ex}
+
+\begin{proof}
+  事实上, \(\det A = \det (-A^{\mathrm{T}}) = \det(-A) = (-1)^{n}\det A\).
+  故若 \(\det A \neq 0\), 必有 \((-1)^{n} = 1\), 即 \(n\) 为偶数.
+\end{proof}
+
+\begin{ex}
+  对分块上三角矩阵 \(X=\begin{bmatrix}A & C \\ O & B\end{bmatrix}\),
+  证明 \(\det X = \det A \cdot \det B\).
+\end{ex}
+
+\begin{proof}
+  若 \(\det A = 0\),
+  则 \(A\) 的列向量线性相关. 因此 \(X\) 的列线性相关, 从而
+  \(\det X = 0 = \det A\det B\).
+
+  若 \(\det A \neq 0\),
+  则 \(A\) 可以写成初等矩阵的乘积
+  \(A = E_1\cdots E_{m}\).
+  利用分块矩阵乘法, 可知
+  \begin{equation*}
+    X =
+    \begin{bmatrix}
+      E_1  \\ & I
+    \end{bmatrix} \cdots
+    \begin{bmatrix}
+      E_m  \\ & I
+    \end{bmatrix}
+    \cdot
+    \begin{bmatrix}
+      I & C' \\ & B
+    \end{bmatrix},
+  \end{equation*}
+  其中\(C' = E_{m}^{-1}\cdots E_{1}^{-1}C\).
+  由于 \(\det A = \prod_{i=1}^{m} \det E_i\),
+  因此只需证明 \(\det\begin{bmatrix}I& C'\\ & B\end{bmatrix}=\det B\).
+  但是此矩阵为 \(\mathrm{diag}(I,B)\) 乘以一系列第三类初等矩阵, 故而行列式与
+  \(\mathrm{diag}(I,B)\) 相同, 等于 \(\det B\).
+\end{proof}
+
+\begin{ex}
+  设 \(A\), \(B\) 分别为 \(m\times n\), \(n\times m\) 矩阵.
+  证明 \(\det(I_m + AB) = \det(I_n+BA)\).
+\end{ex}
+
+\begin{proof}
+  考虑分块矩阵
+  \begin{equation*}
+    X=
+    \begin{bmatrix}
+      I_m & -A \\ B & I_n
+    \end{bmatrix}.
+  \end{equation*}
+  注意到
+  \begin{equation*}
+    \begin{bmatrix}
+      I_m   \\ -B & I_n
+    \end{bmatrix}
+    \cdot X
+    =
+    \begin{bmatrix}
+      I_m & -A \\ & I_n + BA
+    \end{bmatrix},
+    \quad
+    \begin{bmatrix}
+      I_m & A\\   & I_n
+    \end{bmatrix}
+    \cdot X
+    =
+    \begin{bmatrix}
+      I_m+AB \\ B & I_n
+    \end{bmatrix}.
+  \end{equation*}
+  因此 \(\det(I_m+AB)=\det X=\det(I_n+BA)\).
+\end{proof}
+
+\begin{ex}[\(\heartsuit\)]
+  设 \(T = [\boldsymbol{t}_1,\ldots,\boldsymbol{t}_n]\) 为 \(n\) 阶方阵.
+  证明 Hadamard 不等式
+  \[
+    |\det T| \leq \|\boldsymbol{t}_1\| \cdots \|\boldsymbol{t}_n\|.
+  \]
+\end{ex}
+
+\begin{proof}
+  无妨设 \(\boldsymbol{t}_1,\ldots\boldsymbol{t}_n\) 线性无关, 否则不等式显然成立.
+  令 \(T = QR\) 为 \(T\) 之 QR 分解, 其中
+  \(Q = [\boldsymbol{q}_1,\ldots,\boldsymbol{q}_n]\) 为正交方阵,
+  \(R\) 为上三角方阵. 令 \(R = (a_{ij})\),
+  则 \(\det R = \prod_{i=1}^{n} a_{ii}\).
+
+  将矩阵等式 \(T=QR\)  写作向量之间的等式:
+  \begin{equation*}
+    \boldsymbol{t}_{j} = \sum_{i\leq j} a_{ij} \cdot \boldsymbol{q}_i.
+  \end{equation*}
+  由于 \(\boldsymbol{q}_1, \boldsymbol{q}_2, \ldots,\boldsymbol{q}_n\)
+  构成 \(\mathbb{R}^n\) 之单位正交基,
+  由勾股定理, 可知 \(\|\boldsymbol{t}_j\|^{2} = \sum |a_{ij}|^2 \geq |a_{jj}|^{2}\).
+  又 \(|\det Q| = 1\), 故
+  \begin{equation*}
+    |\det T| = |\det R| = \prod_{i=1}^{n} |a_{ii}| \leq \prod_{i=1}^{n}\|t_i\|. \qedhere
+  \end{equation*}
+\end{proof}
+
+
+\begin{ex}
+  计算行列式
+  \begin{equation*}
+    \begin{vmatrix}
+      1 & 0 & 0 & 2 \\
+      0 & 3 & 4 & 5 \\
+      5 & 4 & 0 & 3 \\
+      2 & 0 & 0 & 1
+    \end{vmatrix}
+  \end{equation*}
+\end{ex}
+
+\begin{proof}[解]
+
+  第一行的 $0$ 较多, 故按第一行展开.
+  所求之数为
+  \begin{equation*}
+    1 \cdot
+    \begin{vmatrix}
+      3 & 4 & 5 \\
+      4 & 0 & 3 \\
+      0 & 0 & 1
+    \end{vmatrix}
+    - 2 \cdot
+    \begin{vmatrix}
+      0 & 3 & 4 \\
+      5 & 4 & 0 \\
+      2 & 0 & 0
+    \end{vmatrix}.
+  \end{equation*}
+  对第一个 3 阶行列式, 按第三行展开:
+  \begin{equation*}
+    \begin{vmatrix}
+      3 & 4 & 5 \\
+      4 & 0 & 3 \\
+      0 & 0 & 1
+    \end{vmatrix}
+    = (-1)^{3+3} \cdot
+    \begin{vmatrix}
+      3 & 4 \\ 4 & 0
+    \end{vmatrix}
+    = -16.
+  \end{equation*}
+  对第二个 3 阶行列式, 也按第三行展开:
+  \begin{equation*}
+    \begin{vmatrix}
+      0 & 3 & 4 \\
+      5 & 4 & 0 \\
+      2 & 0 & 0
+    \end{vmatrix}
+    =(-1)^{3+1} \cdot 2 \cdot
+    \begin{vmatrix}
+      3 & 4 \\ 4 & 0
+    \end{vmatrix} = - 2\cdot 16.
+  \end{equation*}
+  因此, 最后答案为 \((-16)-4(-16)=48\).
+\end{proof}
+
+\begin{ex}
+  \(\begin{vmatrix} 2x & x & 1 & 2 \\ 1 & x & 1 & -1\\ 3 & 2 & x & 1 \\ 1 & 1 & 1& x\end{vmatrix}\)
+  中 \(x^4\), \(x^3\) 系数.
+\end{ex}
+
+\begin{proof}[答案]
+  \(x^4\) 系数为 \(2\), \(x^3\) 系数为$ -1$. 可考察行列式的完全展开式,
+  也可按照第一行展开, 然后再利用三阶行列式的展开式逐一计算.
+\end{proof}
+
+\begin{ex}
+  设方阵 \(A,B\) 满足 \(AB=BA\). 证明
+  \(\det\begin{bmatrix}A & B\\-B & A\end{bmatrix}=\det(A^2+B^2)\).
+\end{ex}
+
+\begin{proof}
+  令 \(\mathrm{i}=\sqrt{-1}\) 为虚数单位.
+  利用分块矩阵乘法直接计算可知
+  \begin{equation*}
+    \begin{bmatrix}
+      \mathrm{i}I & I \\ I & \mathrm{i}I
+    \end{bmatrix}
+    \begin{bmatrix}
+      A & B \\ -B & A
+    \end{bmatrix}
+    \begin{bmatrix}
+      \mathrm{i}I & I \\ I & \mathrm{i}I
+    \end{bmatrix}^{-1} =
+    \begin{bmatrix}
+      A+\mathrm{i}B & \\ & A-\mathrm{i}B
+    \end{bmatrix}.
+  \end{equation*}
+  因此所求行列式等于 \(\det((A-\mathrm{i}B)(A+\mathrm{i}B))\).
+  最后, 由于 \(AB=BA\),
+  \(\det((A-\mathrm{i}B)(A+\mathrm{i}B))=\det(A^2+B^2)\).
+\end{proof}
+
+\begin{ex}
+  \begin{enumerate}
+  \item
+    设 \(A\) 是正交矩阵, \(\det A < 0\). 证明 \(I_n + A\) 不可逆.
+  \item   设 \(A\) 为奇数阶正交矩阵, \(\det A > 0\).
+    证明 \(I_n - A\) 不可逆.
+  \end{enumerate}
+\end{ex}
+
+\begin{proof}
+  (1) 今 \(\det(I_n+A)\det(A^{\mathrm{T}}) = \det(A^{\mathrm{T}}+I_n)=\det(I_n+A)\).
+  若 \(\det(I_n +A)\neq 0\), 则 \(\det(A^{\mathrm{T}})=\det A = 1 > 0\).
+
+  (2)   今 \(\det(I_n -A) \det(A^{\mathrm{T}})=\det(A^{\mathrm{T}}-I_n)=\det(A-I_n)\).
+  由于 \(n\) 为奇数, \(\det(A-I_n)=-\det(I_n-A)\). 若 \(\det(I_n-A)\neq 0\),
+  则 \(\det(A^{\mathrm{T}})=\det(A)=-1<0\).
+\end{proof}
+
+\begin{ex}[\(\heartsuit\)]
+  设 \(A\) 为对角占优方阵, 对角元素全为正数. 证明 \(\det A > 0\).
+\end{ex}
+
+\begin{proof}
+  令 \(A(\lambda) = \lambda I_n + A\).
+  根据行列式展开式, \(\det(A(\lambda))\) 为 \(\lambda\) 的首项系数为 1 的 \(n\) 次多项式.
+  由于对任何 \(\lambda \geq 0\), \(A(\lambda)\) 对角占优,
+  故对任何 \(\lambda \geq 0\), \(\det (A(\lambda)) \neq 0\).
+  显然 \(\det(A(\lambda)) \to +\infty\), (\(\lambda\to +\infty\)).
+  又由于 \(\det(A(\lambda))\) 连续, 在 \(\{0\leq \lambda < +\infty\}\)
+  上处处非零, 故介值定理推出, 对任何 \(\lambda \geq 0\),
+  \(\det(A(\lambda))\geq 0\). 由于 \(\det(A(0))=\det(A)\neq 0\),
+  必有 \(\det A > 0\).
+\end{proof}
+
+\begin{ex}
+  设 \(A\) 是元素为整数的可逆矩阵. 证明, 若 \(A\) 可逆, 并且 \(A^{-1}\)
+  的元素也为整数的必要且充分条件是 \(|\det A| =  1\).
+\end{ex}
+
+\begin{proof}
+
+  若 \(\det A = \pm 1\),
+  令 \(\mathrm{adj}(A)\) 为 \(A\) 的伴随矩阵,
+  即 \(\mathrm{adj}(A)^{\mathrm{T}}\) 的 \((i,j)\) 元素为 \(a_{ij}\)
+  的代数余子式.
+  注意到 \(\mathrm{adj}(A)\) 的元素都是整数.
+  则 \(A \cdot \mathrm{adj}(A) = \pm I\), 因此, \(\pm\mathrm{adj}(A)\)
+  为 \(A\) 的逆, 其元素俱为整数.
+
+  反之, 若 \(AC = \mathrm{I}\), \(C\) 之元素为整数. 则 \(\det A\), \(\det C\)
+  都是整数, 且
+  \(\det A \cdot \det C = 1\). 故而必有 \(|\det A| = 1\).
+\end{proof}
+\end{document}

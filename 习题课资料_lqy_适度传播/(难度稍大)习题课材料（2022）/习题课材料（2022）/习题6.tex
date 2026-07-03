@@ -1,0 +1,115 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+% \usepackage{CJK}
+\usepackage{arydshln}
+% \usepackage[11pt]{moresize}
+
+
+
+\newtheorem{thm}{定理}
+\newtheorem{cor}[thm]{推论}
+\newtheorem{lem}[thm]{引理}
+\newtheorem{prop}[thm]{命题}
+\newtheorem{defn}[thm]{定义}
+\newtheorem{ques}[thm]{问题}
+\newtheorem{eg}[thm]{例题}
+\newtheorem{ex}[thm]{习题}
+\newtheorem{rmk}[thm]{注释}
+\newtheorem{ntn}[thm]{记号}
+
+
+
+
+\begin{document}
+
+
+\title{习题课材料（六）}
+\date{}
+
+\maketitle
+
+%\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+\begin{ex}
+  设 \(\mathcal{M}\), \(\mathcal{N}\) 是 \(\mathbb{R}^{n}\) 的两个线性子空间,
+  \(\dim \mathcal{M} = \dim \mathcal{N} = m\). 假设 \(m < n\), 且存在
+  \(\boldsymbol{u} \in \mathcal{M}\), 满足 \(\boldsymbol{u} \perp \boldsymbol{a}\), \(\forall\boldsymbol{a} \in \mathcal{N}\),
+  证明, 存在 \(\boldsymbol{b} \in \mathcal{N}\), \(\boldsymbol{b} \perp \boldsymbol{v}\), \(\forall \boldsymbol{v} \in \mathcal{M}\).
+\end{ex}
+
+
+\begin{ex}
+  设平面上四个点 \((x_i,y_i)\) 分别是
+  \((0,0)\), \((1,8)\), \((3,8)\), \((4,20)\).
+  \begin{enumerate}
+  \item 求 \(k, b\), 使得直线 \(y = kx + b\) 满足
+    \(\sum_{i=1}^{4}|y_i - (kx_i+b)|^2\) 最小.
+  \item 求 \(a,b,c\), 使抛物线 \(y = f(x) = ax^2 + bx + c\) 满足
+    \(\sum_{i=1}^{4}|y_i - (ax_i^2+bx_i + c)|^2\) 最小.
+  \end{enumerate}
+\end{ex}
+
+
+
+\begin{ex}
+  设 \(\mathcal{M}\) 是 \(\mathbb{R}^{3}\) 中由方程
+  \(x_1-x_2+x_3=0\) 所决定的平面. 求 \(\boldsymbol{b} = [1,1,2]^{\mathrm{T}}\)
+  在 \(\mathcal{M}\) 上的正交投影.
+\end{ex}
+
+
+
+\begin{ex}
+  若 \(n\) 阶方阵 \(P\) 满足 \(P^{2} = P\), 则称 \(P\) 为斜投影矩阵.
+  给定 \(n\) 阶斜投影矩阵 \(P\).
+  \begin{enumerate}
+  \item 证明 \(I_{n} - P\) 也是斜投影矩阵.
+  \item 证明 \(\mathcal{R}(P) = \mathcal{N}(I_{n} - P)\), \(\mathcal{R}(I_{n}-P) = \mathcal{N}(P)\).
+  \item 对 \(\boldsymbol{v} \in \mathbb{R}^{n}\), 证明存在唯一分解 \(\boldsymbol{v} = \boldsymbol{v}_1 + \boldsymbol{v}_{2}\),
+    其中 \(\boldsymbol{v}_{1} \in \mathcal{R}(P)\), \(\boldsymbol{v}_{2} \in \mathcal{R}(I_{n} - P)\)
+  \item 构造二阶斜投影方阵, 且它不是正交投影.
+  \end{enumerate}
+\end{ex}
+
+
+\begin{ex}
+  证明 \((\mathcal{M}+\mathcal{N})^{\perp} = \mathcal{M}^{\perp} \cap \mathcal{N}^{\perp}\), \((\mathcal{M}\cap \mathcal{N})^{\perp} = \mathcal{M}^{\perp} + \mathcal{N}^{\perp}\).
+\end{ex}
+
+\begin{ex}[\(\heartsuit\)]
+  给定子空间 \(\mathcal{M}_{1}, \mathcal{M}_{2} \subset \mathbb{R}^{m}\), \(\mathcal{N}_{1}, \mathcal{N}_{2} \subset \mathbb{R}^{n}\).
+何时存在 \(m \times n\) 矩阵 \(A\), 使得
+\(\mathcal{R}(A) = \mathcal{M}_{1}\), \(\mathcal{N}(A^{\mathrm{T}})=\mathcal{M}_{2}\), \(\mathcal{R}(A^{\mathrm{T}})=\mathcal{N}_{1}\), \(\mathcal{N}(A) = \mathcal{N}_{2}\)
+同时成立?
+\end{ex}
+
+
+\begin{ex}
+  给定矩阵 \(A = \begin{bmatrix} 3 & 6 & 6 \\ 4 & 8 & 8\end{bmatrix}\).
+  \begin{enumerate}
+  \item 求向 \(A\) 的列空间的正交投影 \(P_{1}\),
+  \item 求向 \(A\) 的行空间的正交投影 \(P_{2}\),
+  \item 计算 \(P_{1}AP_{2}\).
+  \end{enumerate}
+\end{ex}
+
+
+\begin{ex}
+  设 \(n\) 阶实方阵 \(A\) 满足 \(A = -A^{\mathrm{T}}\).
+  \begin{enumerate}
+  \item 证明 \(I_{n}+A\), \(I_n-A\)可逆.
+  \item 证明 \((I_{n}-A)(I_{n}+A)^{-1}\) 是正交方阵.
+  \end{enumerate}
+\end{ex}
+
+
+\end{document}

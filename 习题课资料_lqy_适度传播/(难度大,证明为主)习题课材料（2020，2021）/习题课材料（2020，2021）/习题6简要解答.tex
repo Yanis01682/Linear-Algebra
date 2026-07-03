@@ -1,0 +1,320 @@
+\documentclass[UTF8]{ctexart}
+
+%\RequirePackage{amsmath} \RequirePackage{amssymb}
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{fullpage}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+%\usetikzlibrary{quotes,angles}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{decorations.pathreplacing}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+%\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+
+
+
+\newcommand{\BC}{{\mathbb {C}}}
+
+\newcommand{\BN}{{\mathbb {N}}}
+\newcommand{\BQ}{{\mathbb {Q}}}
+\newcommand{\BR}{{\mathbb {R}}}
+\newcommand{\BZ}{{\mathbb {Z}}}
+\newcommand{\bv}{{\bm v}}
+\newcommand{\bw}{{\bm w}}
+\newcommand{\bu}{{\bm u}}
+\newcommand{\bx}{{\bm x}}
+\newcommand{\by}{{\bm y}}
+
+\newcommand{\bb}{{\bm b}}
+\newcommand{\Coker}{{\mathrm{Coker}}}
+
+
+\newcommand{\End}{{\mathrm{End}}}
+\newcommand{\GL}{{\mathrm{GL}}}
+
+\newcommand{\SO}{{\mathrm{GSO}}}
+\newcommand{\Hom}{{\mathrm{Hom}}}
+
+\renewcommand{\Im}{{\mathrm{Im}}}
+
+\newcommand{\Isom}{{\mathrm{Isom}}}
+\newcommand{\Id}{{\mathrm{Id}}}
+
+
+
+\newcommand{\Ker}{N}
+\newcommand{\Ran}{R}
+\newcommand{\nullspace}{N}
+\newcommand{\range}{R}
+
+\newcommand{\rank}{{\mathrm{rank}}}
+
+
+\newcommand{\SU}{{\mathrm{SU}}}
+\newcommand{\Sym}{{\mathrm{Sym}}}
+
+\newcommand{\sub}{{\mathrm{sub}}}
+
+\newcommand{\tr}{{\mathrm{tr}}}
+
+\newcommand{\matrixx}[4]{\begin{pmatrix}
+		#1 & #2 \\ #3 & #4
+	\end{pmatrix} }
+	
+	
+	
+	\newcommand{\wt}{\widetilde}
+	\newcommand{\wh}{\widehat}
+	\newcommand{\pp}{\frac{\partial\bar\partial}{\pi i}}
+	\newcommand{\pair}[1]{\langle {#1} \rangle}
+	\newcommand{\wpair}[1]{\left\{{#1}\right\}}
+	\newcommand{\intn}[1]{\left( {#1} \right)}
+	\newcommand{\norm}[1]{\|{#1}\|}
+	\newcommand{\sfrac}[2]{\left( \frac {#1}{#2}\right)}
+	\newcommand{\ds}{\displaystyle}
+	\newcommand{\ov}{\overline}
+	\newcommand{\incl}{\hookrightarrow}
+	\newcommand{\lra}{\longrightarrow}
+	\newcommand{\lla}{\longleftarrow}
+	\newcommand{\ra}{\rightarrow}
+	\newcommand{\imp}{\Longrightarrow}
+	\newcommand{\lto}{\longmapsto}
+	\newcommand{\bs}{\backslash}
+	
+	
+	
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+	\newcommand{\sk}{\medskip}\newcommand{\bsk}{\bigskip}
+	\newcommand{\s}{\sk\noindent}\newcommand{\bigs}{\bsk\noindent}
+	
+	
+	%accented words
+
+	\def\mat(#1,#2,#3,#4){
+		\left[\begin{array}{cc}
+			#1 & #2 \\ #3 & #4\end{array}
+		\right]
+	}
+		\def\clm(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ #2 \end{array}
+\right]
+	}
+		\def\clmn(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ \vdots\\ #2 \end{array}
+\right]
+	}
+		\def\clmt(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ #3\end{array}
+\right]
+	}
+		\def\clmf(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ \vdots \\ #3\end{array}
+\right]
+	}
+
+
+		
+\begin{document}
+
+
+\title{习题课材料（六）简要解答}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+\medskip
+
+\noindent{\bfseries 记号}: 如不加说明，我们只考虑实矩阵。对于矩阵$A$, 它的四个基本子空间是{\bf 列空间$C(A)$(中文教材记为$R(A)$), 零空间$N(A)$, 行空间$C(A^T)$(中文教材记为$R(A^T)$)}和{\bf $A^T$的零空间$N(A^T)$}。
+\medskip
+
+
+
+\begin{ex}
+对以下矩阵进行QR分解：
+\begin{enumerate}
+\item $\begin{bmatrix}-1&2&2\\2&-1&2\\2&2&-1\end{bmatrix}$；
+\item $\begin{bmatrix}1&1&1\\0&1&1\\0&0&1\end{bmatrix}$；
+\item $\begin{bmatrix}1&0&0\\1&1&0\\1&1&1\end{bmatrix}$；
+\item $\begin{bmatrix}1&1&-1\\2&-1&2\\-1&1&1\\0&1&1\end{bmatrix}$；
+\item $\begin{bmatrix}2&0&-2\\1&1&1\\0&2&1\\1&2&2\end{bmatrix}$。
+\end{enumerate}
+\end{ex}
+
+\begin{proof}[解答]
+(1) 矩阵的列构成正交向量组，长度相同均为$3$。因此$\begin{bmatrix}-1&2&2\\2&-1&2\\2&2&-1\end{bmatrix}= \begin{bmatrix}-1/3&2/3&2/3\\2/3&-1/3&2/3\\2/3&2/3&-1/3\end{bmatrix}\begin{bmatrix}3 & &\\&3&\\&&3\end{bmatrix}$为QR分解。
+
+
+(2) $\begin{bmatrix}1&1&1\\0&1&1\\0&0&1\end{bmatrix}=I\begin{bmatrix}1&1&1\\0&1&1\\0&0&1\end{bmatrix}$，该矩阵已经是上三角阵，不需要再进行旋转和反射。
+
+(3) 很容易看出$Q$的三个列向量的方向是$\begin{bmatrix}1\\1\\1\end{bmatrix},\begin{bmatrix}-2\\1\\1\end{bmatrix},\begin{bmatrix}0\\-1\\1\end{bmatrix}$，因此$Q=\begin{bmatrix}\frac{1}{\sqrt{3}}&-\frac{2}{\sqrt{6}}&0\\\frac{1}{\sqrt{3}}&\frac{1}{\sqrt{6}}&-\frac{1}{\sqrt{2}}\\\frac{1}{\sqrt{3}}&\frac{1}{\sqrt{6}}&\frac{1}{\sqrt{2}}\end{bmatrix}$。 计算得到$R=Q^TA=\begin{bmatrix}\frac{3}{\sqrt{3}}&\frac{2}{\sqrt{3}}&\frac{1}{\sqrt{3}}\\0&\frac{2}{\sqrt{6}}&\frac{1}{\sqrt{6}}\\0&0&\frac{1}{\sqrt{2}}\end{bmatrix}$。
+
+(4) 直接计算$\begin{bmatrix}1&1&-1\\2&-1&2\\-1&1&1\\0&1&1\end{bmatrix}=\begin{bmatrix}\frac{1}{\sqrt{6}}&\frac{4}{\sqrt{30}}&-\frac{12}{3\sqrt{70}}\\\frac{2}{\sqrt{6}}&-\frac{1}{\sqrt{30}}&\frac{13}{3\sqrt{70}}\\-\frac{1}{\sqrt{6}}&\frac{2}{\sqrt{30}}&\frac{14}{3\sqrt{70}}\\0&\frac{3}{\sqrt{30}}&\frac{11}{3\sqrt{70}}\end{bmatrix}\begin{bmatrix}\frac{6}{\sqrt{6}}&-\frac{2}{\sqrt{6}}&\frac{2}{\sqrt{6}}\\0&\frac{10}{\sqrt{30}}&-\frac{1}{\sqrt{30}}\\0&0&\frac{63}{3\sqrt{70}}\end{bmatrix}$；
+
+(5) 直接计算$\begin{bmatrix}2&0&-2\\1&1&1\\0&2&1\\1&2&2\end{bmatrix}=\begin{bmatrix}\frac{2}{\sqrt{6}}&-\frac{2}{\sqrt{30}}&-\frac{2}{\sqrt{21}}\\\frac{1}{\sqrt{6}}&\frac{1}{\sqrt{30}}&\frac{2}{\sqrt{21}}\\0&\frac{4}{\sqrt{30}}&-\frac{3}{\sqrt{21}}\\\frac{1}{\sqrt{6}}&\frac{3}{\sqrt{30}}&\frac{2}{\sqrt{21}}\end{bmatrix}\begin{bmatrix}\frac{6}{\sqrt{6}}&\frac{3}{\sqrt{6}}&-\frac{1}{\sqrt{6}}\\0&\frac{15}{\sqrt{30}}&\frac{15}{\sqrt{30}}\\0&0&\frac{7}{\sqrt{21}}\end{bmatrix}$。
+\end{proof}
+
+
+
+
+\begin{ex}
+我们有矩阵$A=\begin{bmatrix}1&1&2\\1&-1&1\\-1&-1&1\\1&1&3\end{bmatrix}$。求四维空间中超平面$C(A)$的一个单位法向量（即求一个单位向量，其与$A$所有的列向量都正交）。
+\end{ex}
+
+
+\begin{proof}[提示]
+注意该题目至少有两种解法。
+
+高斯消元求解$A^T\bm x=\bm 0$，然后将长度调成$1$即可。
+
+另一种思路是随便加一个线性无关的第四列，比如所$\bm e_1$，然后正交化，看第四列变成什么，就是单位法向量。
+\end{proof}
+
+
+\begin{ex}
+
+\begin{enumerate}
+\item 如果$A$既是正交矩阵又是上三角矩阵，则$A$为对角阵，对角元为$\pm 1$。
+\item 证明对于任意可逆矩阵$A$，其QR分解$A=QR$是唯一的。（注意我们要求$R$的对角元都大于零。）
+\end{enumerate}
+\end{ex}
+
+\begin{proof}[证明]
+\begin{enumerate}
+\item 考虑每列与第一列的内积，发现第一行除了对角元之外全是零。再考虑每列与第二列的内积，发现第二行除对角元之外全是零。以此类推，发现$A$是对角阵。又因为每列都是单位向量，因此对角元必须是$\pm 1$。（也可以直接用$A^TA=I$和LDU分解的唯一性得解。）
+\item 假设$Q_1R_1=Q_2R_2$，那么$Q_2^{-1}Q_1=R_2R_1^{-1}$既是正交矩阵，又是上三角阵，因此是对角阵，对角元为$\pm 1$。又因为$R_1,R_2$都是对角元为正的上三角阵，因此$R_2R_1^{-1}$是对角元为正的上三角阵，因此所有的$\pm 1$都只能取值$1$。因此$Q_2^{-1}Q_1=I,R_1R_2^{-1}=I$，整理得到$Q_1=Q_2,R_1=R_2$。
+\end{enumerate}
+\end{proof}
+
+\begin{ex}
+令$\bm a_1,\bm a_2,\bm a_3,\bm a_4,\bm a_5$为$\mathbb{R}^5$的一组标准正交基。
+\begin{enumerate}
+\item 证明$\frac{1}{3}(2\bm a_1+2\bm a_2-\bm a_3),\frac{1}{3}(2\bm a_1-\bm a_2+2\bm a_3),\frac{1}{3}(\bm a_1-2\bm a_2-2\bm a_3)$为两两正交的单位向量；
+\item 给以下向量生成的子空间找一组正交基：$\bm a_1+\bm a_5, \bm a_1-\bm a_2+\bm a_4, 2\bm a_1+\bm a_2+\bm a_3$；
+\item 考虑向$\bm a_2,\bm a_5$生成的子空间进行投影的正交投影矩阵，用我们的向量$\bm a_i$表示出来。
+\end{enumerate}
+\end{ex}
+
+\begin{proof}[提示]
+\begin{enumerate}
+\item 直接计算。
+\item 直接正交化即可。另一种思路，进行QR分解$B=\begin{bmatrix}1&1&2\\0&-1&1\\0&0&1\\0&1&0\\1&0&0\end{bmatrix}=QR$。令$A=\begin{bmatrix}\bm a_1&\dots&\bm a_5\end{bmatrix}$，我们想要对$AB$进行QR分解，而$AB=(AQ)R$，且$A$已经是正交矩阵，因此这就是QR分解。正交基为$AQ$的列向量。
+\item $\bm a_2\bm a_2^T+\bm a_5\bm a_5^T$。
+\end{enumerate}
+\end{proof}
+
+
+
+
+
+\begin{ex}
+\begin{enumerate}
+\item 对任意正交矩阵$Q$，证明分块矩阵$\frac{1}{\sqrt{2}}\begin{bmatrix}Q&Q\\Q&-Q\end{bmatrix}$仍旧是正交矩阵；
+\item 令$H_1=\begin{bmatrix}1\end{bmatrix}$。令$H_{2n}=\begin{bmatrix}H_n&H_n\\H_n&-H_n\end{bmatrix}$。证明$H_{2^n}$是对称矩阵，它的列两两正交，且所有元素都是$\pm 1$。（该矩阵称为Hadamard矩阵，其列向量（或者行向量）即为高维的小波基。）
+\item[注记：] 这里$H_{2^n}$的列向量组成了一组（非标准）正交基，其中每个向量的分量都是$\pm 1$，称为Haar小波基。它在图像处理，信息压缩等方面经常用到。
+\end{enumerate}
+\end{ex}
+
+
+
+\begin{ex}
+考虑QR分解的其它理解方法：
+\begin{enumerate}
+\item 考虑$A=\begin{bmatrix}1&0\\-2&5\\0&1\end{bmatrix}$的列向量围成的平行四边形。我们可以做一个列操作，将第二列加上第一列的若干倍（几何上讲，这是一个错切变换），使得平行四边形变成长方形。这对应着给$A$右乘哪个矩阵$R$？
+\item 考虑$A=\begin{bmatrix}1&0\\-2&5\\0&1\end{bmatrix}$的列向量围成的平行四边形。找到一个正交矩阵$Q$，使得$QA$对应的平行四边形的第一条边在$x_1$轴正半轴上，而第二条边在$x_1x_2$平面中$x_2>0$的那个半平面。（这意味着对平行四边形进行旋转和翻转，直到把它挪到了所要求的的位置上。）
+\end{enumerate}
+\end{ex}
+\begin{proof}[提示]
+两问都是同一个QR分解$A=\begin{bmatrix}\frac{1}{\sqrt{5}}&\frac{2}{\sqrt{6}}\\-\frac{2}{\sqrt{5}}&\frac{1}{\sqrt{6}}\\0&\frac{1}{\sqrt{6}}\end{bmatrix}\begin{bmatrix}\frac{5}{\sqrt{5}}&-\frac{10}{\sqrt{5}}\\0&\frac{6}{\sqrt{6}}\end{bmatrix}$ 的变体。
+\begin{enumerate}
+\item （这就是正交化，但是去掉最后一步调整长度。）我们从$\bm v_1,\bm v_2$出发，得到$\bm v_1,\bm v_2+k\bm v_1$，要求$\bm v_1^T(\bm v_2+k\bm v_1)=0$，解得$k=-\frac{\bm v_1^T\bm v_2}{\bm v_1^T\bm v^1}=2$。因此我们从$A=\begin{bmatrix}\bm v_1&\bm v_2\end{bmatrix}$变成了$\begin{bmatrix}\bm v_1&\bm v_2+2\bm v_1\end{bmatrix}=A\begin{bmatrix}1&2\\0&1\end{bmatrix}$。（注意这个就是$A$的QR分解中，将$R$的行进行倍乘，使之变成单位上三角阵。）
+\item $A = [\bm v_1, \bm v_2] = QR = [\bm q_1,\bm q_2] R$. 将$Q$加入第三列，使它的列向量补全变成标准正交基$\bm q_1, \bm q_2,\bm q_3$。例如$\bm q_3$可以是$\begin{bmatrix}\frac{2}{\sqrt{30}}\\\frac{1}{\sqrt{30}}\\-\frac{5}{\sqrt{30}}\end{bmatrix}$.令$Q' = [\bm q_1,\bm q_2, \bm q_3].$ 将$R$加入零行作为第三行，得到$R'.$ 于是$A = Q ' R'.$ 题目中要求的$Q$可取${Q'}^T.$
+\end{enumerate}
+\end{proof}
+
+
+
+
+\begin{ex}
+假设桌子上有一摞纸，但是这一摞纸是斜着堆起来的，构成了一个平行六面体。比方说，纸的相邻两边分别为向量$\bm a_1=\begin{bmatrix}3\\4\\0\end{bmatrix},\bm a_2=\begin{bmatrix}-4\\3\\0\end{bmatrix}$，而纸摞起来的方向为$\bm a_3=\begin{bmatrix}1\\2\\3\end{bmatrix}$。
+
+显然，斜着摞起来的纸看着很难受，拿起来也容易撒。我们希望将这摞纸理齐，换句话说，我们希望将非正交基$\bm a_1,\bm a_2,\bm a_3$变成正交基。由于一般来说已经有$\bm a_1\perp\bm a_2$，所以我们只需要处理纸摞起来的方向$\bm a_3$。
+\begin{enumerate}
+\item 首先，我们将这一摞纸拿起来，沿着$\bm a_2$这条边在桌子上磕两下，再放回原处。此时$\bm a_3$会沿着$\bm a_1$的方向发生平移，得到$\bm b_3$。请问平移了$\bm a_1$的多少倍？
+\item 现在，我们再将这一摞纸拿起来，沿着$\bm a_1$这条边在桌子上磕两下，再放回原处。此时$\bm b_3$会沿着$\bm a_2$的方向发生平移，得到$\bm c_3$。请问这次平移了$\bm a_2$ 的多少倍？（注意，从$\bm a_3$到$\bm c_3$，这恰恰就是Gram-Schmidt正交化对$\bm a_3$的处理方式。）
+\end{enumerate}
+\end{ex}
+
+
+
+\begin{ex}
+考虑平面上的点$\begin{bmatrix}0\\0\end{bmatrix},\begin{bmatrix}1\\8\end{bmatrix},\begin{bmatrix}3\\8\end{bmatrix},\begin{bmatrix}4\\20\end{bmatrix}$。请用最小二乘法找到以下直线或曲线：
+\begin{enumerate}
+\item 找到平行于$x$轴的直线$y=b$使得$\sum\| y_i-b\|^2$最小；
+\item 找到经过原点的直线$y=kx$使得$\sum\| y_i-kx\|^2$最小；
+\item 找到直线$y=kx+b$使得$\sum\| y_i-(kx_i+b)\|^2$最小；
+\item （$\heartsuit $）找到抛物线$y=ax^2+bx+c$使得$\sum\| y_i-(ax_i^2+bx_i+c)\|^2$最小。
+\end{enumerate}
+\end{ex}
+
+
+
+\begin{ex} （$\heartsuit $）
+（最小二乘的统计应用）我们来研究这样一个问题：死刑到底能否降低凶杀率？为了排除社会文化，统计方式等额外因素的影响，我们考虑美国。考虑美国的一个好处是，社会文化、统计方式等各种因素相对统一，但是有的州有死刑，有的州没有死刑，这就给了研究死刑的影响提供了一个稍微可控的实验环境。
+
+我们这里仅做一个极其简单地分析。已知德克萨斯州和宾夕法尼亚州有死刑，而纽约州，加州和麻省没有死刑。我们可以将这个信息记作向量$\bm x=\begin{bmatrix}1\\1\\0\\0\\0\end{bmatrix}$，这里$1$代表有死刑，$0$代表没有死刑。这五个州的凶杀率为$\bm y=\begin{bmatrix}4.6\\6.1\\2.9\\4.4\\2.0\end{bmatrix}$。我们考虑一个线性拟合模型$y_i=kx_i+b$，也就是说我们想要从$\bm y=k\bm x+b\bm u$中解得$k,b$，其中$\bu$是分量全是$1$的向量。显然，由于凶杀率并不仅仅由是否有死刑决定，因此方程是无解的，我们需要使用线性拟合的手法找到最小二乘解。如果我们计算发现$k$为负，则意味着允许死刑（$x$值从$0$增加到$1$）可以降低凶杀率（$y$值下降）。
+
+（死刑的影响是一个极具争议且比较复杂的话题，同时本题的数据量太小，并没有任何说服力，而且无法提供任何因果关系，仅仅提供了相关性。请读者不要仅仅根据此题的结果擅自下结论，保持独立思考的能力。有兴趣的读者可以搜索Donohue和Wolfers于2006年的文献，其中对若干著名的相关研究进行了介绍和解读。）
+\begin{enumerate}
+\item 请用最小二乘法估计出最佳的$k,b$；
+\item 求出没有死刑的州的凶杀率平均值，以及有死刑的州的凶杀率平均值。这二者和$k,b$有何关系？
+\item 仅根据本题的计算，你猜测一个有死刑的国家，对比一个没有死刑的国家，凶杀率会更高还是更低？
+\end{enumerate}
+\end{ex}
+
+
+\begin{ex}（$\heartsuit \heartsuit$）
+假设我们统计了5个人的身高、体重、收入和受教育年数，记作向量$\bm a_1,\bm a_2,\bm a_3,\bm a_4$。
+\begin{enumerate}
+\item 请找到向量$\bm v$，使得$\bm v\bm v^{T}\bm a_i$的每一个分量均为$\bm a_i$对应的数据的平均值。该向量是否必须为单位向量？
+\item 对任意两组数据$\bm a_i,\bm a_j$，定义其协方差为$C_{ij}=(\bm a_i-\bm v\bm v^{T}\bm a_i)^{T}(\bm a_j-\bm v\bm v^{T}\bm a_j)$; 当$i = j$时，我们称$C_{ii}$为$\bm a_i$自身的方差。请找到矩阵$C$使得两组数据$\bm a_i,\bm a_j$之间的协方差为$C_{ij}= \bm a_i^{T}C\bm a_j$。该矩阵$C$是否为正交矩阵？是否为对称矩阵？
+\item 假设$\bm a_1,\bm a_2,\bm a_3,\bm a_4$分别为
+	$\begin{bmatrix}1.6\\1.7\\1.8\\1.9\\2.0\end{bmatrix},
+	\begin{bmatrix}59\\59\\60\\61\\61\end{bmatrix},
+	\begin{bmatrix}1000\\1100\\1000\\900\\1000\end{bmatrix},
+	\begin{bmatrix}16\\19\\16\\19\\19\end{bmatrix}$，请用协方差代替点积来进行一种变体的Gram-Schmidt正交化，使得得到的数据$\bm b_1,\bm b_2,\bm b_3,\bm b_4$两两协方差为零，且自身的方差均为1。（在统计学和信息学中，变量之间的不相关与向量之间的正交有着很大的类比性。）
+\end{enumerate}
+\end{ex}
+
+
+
+\end{document}

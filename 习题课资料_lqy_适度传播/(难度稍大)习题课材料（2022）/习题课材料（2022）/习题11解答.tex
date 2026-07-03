@@ -1,0 +1,424 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+%\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+\newcommand\bs[1]{\boldsymbol{ #1}}
+
+\newenvironment{bmatriX}[1]{\left[\hskip -\arraycolsep \begin{array}{#1}}{\end{array}\hskip -\arraycolsep\right]}
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+\newif\ifhideproofs
+%\hideproofstrue
+\newif\iffinalver
+\finalvertrue        
+\ifhideproofs
+\usepackage[final]{changes}
+\definechangesauthor[name=Error, color=red]{err}
+\usepackage{environ}
+\NewEnviron{hide}{}
+\let\proof\hide
+\let\endproof\endhide
+\else
+\iffinalver
+\usepackage[final]{changes}
+\else
+\usepackage{changes}
+\fi
+\definechangesauthor[name=Error, color=red]{err}
+\fi
+
+		
+\begin{document}
+
+
+\title{习题课材料（十一）}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+\noindent{\textbf{我们用$\mathbb{F}$表示一个给定的数域。}}
+
+\begin{ex}
+给定$A = \begin{bmatrix}
+1 & 2 & 1 \\
+1 & 1 & 0 \\
+0 & 1 & 1
+\end{bmatrix}$和$\mathbb{R}^{3 \times 3}$上的线性变换$f: X \to AX$。分别求$\mathcal{N}(f)$和$\mathcal{R}(f)$的维数和一组基。
+\end{ex}
+\begin{proof}[解]
+%由定义$\mathcal{N}(f) = \{X \in \mathbb{R}^{3 \times 3} \mid AX = 0\}$
+定义线性空间的同构$\Phi: \mathbb{R}^{3 \times 3} \to \mathbb{R}^{3} \oplus \mathbb{R}^{3} \oplus \mathbb{R}^{3}: [\alpha_1, \alpha_2, \alpha_3] \to (\alpha_1, \alpha_2, \alpha_3)$，即从列向量的角度分解矩阵。注意到如下的交换图：
+\begin{equation}
+\xymatrix{
+[\alpha_1, \alpha_2, \alpha_3] \in \mathbb{R}^{3 \times 3}\ar[r]^{\Phi}\ar[d]^{f}& (\alpha_1, \alpha_2, \alpha_3) \in \mathbb{R}^{3} \oplus \mathbb{R}^{3} \oplus \mathbb{R}^{3}\ar[d]\\
+A[\alpha_1, \alpha_2, \alpha_3] \in \mathbb{R}^{3 \times 3}\ar[r]^{\Phi}& (A\alpha_1, A\alpha_2, A\alpha_3) \in \mathbb{R}^{3} \oplus \mathbb{R}^{3} \oplus \mathbb{R}^{3}.\\
+}
+\end{equation}
+右侧垂直映射记为$(f_1, f_2, f_3)$，每个$f_i$都是左乘矩阵$A$。验证:
+\
+
+$\mathcal{N}(f) = \Phi^{-1}(\mathcal{N}((f_1, f_2, f_3)))$以及$\mathcal{R}(f) = \Phi^{-1}(\mathcal{R}((f_1, f_2, f_3)))$。
+\
+
+注意到$\mathcal{N}(f_1) = \mathcal{N}(f_2) = \mathcal{N}(f_3) = \mathcal{N}(A) = \mathbb{R}\begin{bmatrix} 
+1 \\
+-1 \\
+1
+\end{bmatrix} = \{\begin{bmatrix} 
+a \\
+-a \\
+a
+\end{bmatrix} \mid a \in \mathbb{R}\}$以及
+$\mathcal{R}(f_1) = \mathcal{R}(f_2) = \mathcal{R}(f_3) = \mathcal{R}(A) = \mathrm{Span} \langle \begin{bmatrix} 
+1 \\
+1 \\
+0
+\end{bmatrix}, \begin{bmatrix} 
+1 \\
+0 \\
+1
+\end{bmatrix}\rangle = \{\begin{bmatrix} 
+b+c \\
+b \\
+c
+\end{bmatrix} \mid b,c \in \mathbb{R} \}$，因此
+\[
+\mathcal{N}(f) = \{
+\begin{bmatrix} 
+a_1 & a_2 & a_3\\
+-a_1 & -a_2 & -a_3\\
+a_1 & a_2 & a_3
+\end{bmatrix} \mid a_1, a_2, a_3 \in \mathbb{R} \}= \mathrm{Span} \langle E_{11} - E_{21}+E_{31}, E_{12} - E_{22}+E_{32}, E_{13} - E_{23}+E_{33}\rangle
+\]
+以及
+\begin{equation} \nonumber
+\begin{split}
+&\mathcal{R}(f) = \{
+\begin{bmatrix} 
+b_1+c_1 & b_2+c_2 & b_3+c_3\\
+b_1 & b_2 & b_3\\
+c_1 & c_2 & c_3
+\end{bmatrix} \mid b_1, b_2, b_3, c_1, c_2, c_3 \in \mathbb{R}
+\} \\
+= &\mathrm{Span} \langle E_{11}+E_{21}, E_{11}+E_{31}, E_{12}+E_{22}, E_{12}+E_{32},E_{13}+E_{23}, E_{13}+E_{33}\rangle.
+\end{split}
+\end{equation}
+于是$\dim \mathcal{N}(f) = 3, \dim \mathcal{R}(f) = 6$。
+\end{proof}
+\begin{rmk}
+此题也可以直接计算$f$在基$E_{ij}, 1 \leq i,j \leq 3$下的表示矩阵。
+\end{rmk}
+
+
+
+
+\begin{ex}
+设$\mathbb{Q}[i] = \{a+bi \mid a, b \in \mathbb{Q} \}$，其中$i^2 = -1$。
+\begin{enumerate}
+\item
+证明$\mathbb{Q}[i]$关于数的加法和数乘构成 $\mathbb{Q}$上的线性空间。
+\item
+计算$\mathbb{Q}[i]$作为$\mathbb{Q}$上线性空间的维数。
+\end{enumerate}
+\end{ex}
+\begin{proof}[解]
+\begin{enumerate}
+\item
+验证线性空间的八条性质，细节略。
+\item
+先证明$\{1, i\}$构成$\mathbb{Q}[i]$的一组基。首先，由定义，$\mathbb{Q}[i]$中的任意元素可以写成$1$和$i$的线性组合。其次，若存在$m, n \in \mathbb{Q}$满足
+$m + ni = 0,$
+则
+\[
+0 = (m+ni)(m-ni) = m^2 + n^2,
+\]
+因此$m = n = 0$，换言之$1$和$i$线性无关。所以$\dim_{\mathbb{Q}}\mathbb{Q}[i] = 2$。
+\end{enumerate}
+\end{proof}
+
+
+
+\begin{ex}
+设$V$是数域$\mathbb{F}$上的$n$维线性空间，$V_1$和$V_2$是$V$的两个子空间，满足$\dim V_1 + \dim V_2 = \dim V$。请问是否存在$V$上的线性变换$\sigma$满足$\mathcal{N}(\sigma) = V_1$且 $\mathcal{R}(\sigma) = V_2$？
+\end{ex}
+\begin{proof}[解]
+存在。设向量组$\{\alpha_1, \cdots, \alpha_r\}$与$\{\beta_{r+1}, \cdots, \beta_{n}\}$分别构成$V_1$与$V_2$的一组基。将$\{\alpha_1, \cdots, \alpha_r\}$扩充为$V$的一组基$\{\alpha_1, \cdots, \alpha_r, \alpha_{r+1}, \cdots, \alpha_n\}$。定义$V$上的线性变换$\sigma$：
+\[
+\sigma(\alpha_i) = \begin{cases}
+0, & 1 \leq i \leq r; \\
+\beta_i, & r+1 \leq i \leq n.
+\end{cases}
+\]
+验证$\sigma$满足题目中的条件。
+\end{proof}
+
+
+
+\begin{ex}
+定义$\mathbb{F}[x]$上的变换$\mathbf{A}(f(x)) = xf(x), \forall f(x) \in \mathbb{F}[x]$。
+\begin{enumerate}
+\item
+验证$\mathbf{A}$是$\mathbb{F}[x]$上的一个线性变换。
+\item
+设$\mathbf{D}$是求导算子，证明$\mathbf{D}\mathbf{A} - \mathbf{A}\mathbf{D} = \mathbf{I}$。
+\end{enumerate}
+\end{ex}
+\begin{proof}
+\begin{enumerate}
+\item
+由线性变换的定义，需验证，$\forall, \alpha, \beta \in \mathbb{F}, f(x), g(x) \in \mathbb{F}[x]$，
+\[
+\mathbf{A}(\alpha f(x)+\beta g(x)) = \alpha \mathbf{A}(f(x))  + \beta \mathbf{A}(g(x)). 
+\]
+由定义，上式左边为$\mathbf{A}(\alpha f(x)+\beta g(x)) = x(\alpha f(x)+\beta g(x)) = \alpha xf(x) + \beta xg(x) =$ 等式右边。所以$\mathbf{A}$是$\mathbb{F}[x]$上的一个线性变换。
+\item
+直接计算即可。
+\begin{equation} \nonumber
+\begin{split}
+&(\mathbf{D}\mathbf{A} - \mathbf{A}\mathbf{D} )(f(x)) = \mathbf{D}\mathbf{A} f(x)- \mathbf{A}\mathbf{D} f(x) 
+=  \mathbf{D}(xf(x)) - \mathbf{A}(f^{'}(x)) \\
+=& (xf(x))^{'} - xf^{'}(x) = f(x) + xf^{'}(x) - xf^{'}(x) = f(x) = \mathbf{I} f(x). 
+\end{split}
+\end{equation}
+\end{enumerate}
+\end{proof}
+
+\begin{ex} %%% 过渡矩阵
+设 $a_{1} = \begin{bmatrix}
+1 & 0 \\
+0 & 0
+\end{bmatrix}, a_{2} =\begin{bmatrix}
+1 & 1 \\
+0 & 0
+\end{bmatrix}, a_{3} =\begin{bmatrix}
+0 & 1 \\
+1 & 0
+\end{bmatrix}, a_{4} = \begin{bmatrix}
+0 & 0 \\
+1 & 1
+\end{bmatrix}$;
+\
+
+$b_{1} = \begin{bmatrix}
+1 & 0 \\
+1 & 0
+\end{bmatrix}, b_{2} =\begin{bmatrix}
+0 & 1 \\
+0 & 0
+\end{bmatrix}, b_{3} =\begin{bmatrix}
+0 & 0 \\
+1 & 1
+\end{bmatrix}, b_{4} = \begin{bmatrix}
+0 & 0 \\
+0 & 1
+\end{bmatrix}$.
+\begin{enumerate}
+\item
+验证$\{a_{i}, 1 \leq i \leq 4\}$和$\{b_{i}, 1 \leq i \leq 4\}$都组成$\mathbb{R}^{2 \times 2}$的一组基。
+\item
+计算$\{a_{i}, 1 \leq i \leq 4\}$到$\{b_{i}, 1 \leq i \leq 4\}$的过渡矩阵。
+\end{enumerate}
+\end{ex}
+\begin{proof}[解]
+\begin{enumerate}
+\item
+计算可知：
+\[
+[a_1, a_2, a_3, a_4] = [E_{11}, E_{12}, E_{21}, E_{22}] A = [E_{11}, E_{12}, E_{21}, E_{22}] \begin{bmatrix}
+1 & 1 & 0 & 0  \\
+0 & 1 & 1 & 0  \\
+0 & 0 & 1 & 1 \\
+0 & 0 & 0 & 1 
+\end{bmatrix},
+\]
+\[
+[b_1, b_2, b_3, b_4] = [E_{11}, E_{12}, E_{21}, E_{22}] B = [E_{11}, E_{12}, E_{21}, E_{22}] \begin{bmatrix}
+1 & 0 & 0 & 0  \\
+1 & 1 & 0 & 0  \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 1 & 1 
+\end{bmatrix}.
+\]
+由于$A, B$可逆，故$\{a_{i}, 1 \leq i \leq 4\}$和$\{b_{i}, 1 \leq i \leq 4\}$都组成$\mathbb{R}^{2 \times 2}$的一组基。
+\item
+记$\{a_{i}, 1 \leq i \leq 4\}$到$\{b_{i}, 1 \leq i \leq 4\}$的过渡矩阵为$C$，即
+\[
+[b_1, b_2, b_3, b_4] = [a_1, a_2, a_3, a_4]C.
+\]
+于是：
+\[
+[E_{11}, E_{12}, E_{21}, E_{22}] B = [E_{11}, E_{12}, E_{21}, E_{22}] A C. 
+\]
+换句话说$C = A^{-1}B = \begin{bmatrix}
+1 & 1 & 0 & 0  \\
+0 & 1 & 1 & 0  \\
+0 & 0 & 1 & 1 \\
+0 & 0 & 0 & 1 
+\end{bmatrix}^{-1} \begin{bmatrix}
+1 & 0 & 0 & 0  \\
+1 & 1 & 0 & 0  \\
+0 & 0 & 1 & 0 \\
+0 & 0 & 1 & 1 
+\end{bmatrix} = \begin{bmatrix}
+0 & -1 & 0 & -1  \\
+1 & 1 & 0 & 1  \\
+0 & 0 & 0 & -1 \\
+0 & 0 & 1 & 1 
+\end{bmatrix}$。
+\end{enumerate}
+\end{proof}
+%%%%%%     1  -1  1  -1
+%%%%%%         1   -1  1
+%%%%%%             1  -1
+%%%%%%                 1
+\begin{ex} 
+设$W$是数域$\mathbb{F}$上的$n$维线性空间，$V_1, V_2$和$V$都是$W$的子空间。假设$V_1 \subset V_2$，$V\cap V_1 = V\cap V_2$, $V+ V_1=V+V_2$，证明：
+$V_1 = V_2$。
+\end{ex}
+\begin{proof}
+由维数公式可知：
+\[
+\dim(V+ V_1) = \dim V + \dim V_1 - \dim(V \cap V_1), \dim(V+ V_2) = \dim V + \dim V_2 - \dim(V\cap V_2).
+\]
+由题设又知$\dim(V+V_1) = \dim(V+V_2)$，$\dim(V\cap V_1) = \dim(V\cap V_2)$，因此$\dim V_1 = \dim V_2$。结合$V_1 \subset V_2$，可知结论成立。
+\end{proof}
+\begin{ques}
+题目中条件$V_1 \subset V_2$是否需要？
+\end{ques}
+%需要 V={x=y}, V_1={x=0}, V_2={y=0}
+
+
+\begin{ex}
+设$\mathbb{F}^{2 \times 2}$上的线性变换$\mathbf{R}_A: X \to XA$，其中$A = \begin{bmatrix} 
+a & b \\
+c & d
+\end{bmatrix}$。求$\mathbf{R}_A$在基$E_{11}, E_{12}, E_{21}, E_{22}$下的矩阵。
+\end{ex}
+\begin{proof}[解]
+\begin{equation} \nonumber
+\mathbf{R}_A(E_{11}) = E_{11}A = \begin{bmatrix} 
+1 & 0 \\
+0 & 0
+\end{bmatrix}\begin{bmatrix} 
+a & b \\
+c & d
+\end{bmatrix} = \begin{bmatrix} 
+a & b \\
+0 & 0
+\end{bmatrix} = aE_{11} + bE_{12}.
+\end{equation}
+同样计算可知：
+\begin{equation} \nonumber
+\mathbf{R}_A(E_{12}) = cE_{11} + dE_{12};
+\end{equation}
+\begin{equation} \nonumber
+\mathbf{R}_A(E_{21}) = aE_{21} + bE_{22};
+\end{equation}
+\begin{equation} \nonumber
+\mathbf{R}_A(E_{22}) = cE_{21} + dE_{22}.
+\end{equation}
+所以，我们有
+\begin{equation} \nonumber
+\mathbf{R}_A(E_{11}, E_{12}, E_{21}, E_{22}) = (E_{11}, E_{12}, E_{21}, E_{22})
+\begin{bmatrix} 
+a & c & 0 & 0 \\
+b & d & 0 & 0 \\
+0 & 0 & a & c \\
+0 & 0 & b & d
+\end{bmatrix}.
+\end{equation}
+\end{proof}
+
+
+
+
+\begin{ex}
+设$\mathcal{V}$是数域$\mathbb{F}$上的$n$维线性空间，将$\mathbb{F}$看作自身上的线性空间，而$\mathcal{V}$到$\mathbb{F}$的线性映射称为$\mathcal{V}$上的线性函数。令$\mathcal{V}^* = \mathrm{Hom}(\mathcal{V}, \mathbb{F})$，称为$\mathcal{V}$的对偶空间，证明$\mathcal{V}^{*}$和$\mathcal{V}$同构。
+\end{ex}
+\begin{proof}
+固定$\mathcal{V}$的一组基，记为$\{e_1, \cdots, e_n\}$。定义映射$\varphi: \mathcal{V}^{*} \to \mathcal{V}$：
+\[
+f \to (e_1, e_2, \cdots, e_n)\begin{bmatrix}
+f(e_1) \\
+f(e_2) \\
+\vdots \\
+f(e_n)
+\end{bmatrix}
+\]
+直接验证$\varphi$是线性同构即可。
+\end{proof}
+\begin{rmk}
+作为推论，我们发现$\dim \mathcal{V}^{*} = \dim \mathcal{V}$。$\{e_1, \cdots, e_n\}$在$\varphi$下的原象构成了$\mathcal{V}^{*}$的一组基，称为$\mathcal{V}^{*}$关于$\{e_1, \cdots, e_n\}$的对偶基，一般记为$\{e^1, \cdots, e^n\}$。
+\end{rmk}
+
+
+\begin{ex}[$\heartsuit $]
+给定$m$阶方阵$A_1$，$n$阶方阵$A_2$和$m \times n$阶矩阵$B$。证明：如果$A_1$和$A_2$没有相同的特征值，则
+\begin{enumerate}
+\item
+关于$m \times n$矩阵$X$的方程，$A_1X = XA_2$只有平凡解。
+\item
+关于$m \times n$矩阵$X$的方程，$A_1X - XA_2 = B$只有唯一解。
+\end{enumerate}
+\end{ex}
+\begin{proof}
+\begin{enumerate}
+\item
+注意到：对于任意可逆矩阵$P$，$(P^{-1}A_1P)(P^{-1}XP) = (P^{-1}XP)(P^{-1}A_2P)$
+只有平凡解当且仅当$A_1X = XA_2$只有平凡解。另一方面存在可逆矩阵$P$使得$P^{-1}A_2P$为上三角矩阵，所以不妨设$A_2$为上三角矩阵，其主对角元为$\lambda_1, \cdots, \lambda_n$。令$X = (x_1, \cdots, x_n)$为$A_1X = XA_2$的解。于是
+\[
+(A_1x_1, \cdots, A_1x_n) = A_1(x_1, \cdots, x_n) = (x_1, \cdots, x_n) A_2 =  (x_1, \cdots, x_n) \begin{bmatrix}
+\lambda_1 & * & \cdots & * \\
+0 & \lambda_2 & \cdots & * \\
+0 & 0 & \cdots & \cdots \\
+0 & 0 &  \cdots & \lambda_n
+\end{bmatrix}.
+\]
+特别地，我们发现$A_1x_1 = \lambda_1 x_1$。因为$A_1$和$A_2$没有相同的特征值，故$A_1 - \lambda_1 \mathrm{I}_n$为可逆矩阵，所以$x_1 = 0$。再观察第二列，我们发现$A_1x_2 = \lambda_2 x_2 + * x_1 = \lambda_2 x_2$，同样利用$A_1$和$A_2$没有相同的特征值，$A_1 - \lambda_2 \mathrm{I}_n$为可逆矩阵，因此$x_2 = 0$。同理，我们可以依次证明$x_3 = \cdots = x_n = 0$，即$A_1X = XA_2$只有平凡解。
+\added{
+\begin{proof}[另证]
+	可以证明对任意多项式$f(x)$,有$f(A)X=Xf(B)$，取$f$为$A$的特征多项式，则由Hamilton-Cayley定理有$f(A)=0$，又由$f$的根为$A$的特征值，且$A, B$没有公共特征值，有$f(B)$可逆，于是可得$X=0$。
+\end{proof}
+}
+\item
+假设$m \times n$矩阵$X_1, X_2$都满足$A_1X - XA_2 = B$，即
+\[
+A_1X_1 - X_1A_2 = B, A_1X_2 - X_2A_2 = B. 
+\]
+两式相减得$A_1(X_1-X_2) - (X_1-X_2)A_2 = 0$。由第一问知，$X_1-X_2 = 0$，因此解唯一。
+
+\added{
+	由与第1问类似的讨论可知解的存在性，或将$X\mapsto A_1X-XA_2$看作$n$维矩阵线性空间上的线性变换，由第1问知是单射，故由维数公式知是满射。
+}
+\end{enumerate}
+\end{proof}
+%\clearpage
+%\listofchanges
+\end{document}

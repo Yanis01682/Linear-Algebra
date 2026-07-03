@@ -1,0 +1,271 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+% \usepackage{CJK}
+\usepackage{arydshln}
+% \usepackage[11pt]{moresize}
+
+
+
+\newtheorem{thm}{定理}
+\newtheorem{cor}[thm]{推论}
+\newtheorem{lem}[thm]{引理}
+\newtheorem{prop}[thm]{命题}
+\newtheorem{defn}[thm]{定义}
+\newtheorem{ques}[thm]{问题}
+\newtheorem{eg}[thm]{例题}
+\newtheorem{ex}[thm]{习题}
+\newtheorem{rmk}[thm]{注释}
+\newtheorem{ntn}[thm]{记号}
+
+
+
+
+\begin{document}
+
+
+\title{习题课材料（六）}
+\date{}
+
+\maketitle
+
+%\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+\begin{ex}
+  设 \(\mathcal{M}\), \(\mathcal{N}\) 是 \(\mathbb{R}^{n}\) 的两个线性子空间,
+  \(\dim \mathcal{M} = \dim \mathcal{N} = m\). 假设 \(m < n\), 且存在
+  \(\boldsymbol{u} \in \mathcal{M}\), 满足 \(\boldsymbol{u} \perp \boldsymbol{a}\), \(\forall\boldsymbol{a} \in \mathcal{N}\),
+  证明, 存在 \(\boldsymbol{b} \in \mathcal{N}\), \(\boldsymbol{b} \perp \boldsymbol{v}\), \(\forall \boldsymbol{v} \in \mathcal{M}\).
+\end{ex}
+
+\begin{proof}
+  题设可简化为 \(\mathcal{M} \cap \mathcal{N}^{\perp} \neq \{0\}\).
+  所需证明之事为 \(\mathcal{M}^{\perp} \cap \mathcal{N} \neq \{0\}\).
+  若 \(\mathcal{M}^{\perp}\cap \mathcal{N} = \{0\}\),
+  则根据习题 3.3.8(3), 可知 \(\mathcal{M} + \mathcal{N}^{\perp} = \mathbb{R}^{n}\).
+  由于 \(\dim \mathcal{N}^{\perp} = n - m\), \(\dim \mathcal{M} = m\), 必有
+  \(\mathcal{M} \cap \mathcal{N}^{\perp} = \{0\}\).
+  因此题目的逆否命题成立, 故而问题得证.
+\end{proof}
+
+\begin{ex}
+  设平面上四个点 \((x_i,y_i)\) 分别是
+  \((0,0)\), \((1,8)\), \((3,8)\), \((4,20)\).
+  \begin{enumerate}
+  \item 求 \(k, b\), 使得直线 \(y = kx + b\) 满足
+    \(\sum_{i=1}^{4}|y_i - (kx_i+b)|^2\) 最小.
+  \item 求 \(a,b,c\), 使抛物线 \(y = f(x) = ax^2 + bx + c\) 满足
+    \(\sum_{i=1}^{4}|y_i - (ax_i^2+bx_i + c)|^2\) 最小.
+  \end{enumerate}
+\end{ex}
+
+\begin{proof}
+  第一题需要求线性方程组
+  \begin{equation*}
+    \begin{cases}
+      0 = 0 \cdot k + b \\
+      8 = 1 \cdot k + b \\
+      8 = 3 \cdot k + b \\
+      20= 4\cdot k +b
+    \end{cases}
+  \end{equation*}
+  的最小二乘解. 答案为 (\(y=4x+1\).
+
+  第二题需要求线性方程组
+  \begin{equation*}
+    \begin{cases}
+      0 = 0\cdot a +0\cdot b + c \\
+      8 = a + b+c \\
+      8= 9a+3b+c\\
+      20 = 16a+4b+c
+    \end{cases}
+  \end{equation*}
+  的最小二乘解. 解得 \((a,b,c) = (2/3, 4/3, 2)\).
+\end{proof}
+
+\begin{ex}
+  设 \(\mathcal{M}\) 是 \(\mathbb{R}^{3}\) 中由方程
+  \(x_1-x_2+x_3=0\) 所决定的平面. 求 \(\boldsymbol{b} = [1,1,2]^{\mathrm{T}}\)
+  在 \(\mathcal{M}\) 上的正交投影.
+\end{ex}
+
+\begin{proof}
+  根据基本正交性关系, \(\mathcal{M}^{\perp} = \mathcal{R}([1,-1,1]^{\mathrm{T}})\).
+  为了求出 \(\boldsymbol{b}\) 在 \(\mathcal{M}\)
+  上的正交投影, 只需求出 \(\boldsymbol{b}\) 在 \(\mathcal{M}^{\perp}\)
+  上的正交投影 \(\boldsymbol{b}'\), 则 \(\boldsymbol{b} - \boldsymbol{b}'\)
+  即为所求.
+
+  而 \(\mathcal{M}^{\perp}\) 为 1 维空间, 计算起来更简单.
+  计算得
+  \begin{align*}
+    \boldsymbol{b}'
+    &= \boldsymbol{b} - \frac{\boldsymbol{b}^{\mathrm{T}}\left[ \begin{smallmatrix} 1 \\ -1 \\ 1 \end{smallmatrix}\right]}{\left| \left[\begin{smallmatrix} 1 \\ -1 \\ 1 \end{smallmatrix} \right]\right|^2} \cdot \left[  \begin{smallmatrix} 1 \\ -1 \\ 1 \end{smallmatrix} \right] \\
+    &= \left[  \begin{smallmatrix} 1 \\ 1 \\ 2 \end{smallmatrix} \right] -
+      \frac{2}{3}\left[  \begin{smallmatrix} 1 \\ -1 \\ 1 \end{smallmatrix} \right] \\
+    &= \frac{1}{3}\left[  \begin{smallmatrix} 1 \\ 5 \\ 4 \end{smallmatrix} \right].
+  \end{align*}
+\end{proof}
+
+
+\begin{ex}
+  若 \(n\) 阶方阵 \(P\) 满足 \(P^{2} = P\), 则称 \(P\) 为斜投影矩阵.
+  给定 \(n\) 阶斜投影矩阵 \(P\).
+  \begin{enumerate}
+  \item 证明 \(I_{n} - P\) 也是斜投影矩阵.
+  \item 证明 \(\mathcal{R}(P) = \mathcal{N}(I_{n} - P)\), \(\mathcal{R}(I_{n}-P) = \mathcal{N}(P)\).
+  \item 对 \(\boldsymbol{v} \in \mathbb{R}^{n}\), 证明存在唯一分解 \(\boldsymbol{v} = \boldsymbol{v}_1 + \boldsymbol{v}_{2}\),
+    其中 \(\boldsymbol{v}_{1} \in \mathcal{R}(P)\), \(\boldsymbol{v}_{2} \in \mathcal{R}(I_{n} - P)\)
+  \item 构造二阶斜投影方阵, 且它不是正交投影.
+  \end{enumerate}
+\end{ex}
+
+\begin{proof}
+\begin{enumerate}
+\item 直接计算即可: \((I - P)(I - P) = I - P - P + P^{2} = I - P\).
+\item 设 \(\boldsymbol{v} \in \mathcal{R}(P)\), 则存在 \(\boldsymbol{w} \in \mathbb{R}^{n}\), \(\boldsymbol{v} = P\boldsymbol{w}\).
+因此 \((I-P)\boldsymbol{v} = (I-P)P\boldsymbol{w} = (P-P^{2})(\boldsymbol{w}) = \boldsymbol{0}\).如果$\boldsymbol{v} \in \mathcal{N}(I-P)$,则$\boldsymbol{v}=P\boldsymbol{v}\in\mathcal{R}(P)$.因此$\mathcal{R}(P)=\mathcal{N}(I_n-P)$.
+利用第一问, 将上述论证施行于 \(I-P\) 即得 \(\mathcal{R}(I_{n}-P) = \mathcal{N}(P)\)
+\item \emph{存在性}. \(\boldsymbol{v} = P\boldsymbol{v} + (I-P)\boldsymbol{v}\),
+和号之前者属于 \(\mathcal{R}(P)\), 和号之后者属于 \(\mathcal{R}(I-P)\).
+\emph{唯一性}. 若 \(\boldsymbol{v} \in \mathcal{R}(P)\), 利用 2 可知 \((I-P)\boldsymbol{v}=\boldsymbol{0}\).
+若 \(\boldsymbol{v} \in \mathcal{R}(I-P)\), 则有 \((I-P)\boldsymbol{v}=\boldsymbol{v}\). 故而 \(\mathcal{R}(P) \cap \mathcal{R}(I-P) = \{\boldsymbol{0}\}\).
+若某一向量 \(\boldsymbol{v}\) 有两种分解 \(\boldsymbol{v}_{1} + \boldsymbol{v}_{2}\), \(\boldsymbol{v}'_{1} + \boldsymbol{v}'_{2}\), 则 \(\boldsymbol{v}_1-\boldsymbol{v}'_{1}=\boldsymbol{v}'_{2}-\boldsymbol{v}_{2}\)
+同时属于 \(\mathcal{R}(P)\) 和 \(\mathcal{R}(I-P)\). 因此只能有 \(\boldsymbol{v}_{1} = \boldsymbol{v}'_{1}\), \(\boldsymbol{v}_{2} = \boldsymbol{v}'_{2}\).
+\item 选择 \(\mathbb{R}^{2}\) 的非正交基, 如 \([1,0]^{\mathrm{T}}\)
+和 \([1,1]^{\mathrm{T}}\). 则任何 \([x,y]^{\mathrm{T}} \in \mathbb{R}^{2}\)
+可以写成这两个基向量的唯一线性组合:
+\([x,y]^{\mathrm{T}} = (x-y)[1,0]^{\mathrm{T}} + y [1,1]^{\mathrm{T}}\).
+则映射 \([x,y]^{\mathrm{T}} \mapsto (x-y)[1,0]^{\mathrm{T}}\) 可看做向一维子空间 \(\mathbb{R}\cdot [1,0]^{\mathrm{T}}\)
+方向的斜投影, 它的矩阵表示为 \(\left[\begin{smallmatrix} 1 & -1 \\ 0 & 0 \end{smallmatrix}\right]\). 这不是正交投影矩阵, 因为它不是对称的.
+\end{enumerate}
+\end{proof}
+
+\begin{ex}
+  证明 \((\mathcal{M}+\mathcal{N})^{\perp} = \mathcal{M}^{\perp} \cap \mathcal{N}^{\perp}\), \((\mathcal{M}\cap \mathcal{N})^{\perp} = \mathcal{M}^{\perp} + \mathcal{N}^{\perp}\).
+\end{ex}
+
+\begin{proof}
+  只需证明第一个等式, 因为将第一个等式中的 \(\mathcal{M}\) 和 \(\mathcal{N}\)
+分别换为它们的正交补, 并利用 \((\mathcal{M}^{\perp})^{\perp} = \mathcal{M}\) 这一事实, 即能导出第二个等式.
+
+若 \(\boldsymbol{v} \in (\mathcal{M}+\mathcal{N})^{\perp}\),
+则 \(\boldsymbol{v}^{\mathrm{T}}\boldsymbol{w}=0\) 对一切 \(\boldsymbol{w} \in \mathcal{M}+\mathcal{N}\) 成立, 特别地, 它对 \(\mathcal{M}\) 和 \(\mathcal{N}\) 中的向量都成立.
+因此 \(\boldsymbol{v} \in \mathcal{M}^{\perp}\) 且 \(\boldsymbol{v} \in \mathcal{N}^{\perp}\). 故而我们证明了 \((\mathcal{M}+\mathcal{N})^{\perp} \subset \mathcal{M}^{\perp}\cap \mathcal{N}^{\perp}\).
+
+若 \(\boldsymbol{v} \in \mathcal{M}^{\perp}\cap \mathcal{N}^{\perp}\),
+则对任何 \(\boldsymbol{u} \in \mathcal{M}\), \(\boldsymbol{w} \in \mathcal{N}\),
+都有 \(\boldsymbol{v}^{\mathrm{T}} \boldsymbol{u} = \boldsymbol{0} = \boldsymbol{v}^{\mathrm{T}} \boldsymbol{w}\).
+特别地, \(\boldsymbol{v}^{\mathrm{T}} (\boldsymbol{u}+\boldsymbol{w}) = \boldsymbol{0}\).
+今 \(\mathcal{M}+\mathcal{N}\) 中的向量俱形如 \(\boldsymbol{u}+\boldsymbol{w}\) 如上,
+故 \(\boldsymbol{v} \in (\mathcal{M}+\mathcal{N})^{\perp}\),
+即 \(\mathcal{M}^{\perp} \cap \mathcal{N}^{\perp} \subset (\mathcal{M}+\mathcal{N})^{\perp}\).
+问题得证.
+\end{proof}
+
+\begin{ex}[\(\heartsuit\)]
+  给定子空间 \(\mathcal{M}_{1}, \mathcal{M}_{2} \subset \mathbb{R}^{m}\), \(\mathcal{N}_{1}, \mathcal{N}_{2} \subset \mathbb{R}^{n}\).
+何时存在 \(m \times n\) 矩阵 \(A\), 使得
+\(\mathcal{R}(A) = \mathcal{M}_{1}\), \(\mathcal{N}(A^{\mathrm{T}})=\mathcal{M}_{2}\), \(\mathcal{R}(A^{\mathrm{T}})=\mathcal{N}_{1}\), \(\mathcal{N}(A) = \mathcal{N}_{2}\)
+同时成立?
+\end{ex}
+
+\begin{proof}
+  根据课上所学内容, 我们有维数之间的等式:
+\[\dim \mathcal{M}_{1} + \dim \mathcal{N}_{2} = n, \quad \dim \mathcal{N}_{1} + \dim \mathcal{M}_{2} = m.\]
+以及正交关系:
+\[
+  \mathcal{N}(A) = \mathcal{R}(A^{\mathrm{T}})^{\perp}, \quad
+  \mathcal{R}(A) = \mathcal{N}(A^\mathrm{T})^{\perp}.
+\]
+因此必有 \(\mathcal{N}_{2} = \mathcal{N}_{1}^{\perp}\), \(\mathcal{M}_{2} = \mathcal{M}_{1}^{\perp}\) 成立.
+若上述关系成立, 下证必存在 \(A\).
+
+注意, 利用正交补彼此之间的维数关系, 第一组等式推出 \(\dim \mathcal{N}_{1} = \dim \mathcal{M}_{1}\).
+取 \(\mathcal{M}_{1}\) 的基 \(e_{1},\ldots,e_{r}\), \(\mathcal{M}_{2}\) 的基 \(e_{r+1},\ldots,e_{m}\),
+\(\mathcal{N}_{1}\) 的基 \(f_{1},\ldots,f_{r}\), 和 \(\mathcal{N}_{2}\) 的基 \(f_{r+1},\ldots,f_{n}\).
+则存在唯一的线性映射  \(\mathscr{A}\colon\mathbb{R}^{n} \to \mathbb{R}^{m}\), 满足
+\[\mathscr{A}(f_{i}) =
+  \begin{cases}
+    e_{i}, & 1 \leq i \leq r; \\
+    0,    & r+1 \leq i  \leq n.
+  \end{cases}\]
+令 \(A\) 为线性映射 \(\mathscr{A}\) 在 \(\mathbb{R}^{n}, \mathbb{R}^{m}\) 各自标准基之下的矩阵.
+则根据定义 \(\mathcal{R}(A) = \mathcal{M}_{1}\), \(\mathcal{N}(A) = \mathcal{N}_{2}\).
+由基本正交关系, 直接可推出 \(\mathcal{M}_{2} = \mathcal{N}(A^{\mathrm{T}})\),
+\(\mathcal{N}_{1} = \mathcal{R}(A^{\mathrm{T}})\).
+\end{proof}
+
+\begin{ex}
+  给定矩阵 \(A = \begin{bmatrix} 3 & 6 & 6 \\ 4 & 8 & 8\end{bmatrix}\).
+  \begin{enumerate}
+  \item 求向 \(A\) 的列空间的正交投影 \(P_{1}\),
+  \item 求向 \(A\) 的行空间的正交投影 \(P_{2}\),
+  \item 计算 \(P_{1}AP_{2}\).
+  \end{enumerate}
+\end{ex}
+
+\begin{proof}[解]
+  \begin{enumerate}
+  \item \(A\) 的列空间由 \([3,4]^{\mathrm{T}}\) 张成.
+    因此投影由 \([x,y]^{\mathrm{T}} \mapsto \frac{[x,y]\left[ \begin{smallmatrix} 3 \\ 4\end{smallmatrix} \right]}{3^2+4^2}\left[ \begin{smallmatrix} 3 \\ 4\end{smallmatrix} \right]\)
+    给出. 计算可得它的矩阵为 \(\frac{1}{25}\left[\begin{smallmatrix} 9 & 12 \\ 12 & 16\end{smallmatrix} \right]\).
+  \item 矩阵的列秩为 1, 因此行秩也为 1, 故而行空间由 \([3,6,6]\)
+    张成. 向这个方向的正交投影为
+    \begin{equation}
+      \begin{bmatrix}
+        x \\ y \\ z
+      \end{bmatrix}
+      \mapsto
+      \frac{[x,y,z]\left[
+          \begin{smallmatrix}
+            3 \\ 6 \\ 6
+          \end{smallmatrix}
+        \right]}{81}
+      \begin{bmatrix}
+        3 \\ 6 \\6
+      \end{bmatrix}
+    \end{equation}
+    其矩阵表示为
+    \begin{equation*}
+      \frac{1}{9}
+      \begin{bmatrix}
+        1 & 2 & 2 \\ 2 & 4 & 4 \\ 2 &  4 & 4
+      \end{bmatrix}
+    \end{equation*}.
+  \item 利用映射的几何意义说明复合是$A$.
+  \end{enumerate}
+\end{proof}
+
+\begin{ex}
+  设 \(n\) 阶实方阵 \(A\) 满足 \(A = -A^{\mathrm{T}}\).
+  \begin{enumerate}
+  \item 证明 \(I_{n}+A\), \(I_n-A\)可逆.
+  \item 证明 \((I_{n}-A)(I_{n}+A)^{-1}\) 是正交方阵.
+  \end{enumerate}
+\end{ex}
+
+\begin{proof}
+  第一问.
+  设 \(\boldsymbol{x} \in \mathbb{R}^{n}\) 满足方程组 \(A\boldsymbol{x} = \pm\boldsymbol{x}\). 今证明 \(\boldsymbol{x} = \boldsymbol{0}\).
+  由 \(\boldsymbol{x}\) 的选取可知, \(\pm\boldsymbol{x}^{\mathrm{T}}A^{\mathrm{T}}A\boldsymbol{x} = \boldsymbol{x}^{\mathrm{T}}A^{\mathrm{T}}\boldsymbol{x}\).
+  由于上式中左右两侧都是数, 取转置不影响它们的值. 利用 \(A^{\mathrm{T}}=-A\),
+  上式右侧的转置等于 \(\boldsymbol{x}^{\mathrm{T}}A\boldsymbol{x} = -\boldsymbol{x}^{\mathrm{T}}A^{\mathrm{T}}\boldsymbol{x}\), 即它自己的相反数, 因此 \(\boldsymbol{x}^{\mathrm{T}}A^{\mathrm{T}}\boldsymbol{x}=\boldsymbol{0}\).
+  故而 \(\boldsymbol{x}^{\mathrm{T}}A^{\mathrm{T}}A\boldsymbol{x}=\boldsymbol{0}\). 利用内积性质, \(A\boldsymbol{x} = \boldsymbol{0}\). 又 \(\boldsymbol{x} = \pm A\boldsymbol{x}\),
+  故 \(\boldsymbol{x} = \boldsymbol{0}\), 命题得证.
+
+  第二问. 我们直接计算:
+  \(((I-A)(I+A)^{-1})^{\mathrm{T}}=((I+A)^{-1})^{\mathrm{T}}(I-A^{\mathrm{T}})=(I-A)^{-1}(I+A)\).
+  因此 \(((I-A)(I+A)^{-1})^{\mathrm{T}}((I-A)(I+A)^{-1})=(I-A)^{-1}(I+A)(I-A)(I+A)^{-1}\)
+  但是由于 \(I-A\), \(I+A\) 互相交换, 它们的逆与它们亦互相交换. 因此上式给出了单位阵 \(I\),
+  命题得证.
+\end{proof}
+\end{document}

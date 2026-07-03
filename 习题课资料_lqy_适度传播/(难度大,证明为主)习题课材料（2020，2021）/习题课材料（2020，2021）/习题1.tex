@@ -1,0 +1,309 @@
+\documentclass[UTF8]{ctexart}
+
+%\RequirePackage{amsmath} \RequirePackage{amssymb}
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{fullpage}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+%\usetikzlibrary{quotes,angles}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{decorations.pathreplacing}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+
+
+\newcommand{\BC}{{\mathbb {C}}}
+
+\newcommand{\BN}{{\mathbb {N}}}
+\newcommand{\BQ}{{\mathbb {Q}}}
+\newcommand{\BR}{{\mathbb {R}}}
+\newcommand{\BZ}{{\mathbb {Z}}}
+\newcommand{\bv}{{\bm v}}
+\newcommand{\bw}{{\bm w}}
+\newcommand{\bu}{{\bm u}}
+\newcommand{\bx}{{\bm x}}
+\newcommand{\by}{{\bm y}}
+
+\newcommand{\bb}{{\bm b}}
+\newcommand{\Coker}{{\mathrm{Coker}}}
+
+
+\newcommand{\End}{{\mathrm{End}}}
+\newcommand{\GL}{{\mathrm{GL}}}
+
+\newcommand{\SO}{{\mathrm{GSO}}}
+\newcommand{\Hom}{{\mathrm{Hom}}}
+
+\renewcommand{\Im}{{\mathrm{Im}}}
+
+\newcommand{\Isom}{{\mathrm{Isom}}}
+\newcommand{\Id}{{\mathrm{Id}}}
+
+
+
+\newcommand{\Ker}{{\mathrm{Ker}}}
+
+
+
+\newcommand{\rank}{{\mathrm{rank}}}
+
+
+\newcommand{\SU}{{\mathrm{SU}}}
+\newcommand{\Sym}{{\mathrm{Sym}}}
+
+\newcommand{\sub}{{\mathrm{sub}}}
+
+\newcommand{\tr}{{\mathrm{tr}}}
+
+\newcommand{\matrixx}[4]{\begin{pmatrix}
+		#1 & #2 \\ #3 & #4
+	\end{pmatrix} }
+	
+	
+	
+	\newcommand{\wt}{\widetilde}
+	\newcommand{\wh}{\widehat}
+	\newcommand{\pp}{\frac{\partial\bar\partial}{\pi i}}
+	\newcommand{\pair}[1]{\langle {#1} \rangle}
+	\newcommand{\wpair}[1]{\left\{{#1}\right\}}
+	\newcommand{\intn}[1]{\left( {#1} \right)}
+	\newcommand{\norm}[1]{\|{#1}\|}
+	\newcommand{\sfrac}[2]{\left( \frac {#1}{#2}\right)}
+	\newcommand{\ds}{\displaystyle}
+	\newcommand{\ov}{\overline}
+	\newcommand{\incl}{\hookrightarrow}
+	\newcommand{\lra}{\longrightarrow}
+	\newcommand{\lla}{\longleftarrow}
+	\newcommand{\ra}{\rightarrow}
+	\newcommand{\imp}{\Longrightarrow}
+	\newcommand{\lto}{\longmapsto}
+	\newcommand{\bs}{\backslash}
+	
+	
+	
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+	\newcommand{\sk}{\medskip}\newcommand{\bsk}{\bigskip}
+	\newcommand{\s}{\sk\noindent}\newcommand{\bigs}{\bsk\noindent}
+	
+	
+	%accented words
+
+	\def\mat(#1,#2,#3,#4){
+		\left[\begin{array}{cc}
+			#1 & #2 \\ #3 & #4\end{array}
+		\right]
+	}
+		\def\clm(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ #2 \end{array}
+\right]
+	}
+		\def\clmn(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ \vdots\\ #2 \end{array}
+\right]
+	}
+		\def\clmt(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ #3\end{array}
+\right]
+	}
+		\def\clmf(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ \vdots \\ #3\end{array}
+\right]
+	}
+
+
+		
+\begin{document}
+
+
+\title{习题课材料（一）}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+
+
+
+
+
+\begin{ex}
+设 $A=\begin{bmatrix} 1 & 1 & 0 & \\ -1 & 0 & 1 \\ 0 & -1 & -1 \\ \end{bmatrix}, \bb=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \\ \end{bmatrix}$， 证明：
+\begin{enumerate}
+\item  $A \bx=\bb$ 有解当且仅当 $b_1+b_2+b_3=0$.
+\item 齐次线性方程组 $A \bx=\bm{0}$ 的解集是 $\{k \bx_1, k \in \mathbb{R}\}, \bx_1=\begin{bmatrix} 1 \\ -1 \\ 1 \\ \end{bmatrix}$.
+\item 当 $A \bx=\bb$ 有解时， 设$\bx_0$ 是一个解， 则解集是 $\{\bx_0 + k \bx_1, k \in \mathbb{R}\}$.
+\end{enumerate}
+\end{ex}
+
+
+\begin{ex}
+	令 $A=\begin{bmatrix} 1 & 1 & 1 \\ 1 & 3 & 1\end{bmatrix}$.
+	\begin{enumerate}
+		\item 求所有的 $3\times 2$ 矩阵 $X$, 使得 $AX=\mat(0,0,0,0)
+		$.
+		\item 求一个 $3\times 2$ 矩阵 $X$, 使得 $AX=\mat(1,0,0,1)$.
+		\item 求所有 $3\times 2$ 矩阵 $X$, 使得 $AX=\mat(1,0,0,1)$.
+	\end{enumerate}
+	\end{ex}
+\begin{ex}
+	设 $A\in M_3(\BR)$, 考虑方程组 $A\bx=\clmt(2,4,2)$. 已知 $\left\{\clmt(2,0,0)+c\clmt(1,1,0)+d\clmt(0,0,1):c,d\in\BR\right\}$ 是它所有的解; 请求出 $A$.
+\end{ex}
+
+
+\begin{ex}
+设 $\triangle ABC$ 是平面中的三角形，三边 $BC$, $AC$, $AB$ 上的垂线分别记为 $\ell_1, \ell_2, \ell_3$.
+用点积证明 $\ell_1, \ell_2, \ell_3$ 交于一点.
+
+（提示：将 $\triangle ABC$ 放在直角坐标系中，
+$P$ 为平面上的任意一点，
+则点 $P \in \ell_1$ 当且仅当 $P, A, B, C$ 四点的坐标满足什么关系？
+类似的 $P \in \ell_2$ 或 $P \in \ell_3$
+当且仅当 $P, A, B, C$ 四点的坐标满足什么关系？）
+\end{ex}
+
+
+
+
+\begin{ex}
+证明：
+\begin{enumerate}
+	\item 设 $n$ 维向量 $\bx$ 的每个分量都是 $1$， 则 $n$ 阶方阵  $A$ 的各行元素之和为 $1$ 当且仅当 $A \bx=\bx$.
+	\item 若 $n$ 阶方阵 $A, B$ 的各行元素之和均为$1$, 则 $AB$ 的各行元素之和也均为 $1$.
+	\item 若 $n$ 阶方阵 $A, B$ 的各列元素之和均为$1$, 则 $AB$ 的各列元素之和也均为 $1$.
+\end{enumerate}
+\end{ex}
+
+
+\begin{ex}
+	\begin{itemize}
+\item[(a)] 设 $2$ 阶方阵
+\[
+R_{\theta}=\begin{bmatrix}
+\cos\theta & -\sin\theta\\
+\sin\theta & \cos\theta
+\end{bmatrix}.
+\]
+由矩阵和向量的乘法给出 $\mathbb{R}^2$ 上的变换 $f_{\theta}:\mathbb{R}^2 \to \mathbb{R}^2, \bx \mapsto R_{\theta}\bx$.
+\begin{enumerate}
+\item[(1)] 证明: $f_{\theta}$ 是逆时针旋转角度 $\theta$ 的变换.
+\item[(2)] 证明: 设 $\theta \ne k\pi$, 不存在非零向量 $\bx$, 满足 $R_{\theta}\bx=\pm\bx$.
+\item[(3)] 计算 $R_{\theta}^n$, $n$是整数.
+\end{enumerate}
+
+\item[(b)] 设
+\[
+H_{\theta}=\begin{bmatrix}
+\cos2\theta & \sin2\theta\\
+\sin2\theta & -\cos2\theta
+\end{bmatrix}, \bv=\begin{bmatrix}
+\cos\theta \\
+\sin\theta
+\end{bmatrix}, \bw=\begin{bmatrix}
+\sin\theta \\
+-\cos\theta
+\end{bmatrix}.
+\]
+\begin{enumerate}
+	\item[(1)] 证明: $H_{\theta}^2=I_2, H_{\theta}=I_2-2\bw\bw^{T}$.
+    \item[(2)] 证明: $\bv \perp \bw, |\bv|=|\bw|=1; H_{\theta}\bv=\bv, H_{\theta}\bw=-\bw$. 试分析变换$\bx \mapsto H_{\theta}\bx$ 的几何意义.
+    \end{enumerate}
+\item[(c)] 证明: $R_{-\theta}H_{\phi}R_{\theta}=H_{\phi-\theta}, H_{\phi}R_{\theta}H_{\phi}=R_{-\theta}$, 并分析其几何意义.
+
+\end{itemize}
+	\end{ex}
+
+
+
+\begin{ex}
+设 $n$ 阶方阵
+$$T=\begin{bmatrix} 1 & -1 & 0 & \cdots & 0 \\ -1 & 2 & -1 & \cdots & 0 \\ 0 & -1 & 2 & \ddots & \vdots \\  \vdots & \ddots & \ddots & \ddots & -1 \\ 0 & \cdots & 0 & -1 & 2 \\ \end{bmatrix}.$$
+利用初等变换证明: 存在分解式 $T=LU$, 其中 $L$ 是下三角矩阵, $U$ 是上三角矩阵. 据此求出 $T^{-1}$.
+\end{ex}
+
+\begin{ex}
+证明: 对角线元素全非零的上三角阵 $U$ 可逆, 其逆矩阵 $U^{-1}$ 也是上三角阵,
+且 $U^{-1}$ 的对角线元素是 $U$ 的对角线元素的倒数.
+\end{ex}
+
+
+
+ \begin{ex}[$\heartsuit $]
+假设 $i\neq j$. 我们把单位矩阵 $I$ 的 $(i,j)$ 项改成 $1$, 其他项保持不变, 这样得到的矩阵记作 $E_{ij}$. 单位矩阵 $I$ 的 $(i,i)$ 项和 $(j,j)$ 项改成零, 再把 $(i,j)$ 项和 $(j,i)$ 项改成 $1$, 这样得到的矩阵记作 $P_{ij}$.
+\begin{itemize}	
+	\item[(a)] 证明: 对于矩阵 $P_{ij} (i<j)$, 以下性质成立:
+	\begin{enumerate}
+		\item 若 $\forall i<k<j$, 则
+		\begin{itemize}
+			\item $P_{ik}P_{ij}=P_{kj}P_{ik}=P_{ij}P_{kj}$;
+			\item $P_{ij}P_{ik}=P_{kj}P_{ij}=P_{ik}P_{kj}$;
+			\item $(P_{ik}P_{ij})^3=I$.
+		\end{itemize}
+		\item 若 $i,j,k,\ell$ 互不相等，则
+		\begin{itemize}
+			\item $P_{k\ell}P_{ij}=P_{ij}P_{k\ell}$;
+			\item$(P_{k\ell}P_{ij})^2=I$.
+		\end{itemize}
+	\end{enumerate}
+	
+	\item[(b)] 对于任意两个矩阵 $A,B$, 我们定义 $[A,B]=AB-BA$.
+	\begin{enumerate}
+		\item 假设 $i,j,k$ 两两不同, 计算 $[E_{ij},E_{jk}], [E_{ij},P_{jk}]$ 和 $[P_{ij},P_{jk}]$. (除生算外, 也可以直接考虑作为行操作或列操作, 两个矩阵的顺序调换后, 到底差别在哪里.)
+		\item 令 $D={\rm diag}(d_1,...,d_n)$ 为对角矩阵; 假设 $i\neq j$, 计算 $[E_{ij},E_{ji}], [E_{ij},D]$ 和 $[P_{ij},D]$. (除生算外, 也可以直接考虑作为行操作或列操作, 两个矩阵的顺序调换后, 到底差别在哪里.)
+	\end{enumerate}
+	\end{itemize}
+\end{ex}
+
+
+
+\begin{ex}[$\heartsuit $]
+	\begin{enumerate}
+	\item 定义 $m \times n$ 阶实矩阵 $A=(a_{ij})$ 的范数为
+	$$ 	\|A\|= \sqrt{ \sum_{i=1}^m \sum_{j=1}^n a_{ij}^2}. 	$$
+	证明：
+	\begin{enumerate}
+		\item $\|A\| \geq 0$; 且 $\|A\|=0$ 当且仅当 $A=0$,
+		\item $\|cA\| = |c|\cdot\|A\|$,
+		\item $\|A+B\|\leq\|A\|+\|B\|$,
+		\item $\|AB\|\leq\|A\|\cdot\|B\|$.
+	\end{enumerate}
+   \item 证明范数
+	$$ \|A\|_{\infty} = \max_{1\leq i\leq m} \sum_{j=1}^n |a_{ij}|.
+	$$
+	也满足性质(a)-(d).
+	\end{enumerate}
+\end{ex}
+
+
+
+
+\end{document}

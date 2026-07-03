@@ -1,0 +1,343 @@
+\documentclass[UTF8]{ctexart}
+
+%\RequirePackage{amsmath} \RequirePackage{amssymb}
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{fullpage}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+%\usetikzlibrary{quotes,angles}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{decorations.pathreplacing}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+
+
+\newcommand{\BC}{{\mathbb {C}}}
+
+\newcommand{\BN}{{\mathbb {N}}}
+\newcommand{\BQ}{{\mathbb {Q}}}
+\newcommand{\BR}{{\mathbb {R}}}
+\newcommand{\BZ}{{\mathbb {Z}}}
+\newcommand{\bv}{{\bm v}}
+\newcommand{\bw}{{\bm w}}
+\newcommand{\bu}{{\bm u}}
+\newcommand{\bx}{{\bm x}}
+\newcommand{\by}{{\bm y}}
+\newcommand{\rref}{\mathrm{rref}}
+
+\newcommand{\bb}{{\bm b}}
+\newcommand{\Coker}{{\mathrm{Coker}}}
+
+
+
+\newcommand{\End}{{\mathrm{End}}}
+\newcommand{\GL}{{\mathrm{GL}}}
+
+\newcommand{\SO}{{\mathrm{GSO}}}
+\newcommand{\Hom}{{\mathrm{Hom}}}
+
+\renewcommand{\Im}{{\mathrm{Im}}}
+
+\newcommand{\Isom}{{\mathrm{Isom}}}
+\newcommand{\Id}{{\mathrm{Id}}}
+
+
+
+\newcommand{\Ker}{{\mathrm{Ker}}}
+
+
+
+\newcommand{\rank}{{\mathrm{rank}}}
+
+
+\newcommand{\SU}{{\mathrm{SU}}}
+\newcommand{\Sym}{{\mathrm{Sym}}}
+
+\newcommand{\sub}{{\mathrm{sub}}}
+
+\newcommand{\tr}{{\mathrm{tr}}}
+
+\newcommand{\matrixx}[4]{\begin{pmatrix}
+		#1 & #2 \\ #3 & #4
+	\end{pmatrix} }
+	
+	
+	
+	\newcommand{\wt}{\widetilde}
+	\newcommand{\wh}{\widehat}
+	\newcommand{\pp}{\frac{\partial\bar\partial}{\pi i}}
+	\newcommand{\pair}[1]{\langle {#1} \rangle}
+	\newcommand{\wpair}[1]{\left\{{#1}\right\}}
+	\newcommand{\intn}[1]{\left( {#1} \right)}
+	\newcommand{\norm}[1]{\|{#1}\|}
+	\newcommand{\sfrac}[2]{\left( \frac {#1}{#2}\right)}
+	\newcommand{\ds}{\displaystyle}
+	\newcommand{\ov}{\overline}
+	\newcommand{\incl}{\hookrightarrow}
+	\newcommand{\lra}{\longrightarrow}
+	\newcommand{\lla}{\longleftarrow}
+	\newcommand{\ra}{\rightarrow}
+	\newcommand{\imp}{\Longrightarrow}
+	\newcommand{\lto}{\longmapsto}
+	\newcommand{\bs}{\backslash}
+	
+	
+	
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+	\newcommand{\sk}{\medskip}\newcommand{\bsk}{\bigskip}
+	\newcommand{\s}{\sk\noindent}\newcommand{\bigs}{\bsk\noindent}
+	
+	
+	%accented words
+
+	\def\mat(#1,#2,#3,#4){
+		\left[\begin{array}{cc}
+			#1 & #2 \\ #3 & #4\end{array}
+		\right]
+	}
+		\def\clm(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ #2 \end{array}
+\right]
+	}
+		\def\clmn(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ \vdots\\ #2 \end{array}
+\right]
+	}
+		\def\clmt(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ #3\end{array}
+\right]
+	}
+		\def\clmf(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ \vdots \\ #3\end{array}
+\right]
+	}
+
+
+		
+\begin{document}
+
+\title{习题课材料（三）简要解答}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+
+\noindent{\Large\textbf{注: 带 $\heartsuit  $号的习题有一定的难度、较为耗时, 请量力为之.}}
+
+
+\medskip
+
+\noindent{\bfseries 记号}: 如不加说明，我们只考虑实矩阵。对于矩阵$A$, 它的四个基本子空间是列空间$C(A)$, 零空间$N(A)$, 行空间$C(A^T)$和$A^T$的零空间$N(A^T)$。
+\medskip
+
+\begin{ex} 假设$V$是一个线性空间，$n$是一个正整数，$\alpha_1,\alpha_2,\dots,\alpha_n$是$V$中一组线性无关的向量，$\beta \in V$。 证明：扩充后的向量组$\alpha_1,\dots,\alpha_n,\beta$线性相关当且仅当$\beta$是$\alpha_1,\dots,\alpha_n$的一个线性组合。
+\end{ex}
+
+
+
+\begin{ex} 对正整数$n$, 记$n$阶实方阵的全体为$\mathbb{M}_n$。
+\begin{enumerate}
+\item 验证$\mathbb{M}_n$配上矩阵加法和矩阵与实数的数乘，构成了一个$\mathbb{R}$上的线性空间。
+\item 对于下列$\mathbb{M}_n$的各子集，分别判断它们是否构成一个线性子空间。
+\begin{enumerate}
+\item $\{A \in \mathbb{M}_n \,:\, A = -A^T\}$.
+\item $\{A \in \mathbb{M}_n \,:\, \mathrm{tr} (A) = 0\}$, 其中$\mathrm{tr}(A) := \sum_{i=1}^n a_{ii}$ 称为$A$的迹。
+\item $\{A \in \mathbb{M}_n \,:\, \text{$A$与$B$可交换}\}$，其中$B$是给定的一个$n$阶方阵。
+\item $\{A \in \mathbb{M}_n \,:\, \text{$Ax = b$有解}\}$，其中$b$是给定的$\mathbb{R}^n$中的一个向量。
+\item $\{A \in \mathbb{M}_n \,:\, \text{$b\in N(A)$且$b\in N(A^T)$}\}$, 其中$b$是给定的$\mathbb{R}^n$中的一个向量。
+\end{enumerate}
+\end{enumerate}
+\end{ex}
+
+
+\begin{proof}[答案] 2(a) 是；2(b) 是；2(c) 是；2(d) 当$b$为零向量时，答案为是，否则为否; 2(e) 是。
+\end{proof}
+
+
+\begin{ex}
+记闭区间$[-\pi,\pi]$上的实值连续函数的全体为$\mathcal{C}([-\pi,\pi])$, 定义函数的加法，以及函数与实数的数乘如下：
+\begin{equation*}
+(f+g)(x) := f(x) + g(x), \qquad (kf)(x) := k(f(x)), \qquad \text{ 其中}\; f,g \in \mathcal{C}([-\pi,\pi]), \, k \in \mathbb{R}.
+\end{equation*}
+\begin{enumerate}
+\item 验证$\mathcal{C}([-\pi,\pi])$配上上述运算构成了一个$\mathbb{R}$上的线性空间。
+\item {($\heartsuit  $)} 对于任意正整数$n$, 验证$\mathcal{C}([-\pi,\pi])$中的向量组
+\begin{equation*}
+1, \sin x, \cos x, \sin 2x, \cos 2x, \dots, \sin (nx), \cos (nx)
+\end{equation*}
+线性无关。
+\end{enumerate}
+\end{ex}
+
+\begin{proof}[解答] 仅给出第二问的解答。在这个具体的场景下，我们需要借助一些微积分中的工具和理论。下面解答中假设我们对微分和极限已经比较熟悉。
+
+给定正整数$n$, 假设这些向量被系数$a_1,\dots,a_n,b_0,b_1,\dots,b_n$组合为零向量（零值函数），即
+\begin{equation*}
+(a_1 \sin x + \cdots + a_n \sin nx) + (b_0 + b_1\cos x + \cdots b_n\cos nx) = 0, \qquad \forall x \in [-\pi,\pi].
+\end{equation*}
+根据函数的奇偶性，必然有
+\begin{equation*}
+(a_1 \sin x + \cdots + a_n \sin nx) = (b_0 + b_1\cos x + \cdots b_n\cos nx) = 0, \qquad \forall x \in [-\pi,\pi].
+\end{equation*}
+所以我们仅需分别证明向量组$\sin x,\dots,\sin nx$无关，向量组$1,\cos x, \dots, \cos nx$线性无关。我们仅对后一组向量进行证明。根据三角函数的微分性质，对关于$\cos$的等式微分$M$次，其中$M$为4的正整数倍，得到
+\begin{equation*}
+b_1 \cos x + b_2 2^{M} \cos 2x + b_3 3^M  \cos 3x + \dots + b_{n-1} (n-1)^{M} \cos (n-1)x = - b_n n^M \cos nx, \qquad \forall x\in [-\pi,\pi].
+\end{equation*}
+两边同除以$n^M$, 并令$x=0$, 得到
+\begin{equation*}
+b_1 (\frac{1}{n})^M  + b_2 (\frac{2}{n})^M  +  \dots + b_{n-1} (\frac{n-1}{n})^{M}  = - b_n, \qquad \forall x\in [-\pi,\pi].
+\end{equation*}
+注意到上式对所有的$M$（4的倍数）成立，而$n$和$b_1,\dots,b_n$都是固定的数。令$M=4m$, 令$m\to \infty$, 我们得到$b_n = 0$。
+
+重复上述步骤（可以写成标准的数学归纳证明），我们可以得到$b_i =0$, 对所有的$i=1,\dots,n$，从而完成证明。
+\end{proof}
+
+\noindent\emph{说明}：如果我们对积分比较熟悉，也可以通过积分来证明$\cos$向量组的线性无关性。例如，为了证明$b_n =0$, 只需将等式两端同乘$\cos nx$, 然后在$[-\pi,\pi]$上积分，利用三角函数乘积和积分的显式计算结果可得。
+
+
+
+
+\begin{ex}
+		$R=\begin{bmatrix}
+		I & F\\ 0&0
+	\end{bmatrix}$是秩为$r$的$m\times n$矩阵。
+	\begin{enumerate}
+		\item 求$R$的各子块的大小。
+			\item 如果$r=m$，求一个$B$使得$RB=I$。
+			\item 如果$r=n$，求一个$C$使得$CR=I$。
+			\item 在上述两小问中，求所有满足条件的$B,C$。
+		\item {($\heartsuit  $)} 求$\rref(R^T)$。
+		\item {($\heartsuit  $)} 求$\rref(R^TR)$。
+	\end{enumerate}
+\end{ex}
+
+\begin{proof}[解答] 第4问解答：仅求所有的$B$. 此时$R = [I \;\;\;F]$，而$RB=I$中的$I$必然是$m$阶矩阵。$B$必然是$n\times m$阶矩阵，将$B$分为$m\times m$和$(n-m)\times m$的块，也就是将其写作$B = \begin{bmatrix}B_1\\B_2\end{bmatrix}$, 计算
+\begin{equation*}
+RB = \begin{bmatrix} I & F\end{bmatrix} \begin{bmatrix} B_1 \\ B_2\end{bmatrix} = B_1 + FB_2 = I.
+\end{equation*}
+因此，我们仅需任取$(n-m)\times m$阶矩阵$B_2$, 然后令$B=\begin{bmatrix} I-FB_2\\ B_2\end{bmatrix}$即可。
+
+第5问：计算得到$R^T = \begin{bmatrix} I & 0\\F^T & 0\end{bmatrix}$. 对矩阵进行分块初等行变换``第一块行左乘$-F^T$加到第二块行", 可得
+\begin{equation*}
+\rref(R^T) = \begin{bmatrix} I & 0\\0 & 0\end{bmatrix}
+\end{equation*}
+
+类似的，第6问答案为：
+\begin{equation*}
+\rref(R^T R) = \begin{bmatrix} I & F\\0 & 0\end{bmatrix}
+\end{equation*}
+\end{proof}
+
+
+\begin{ex}
+		$A$是$3\times 4$矩阵，$s=(2,3,1,0)^T$是$Ax=0$的唯一特殊解（special solution）。
+	\begin{enumerate}
+		\item 求$\rank(A)$并找出$Ax=0$的全部解。
+		\item 求$\rref(A)$。
+			\item $Ax=b$对任意$b$都有解吗？
+	\end{enumerate}
+\end{ex}
+\begin{ex}
+		$Ax=b$和$Cx=b$，对任意$b$都有相同的解集。$A=C$成立吗？
+\end{ex}
+
+
+
+\begin{ex}
+	假设$x_1,\dots,x_p$是$Ax=b$的解，且$b$非零。证明：$k_1x_1+\dots+k_px_p$也是解当且仅当$k_1+\dots+k_p=1$。
+\end{ex}
+
+
+
+
+
+\begin{ex}
+		$B=\begin{bmatrix}
+		1&0&1&0&1&0&1&0\\
+		0&1&0&1&0&1&0&1\\
+		1&0&1&0&1&0&1&0\\
+		0&1&0&1&0&1&0&1\\
+		1&0&1&0&1&0&1&0\\
+		0&1&0&1&0&1&0&1\\
+		1&0&1&0&1&0&1&0\\
+		0&1&0&1&0&1&0&1\\
+	\end{bmatrix},C=\begin{bmatrix}
+	r&n&b&q&k&b&n&r\\
+	p&p&p&p&p&p&p&p\\
+	0&0&0&0&0&0&0&0\\
+	0&0&0&0&0&0&0&0\\
+	0&0&0&0&0&0&0&0\\
+	0&0&0&0&0&0&0&0\\
+	p&p&p&p&p&p&p&p\\
+	r&n&b&q&k&b&n&r\\
+	\end{bmatrix}$。
+	求二者的四个子空间的基。这里，$r,n,b,q,k,p$为各不相同的实数。
+\end{ex}
+
+
+\begin{ex}
+		$A=\begin{bmatrix}
+		I & F\\0&0
+	\end{bmatrix},B=\begin{bmatrix}
+		I & G\\0&0
+	\end{bmatrix}$都是$m\times n$矩阵，且具有相同的四个子空间。
+	证明$F=G$。
+\end{ex}
+
+\begin{proof}[提示] 首先$A,B$的秩相同，所以两个$I$的大小相同，$F$和$G$大小相同。不妨设$I$为$r\times r$的，而$F,G$是$r\times (n-r)$的。论断：对于任意的$b\in\mathbb{R}^r$, 有$Fx = b$当且仅当$Gx=b$. 确实，$Fx=b$等价于
+\begin{equation*}
+A\begin{bmatrix}-b \\ x\end{bmatrix} =   0,
+\qquad (\text{因为}\; \begin{bmatrix}
+		I & F\\0&0
+	\end{bmatrix} \begin{bmatrix}-b \\ x\end{bmatrix} =\begin{bmatrix}Fx-b \\ 0\end{bmatrix} = \begin{bmatrix}0 \\ 0\end{bmatrix}).
+\end{equation*}
+因此$A$和$B$有共同的零空间意味着前面的论断成立。根据习题6, 可得$F=G$.
+
+\smallskip
+
+\emph{该证明也可以这样理解}: 通过分块矩阵的计算，得到
+\begin{equation*}
+N(A) = \left\{\begin{bmatrix}-Fy\\y\end{bmatrix} \,:\, y\in \mathbb{R}^{n-r}\right\} \subseteq \mathbb{R}^n.
+\end{equation*}
+类似的，
+\begin{equation*}
+N(B) = \left\{\begin{bmatrix}-Gy\\y\end{bmatrix} \,:\, y\in \mathbb{R}^{n-r}\right\} \subseteq \mathbb{R}^n.
+\end{equation*}
+从$N(A)=N(B)$得到，对于任意的$y\in \mathbb{R}^{n-r}$, 我们有$z = \begin{bmatrix}-Gy\\y\end{bmatrix} \in N(B) = N(A)$，故$Az = 0$. 计算验证这意味着$(F-G)y=0$. 由于$y$任意，得到$F=G$.
+\end{proof}
+
+\vspace{2cm}
+\noindent{\itshape 思考题}：
+设$A,B$为同型矩阵，且$N(A) = N(B)$. 试证明$\rref(A) = \rref(B)$.
+
+
+\end{document}

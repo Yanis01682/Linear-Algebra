@@ -1,0 +1,314 @@
+\documentclass[UTF8]{ctexart}
+
+%\RequirePackage{amsmath} \RequirePackage{amssymb}
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{fullpage}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+%\usetikzlibrary{quotes,angles}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{decorations.pathreplacing}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+
+
+\newcommand{\BC}{{\mathbb {C}}}
+
+\newcommand{\BN}{{\mathbb {N}}}
+\newcommand{\BQ}{{\mathbb {Q}}}
+\newcommand{\BR}{{\mathbb {R}}}
+\newcommand{\BZ}{{\mathbb {Z}}}
+\newcommand{\bv}{{\bm v}}
+\newcommand{\bw}{{\bm w}}
+\newcommand{\bu}{{\bm u}}
+\newcommand{\bx}{{\bm x}}
+\newcommand{\by}{{\bm y}}
+
+\newcommand{\bb}{{\bm b}}
+\newcommand{\Coker}{{\mathrm{Coker}}}
+
+
+\newcommand{\End}{{\mathrm{End}}}
+\newcommand{\GL}{{\mathrm{GL}}}
+
+\newcommand{\SO}{{\mathrm{GSO}}}
+\newcommand{\Hom}{{\mathrm{Hom}}}
+
+\renewcommand{\Im}{{\mathrm{Im}}}
+
+\newcommand{\Isom}{{\mathrm{Isom}}}
+\newcommand{\Id}{{\mathrm{Id}}}
+
+
+
+\newcommand{\Ker}{{\mathrm{Ker}}}
+
+
+
+\newcommand{\rank}{{\mathrm{rank}}}
+
+
+\newcommand{\SU}{{\mathrm{SU}}}
+\newcommand{\Sym}{{\mathrm{Sym}}}
+
+\newcommand{\sub}{{\mathrm{sub}}}
+
+\newcommand{\tr}{{\mathrm{tr}}}
+
+\newcommand{\matrixx}[4]{\begin{pmatrix}
+		#1 & #2 \\ #3 & #4
+	\end{pmatrix} }
+	
+	
+	
+	\newcommand{\wt}{\widetilde}
+	\newcommand{\wh}{\widehat}
+	\newcommand{\pp}{\frac{\partial\bar\partial}{\pi i}}
+	\newcommand{\pair}[1]{\langle {#1} \rangle}
+	\newcommand{\wpair}[1]{\left\{{#1}\right\}}
+	\newcommand{\intn}[1]{\left( {#1} \right)}
+	\newcommand{\norm}[1]{\|{#1}\|}
+	\newcommand{\sfrac}[2]{\left( \frac {#1}{#2}\right)}
+	\newcommand{\ds}{\displaystyle}
+	\newcommand{\ov}{\overline}
+	\newcommand{\incl}{\hookrightarrow}
+	\newcommand{\lra}{\longrightarrow}
+	\newcommand{\lla}{\longleftarrow}
+	\newcommand{\ra}{\rightarrow}
+	\newcommand{\imp}{\Longrightarrow}
+	\newcommand{\lto}{\longmapsto}
+	\newcommand{\bs}{\backslash}
+	
+	
+	
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+	\newcommand{\sk}{\medskip}\newcommand{\bsk}{\bigskip}
+	\newcommand{\s}{\sk\noindent}\newcommand{\bigs}{\bsk\noindent}
+	
+	
+	%accented words
+
+	\def\mat(#1,#2,#3,#4){
+		\left[\begin{array}{cc}
+			#1 & #2 \\ #3 & #4\end{array}
+		\right]
+	}
+		\def\clm(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ #2 \end{array}
+\right]
+	}
+		\def\clmn(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ \vdots\\ #2 \end{array}
+\right]
+	}
+		\def\clmt(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ #3\end{array}
+\right]
+	}
+		\def\clmf(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ \vdots \\ #3\end{array}
+\right]
+	}
+
+
+		
+\begin{document}
+\begin{CJK*}{GBK}{song}
+
+
+\title{习题课材料（九）}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+
+\vspace{0.5cm}
+
+
+\begin{enumerate}
+
+%\vspace{4ex}
+\item[一] 设$S=\left(
+                   \begin{array}{ccc}
+                     1 & 0 & 2 \\
+                     0 & -1 & -2 \\
+                     2 & -2 & 0\\
+
+                   \end{array}
+                 \right).$ 求正交矩阵$Q$对角化$S$.
+
+ \vspace{2ex}
+\item[二]
+
+设$M=\frac{1}{\sqrt{3}}\left[
+          \begin{array}{cccc}
+          0&1&1&1\\
+          -1&0&-1&1\\
+          -1&1&0&-1\\
+          -1&-1&1&0\\
+          \end{array}
+          \right].$
+
+ \begin{enumerate}
+                            \item[(1)]证明$M$的特征值为纯虚数，且$|\lambda|=1$.
+                            \item[(2)] 通过$M$的Trace确定$M$的所有特征值.
+                          \end{enumerate}
+
+
+
+ \vspace{2ex}
+
+ \item[三] 设$S=\left(
+                   \begin{array}{ccc}
+                     s & -4 &-4\\
+                     -4 & s &-4\\
+                     -4 & -4& 2\\
+
+                         \end{array}
+                             \right).$
+                 当$s$取何值时$S$正定.
+
+
+\vspace{2ex}
+\item[四] 设$A$是一个实对称阵满足
+$
+A\left(
+   \begin{array}{c}
+     2 \\
+     0 \\
+     0 \\
+   \end{array}
+ \right)=\left(
+           \begin{array}{c}
+             2 \\
+             4 \\
+             -6 \\
+           \end{array}
+         \right)
+$和$A\left(
+   \begin{array}{c}
+     0 \\
+     -1 \\
+     0 \\
+   \end{array}
+ \right)=\left(
+           \begin{array}{c}
+             -2 \\
+             -4 \\
+             6 \\
+           \end{array}
+         \right).$
+         \begin{enumerate}
+                            \item[(1)] $A$是否可逆？解释原因.
+                            \item[(2)] 给出满足上述性质的矩阵$A$的例子，并且$A$的特征值之和为$0$.
+                          \end{enumerate}
+
+
+
+\vspace{2ex}
+\item[五]设$S$是$\mathbb{R}^7$的一个$4$维子空间，$P$是$S$上的投影矩阵.
+\begin{enumerate}
+  \item 求出$P$的$7$个特征值.
+  \item 求出$P$的全部特征向量.
+
+\end{enumerate}
+
+
+
+
+
+\vspace{2ex}
+
+
+
+\item[六]
+构造一个三阶实对称矩阵，使得其特征值为$1,1,-1,$ 属于特征值$1$的线性无关的特征向量有$\left(
+                                                                            \begin{array}{ccc}
+                                                                              1 & 1 & 1 \\
+                                                                            \end{array}
+                                                                          \right)^T
+$和$\left(
+     \begin{array}{ccc}
+       2 & 2 & 1 \\
+     \end{array}
+   \right)^T.$
+
+
+
+\vspace{2ex}
+\item[七] 设$A=(a_{ij})$是$n$阶实对称矩阵, 其特征值是$\lambda_1\leq \lambda_2\leq\cdots\leq \lambda_n.$
+    \begin{enumerate}
+  \item[(1)] 证明对于任意$n$维列向量$\alpha\in\mathbb{R}^n$, 均有
+    $$
+    \lambda_1\alpha^T\alpha\leq \alpha^TA\alpha\leq \lambda_n\alpha^T\alpha.
+    $$
+  \item[(2)] 展示$\lambda_1\leq a_{11}\leq \lambda_n.$
+  \item[(3)] 假设$A=(a_{ij})$是一个$2$阶实对称阵. 求$a_{12}$可能的最大值和最小值.
+   \end{enumerate}
+
+
+\vspace{2ex}
+\item[八] 设$A, B$是$n$阶实对称矩阵, 其特征值分别是$\lambda_1\leq \lambda_2\leq\cdots\leq \lambda_n$和
+$\mu_1\leq \mu_2\leq\cdots\leq \mu_n.$ 求证：$A+B$的特征值全部落在区间$[\lambda_1+\mu_1, \lambda_n+\mu_n].$
+
+
+
+
+\vspace{2ex}
+\item[九][$\heartsuit $] 若$A=(a_{ij})$是$n$阶实方阵，且$A$的秩小于$n$，则$A$的伴随矩阵的特征值包含至少$n-1$个$0$, 若存在非零特征值，则它是$\sum_{i=1}^nC_{ii}.$
+
+
+\vspace{2ex}
+\item[十][$\heartsuit $]
+     设$A$是一个$n$阶反对称矩阵, 即$A^T=-A$且$A$是实矩阵. 证明：\begin{enumerate}
+  \item[(1)]$I_n+A$可逆且$(I_n-A)(I_n+A)^{-1}$是正交阵.
+  \item[(2)]假设$n=3$， 则存在正交阵 $Q$和向量$b\in\mathbb{R}$，使得 $Q^TAQ=\left(
+                                                        \begin{array}{ccc}
+                                                          0 & 0 & 0 \\
+                                                          0 & 0 & b \\
+                                                          0 & -b & 0 \\
+                                                        \end{array}
+                                                      \right).
+  $
+\end{enumerate}
+
+
+
+
+
+\end{enumerate}
+
+
+\end{CJK*}
+\end{document}

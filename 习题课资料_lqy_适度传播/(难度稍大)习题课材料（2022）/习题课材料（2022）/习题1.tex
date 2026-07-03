@@ -1,0 +1,383 @@
+% !TEX program = xelatex
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+%\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+\newcommand\bs[1]{\boldsymbol{ #1}}
+
+\newenvironment{bmatriX}[1]{\left[\hskip -\arraycolsep \begin{array}{#1}}{\end{array}\hskip -\arraycolsep\right]}
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+
+\newif\ifhideproofs
+\hideproofstrue
+\newif\iffinalver
+%\finalvertrue        
+\ifhideproofs
+    \usepackage[final]{changes}
+    \definechangesauthor[name=Error, color=red]{err}
+    \usepackage{environ}
+    \NewEnviron{hide}{}
+    \let\proof\hide
+    \let\endproof\endhide
+\else
+    \iffinalver
+        \usepackage[final]{changes}
+    \else
+        \usepackage{changes}
+    \fi
+    \definechangesauthor[name=Error, color=red]{err}
+\fi
+
+		
+\begin{document}
+
+
+\title{习题课材料（一）}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+\medskip
+
+本节考虑的矩阵均为实矩阵.
+
+
+
+
+
+\begin{ex}
+设$\bs x_1 = \begin{bmatrix}
+				1 \\ 0
+			\end{bmatrix},$ $\bs x_2 = \begin{bmatrix}
+				1 \\ 1
+			\end{bmatrix},$ $\bs x_3 = \begin{bmatrix}
+				0 \\ 1
+			\end{bmatrix},$ $\bs b_1 = \begin{bmatrix}
+				1 \\ 1\\ 0
+			\end{bmatrix},$ $\bs b_2 = \begin{bmatrix}
+				1 \\ 0\\ 1
+			\end{bmatrix},$ $\bs b_3 = \begin{bmatrix}
+				0 \\ 1\\ 1
+			\end{bmatrix},$ 是否存在线性映射$f:\mathbb{R}^2 \to \mathbb{R}^3$, 满足$f (\bs x_i) = \bs b_i, \forall i$?
+\end{ex}
+\begin{proof}[解答]
+假设存在这样的线性映射$f.$ 由于$\bs x_2 = \bs x_1 + \bs x_3,$ 根据$f$的线性性, $\bs b_2 = f(\bs x_2) = f (\bs x_1) + f(\bs x_3) =\bs b_1 + \bs b_3,$ 矛盾. 因此, 不存在满足条件的线性映射.
+\end{proof}
+
+\begin{ex}
+给定三维向量$\bs a = \begin{bmatrix}
+				a_1 \\ a_2 \\ a_3
+			\end{bmatrix},$ $\bs b = \begin{bmatrix}
+				b_1 \\ b_2 \\ b_3
+			\end{bmatrix}$, 定义:
+
+\begin{enumerate}
+\item 二者的点积为$\bs a \cdot \bs b = a_1 b_1 + a_2 b_2 + a_3 b_3.$
+
+\item 二者的叉积为$\bs a \times \bs b = \begin{bmatrix}
+				a_2b_3 - a_3 b_2 \\ a_3b_1 - a_1 b_3 \\ a_1 b_2 - a_2b_1
+			\end{bmatrix}.$
+\end{enumerate}
+那么给定$\bs a \in \mathbb{R}^3,$ 映射$f : \mathbb{R}^3 \to \mathbb{R}, ~ \bs b \mapsto \bs a\cdot \bs b$和$g: \mathbb{R}^3 \to \mathbb{R}^3,~ \bs b\mapsto \bs a\times \bs b$是否是线性映射?
+\end{ex}
+\begin{proof}[提示]
+证明$f$为线性映射只需证明$f(c_1 \bs b_1 + c_2 \bs b_2) = c_1 f(\bs b_1) + c_2 f(\bs b_2),$ $\forall c_1, c_2 \in \mathbb{R},$ $\forall \bs b_1, \bs b_2 \in \mathbb{R}^3.$ 对题目给出的两个映射, 直接验证它们是线性映射. 这里略去细节.
+\end{proof}
+
+
+
+
+\begin{ex}
+计算下列线性映射的表示矩阵
+
+\begin{enumerate}
+\item $f : \mathbb{R}^3 \to \mathbb{R},$ $f (\bs x ) = \begin{bmatrix}
+				1 \\ 2 \\ 3
+			\end{bmatrix}\cdot \bs x$
+
+\item $f : \mathbb{R}^3 \to \mathbb{R}^3,$ $f (\bs x ) = \begin{bmatrix}
+				1 \\ 2 \\ 3
+			\end{bmatrix}\times \bs x$
+
+\item $ f : \mathbb{R}^4 \to \mathbb{R}^4, $ $f \left( \begin{bmatrix}
+				x_1 \\ x_2 \\ x_3 \\ x_4
+			\end{bmatrix} \right) = \begin{bmatrix}
+				x_1 \\ x_2 \\ x_3 \\ x_4 + x_2
+			\end{bmatrix}$
+
+\end{enumerate}
+\end{ex}
+\begin{proof}[解答]
+\begin{enumerate}
+\item $f$由一$1\times 3$矩阵给出. $f(\bs e_1) = 1,$ $f(\bs e_2) = 2, $ $f(\bs e_3) = 3.$ 因此, $f$的表示矩阵为$[1,~ 2, ~ 3].$
+
+\item $f$由一$3$阶方阵给出. $f(\bs e_1) =  \begin{bmatrix}
+				0 \\  3\\  -2
+			\end{bmatrix},$ $f(\bs e_2) = \begin{bmatrix}
+				-3\\  0 \\ 1
+			\end{bmatrix}, $ $f(\bs e_3) = \begin{bmatrix}
+				2\\ -1 \\  0
+			\end{bmatrix}.$ 因此, $f$的表示矩阵为$ \begin{bmatrix}
+				0 & -3 & 2  \\  3 &  0 & -1\\  -2 &  1 & 0
+			\end{bmatrix}.$
+
+\item $f$由一$4$阶方阵给出. $f(\bs e_1) =  \begin{bmatrix}
+				1 \\  0\\  0\\ 0
+			\end{bmatrix},$ $f(\bs e_2) = \begin{bmatrix}
+				0\\  1 \\ 0 \\ 1
+			\end{bmatrix}, $ $f(\bs e_3) = \begin{bmatrix}
+				0 \\ 0 \\ 1 \\ 0
+			\end{bmatrix},$ $f(\bs e_4) = \begin{bmatrix}
+				0 \\ 0  \\ 0 \\ 1
+			\end{bmatrix}.$ 因此, $f$的表示矩阵为$ \begin{bmatrix}
+				1 & 0 & 0 &0 \\  0 & 1 & 0 & 0\\  0 & 0 & 1 & 0\\ 0 & 1 & 0 & 1
+			\end{bmatrix}.$
+\end{enumerate}
+\end{proof}
+
+\begin{ex}[$\heartsuit $]
+证明, 如果$n$阶方阵$A$对任意$n$维列向量$\bs x,$ 都存在依赖于$\bs x$的常数$c(\bs x)$, 满足$A \bs x = c(\bs x) \bs x,$ 则存在常数$c,$ 使得$A = cI_n.$
+\end{ex}
+\begin{proof}[解答]
+取$\bs x$为标准坐标向量组的向量$\bs e_1,\ldots ,\bs e_n,$ 得到$A$为对角阵. 于是$A = {\rm diag}(c_1,\ldots, c_n),$ $c_i = c(\bs e_i).$ 只需说明$c_i$相等.
+对任意$1\leq i\neq j \leq n,$ $A \bs e_i = c_i \bs e_i,$ $A \bs e_j = c_j \bs e_j.$ 又由假设$A (\bs e_i + \bs e_j) = c \cdot (\bs e_i + \bs e_j), $ $c\in \mathbb{R}.$ 于是, $c_i \bs e_i+  c_j \bs e_j = c \cdot (\bs e_i + \bs e_j).$ 得到$c_i = c= c_j .$
+\end{proof}
+
+
+
+
+
+\begin{ex}
+设 $A=\begin{bmatrix} 1 & 1 & 0 & \\ -1 & 0 & 1 \\ 0 & -1 & -1 \\ \end{bmatrix}, \bs b=\begin{bmatrix} b_1 \\ b_2 \\ b_3 \\ \end{bmatrix}$, 证明：
+\begin{enumerate}
+\item  $A \bs x=\bs b$ 有解当且仅当 $b_1+b_2+b_3=0$.
+\item 齐次线性方程组 $A \bs x=\bm{0}$ 的解集是 $\{k \bs x_1~|~ k \in \mathbb{R}, \bs x_1=\begin{bmatrix} 1 \\ -1 \\ 1 \\ \end{bmatrix}\}$.
+\item 当 $A \bs x=\bs b$ 有解时, 设$\bs x_0$ 是一个解, 则解集是 $\{\bs x_0 + k \bs x_1, k \in \mathbb{R}\}$.
+\end{enumerate}
+\end{ex}
+
+\begin{proof}[解答]
+\begin{enumerate}
+\item 将方程写成矩阵形式, 并对增广矩阵作初等行变换
+\[
+\begin{bmatriX}{ccc|c} 1 & 1 & 0 & b_1 \\ -1 & 0 & 1 & b_2 \\ 0 & -1 & -1& b_3 \end{bmatriX}
+\longrightarrow
+\begin{bmatriX}{ccc|c} 1 & 1 & 0 & b_1 \\ 0 & 1 & 1 & b_1+ b_2 \\ 0 & 0 & 0& b_1 + b_2 +b_3 \end{bmatriX}
+.\]
+因此, $A \bs x =\bs b$有解当且仅当$ b_1 + b_2 +b_3 = 0.$
+
+\item 容易验证形如$k \bs x_1, k \in \mathbb{R}$的向量是齐次方程组的解. 反之, 若$\bs x = \begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ \end{bmatrix}, $ 考虑方程$A \bs x = \bs 0$的增广矩阵的行变换得到
+\[
+\begin{bmatriX}{ccc|c} 1 & 1 & 0 & 0 \\ 0 & 1 & 1 & 0 \\ 0 & 0 & 0& 0 \end{bmatriX}.
+\]
+于是, $\bs x$满足$x_1 + x_2 = 0,$ $x_2 + x_3 = 0.$ 令$k=x_1,$ 得到$\bs x = k \bs x_1.$
+
+\item 设$\bs x$满足$A \bs x = \bs b.$ $\bs x - \bs x_0$满足2中的齐次方程. 于是$\bs x -\bs x_0 = k\bs x_1,$ $k\in \mathbb{R}.$
+\end{enumerate}
+\end{proof}
+
+\begin{ex}
+求三阶方阵$A\in M_3(\mathbb{R})$, 使得方程组 $A\bs x= \begin{bmatrix} 2 \\ 4 \\ 2 \\ \end{bmatrix} $的解集是$\left\{\begin{bmatrix} 2 \\ 0 \\ 0 \\ \end{bmatrix}+c \begin{bmatrix} 1 \\ 1 \\ 0 \\ \end{bmatrix} + d \begin{bmatrix} 0 \\ 0 \\ 1 \\ \end{bmatrix} : c,d\in\mathbb{R} \right\}.$
+\end{ex}
+\begin{proof}[解答]
+设$A = [\bs a_1,~ \bs a_2, ~ \bs a_3].$ 由于$\begin{bmatrix} 2 \\ 0 \\ 0 \\ \end{bmatrix}$满足方程$A\bs x= \begin{bmatrix} 2 \\ 4 \\ 2 \\ \end{bmatrix} ,$ 得到$2 \bs a_1 = \begin{bmatrix} 2 \\ 4 \\ 2 \\ \end{bmatrix} .$ 于是$\bs a_1 = \begin{bmatrix} 1 \\ 2 \\ 1 \\ \end{bmatrix} .$
+
+取$c = 1, d= 0$知, $\begin{bmatrix} 1 \\ 1 \\ 0 \\ \end{bmatrix}$满足方程$A \bs x = \bs 0.$ 于是$\bs a_1 + \bs a_2 = \bs 0,$ 得到$\bs a_2 = -\bs a_1 = \begin{bmatrix} -1 \\ -2 \\ -1 \\ \end{bmatrix} .$
+
+取$c = 0, d= 1$知, $\begin{bmatrix} 0 \\ 0 \\ 1 \\ \end{bmatrix}$满足方程$A \bs x = \bs 0.$ 于是$ \bs a_3 = \bs 0.$
+\end{proof}
+
+\begin{ex}
+考虑线性方程组
+\[
+\left\{\begin{array}{r@{\,}r@{\,}r@{\,}r@{\,}r}
+	x_1 &+2x_2 &+x_3 & =& 1, \\
+	2x_1&+3x_2&+(\lambda+2)x_3&=&3, \\
+	x_1&+\lambda x_2&-2x_3 &=&0.
+\end{array}\right.
+\]
+
+$\lambda$取何值时, 该方程组无解? $\lambda$取何值时, 该方程组有唯一解? $\lambda$取何值时, 该方程组有无穷多解? \deleted{并}证明你的论断.
+\end{ex}
+\begin{proof}[解答]
+将方程写成矩阵形式:
+	\[\begin{bmatrix} 1 & 2 & 1 \\ 2 & 3 & \lambda +2 \\ 1 & \lambda & -2 \end{bmatrix}\begin{bmatrix}
+		x_1 \\ x_2 \\x_3
+	\end{bmatrix}=\begin{bmatrix}
+	1 \\ 3  \\ 0
+\end{bmatrix}.\]
+对增广矩阵作初等行变换
+\[
+\begin{bmatriX}{ccc|c} 1 & 2 & 1 &1 \\ 2 & 3 & \lambda+2 & 3 \\ 1 & \lambda & -2& 0 \end{bmatriX}
+\longrightarrow
+\begin{bmatriX}{ccc|c} 1 & 2 & 1 &1 \\ 0 & 1 & -\lambda & -1 \\ 0 & 0 & \lambda^2-2\lambda-3& \lambda-3 \end{bmatriX}
+.
+\]
+因此:
+\begin{itemize}
+	\item 方程组无解, 当且仅当 $\lambda^2-2\lambda-3=0$ 且 $\lambda-3\neq 0$, 即: $\lambda=-1$;
+	\item 方程组有唯一解, 当且仅当 $\lambda^2-2\lambda-3\neq 0$, 即 $\lambda\neq -1,3$;
+	\item 方程组有无穷多解, 当且仅当 $\lambda^2-2\lambda-3=0$ 且 $\lambda-3= 0$; 即: $\lambda=3$.
+	\end{itemize}
+\end{proof}
+
+\begin{ex}
+\begin{enumerate}
+\item $\mathbb{R}^3$中有三个平面, 分别经过点$\begin{bmatrix}
+				4 \\  0\\  0
+			\end{bmatrix},$ $\begin{bmatrix}
+				0 \\  1\\  -1
+			\end{bmatrix}$, $\begin{bmatrix}
+				2 \\  0\\  2
+			\end{bmatrix},$ 具有法向量$\begin{bmatrix}
+				1 \\  3\\  5
+			\end{bmatrix}$, $\begin{bmatrix}
+				1 \\  2\\  -3
+			\end{bmatrix}$, $\begin{bmatrix}
+				2 \\  5\\  2
+			\end{bmatrix},$ 求这三个平面的交点.
+
+\item $\mathbb{R}^3$中有一条经过原点的直线, 并且与向量$\begin{bmatrix}
+				1 \\  1\\  0
+			\end{bmatrix}$, $\begin{bmatrix}
+				0 \\  1\\  1
+			\end{bmatrix}$垂直, 求所有直线上的点.
+
+\item $\mathbb{R}^3$中有一个平面经过点$\begin{bmatrix}
+				1 \\  1\\  0
+			\end{bmatrix}$, $\begin{bmatrix}
+				0 \\  1\\  1
+			\end{bmatrix}$, $\begin{bmatrix}
+				1 \\  0\\  1
+			\end{bmatrix}$, 求所有与该平面垂直的向量.
+\end{enumerate}
+\end{ex}
+\begin{proof}[解答]
+\begin{enumerate}
+\item 设法向量为$\begin{bmatrix}
+				1 \\  3\\  5
+			\end{bmatrix}$的平面是$x+3y+5z = a,$ 由于平面过点$\begin{bmatrix}
+				4 \\  0\\  0
+			\end{bmatrix}$, 得到$a = 4.$ 同理得到三个平面方程分别为$x+3y+5z = 4,$ $x + 2y -3z = 5,$ $2x + 5y +2z = 8.$ 解方程
+\[
+\begin{bmatrix}
+				1 & 3 & 5 \\  1 & 2 & -3\\  2& 5 & 2
+			\end{bmatrix} X= \begin{bmatrix}
+				4 \\  5\\  8
+			\end{bmatrix}
+\]
+用增广矩阵消元判断得知方程无解.
+
+\item 方法一: 过原点直线的方向与向量$\begin{bmatrix}
+				1 \\  1\\  0
+			\end{bmatrix}\times \begin{bmatrix}
+				0 \\  1\\  1
+			\end{bmatrix} = \begin{bmatrix}
+				1 \\  -1\\  1
+			\end{bmatrix}$同向或反向. 因此, 直线上的点为$\begin{bmatrix}
+				k \\  -k\\  k
+			\end{bmatrix}, ~ k\in \mathbb{R}.$
+
+方法二: 设向量$X= \begin{bmatrix}
+				x \\  y\\  z
+			\end{bmatrix}$满足条件, 则$X$满足方程
+\[
+ \begin{bmatrix}
+				1 & 1 & 0 \\  0 & 1 & 1
+			\end{bmatrix} \begin{bmatrix}
+				x \\  y\\  z
+			\end{bmatrix} =  \begin{bmatrix}
+				0 \\  0
+			\end{bmatrix}
+\]
+解方程得到结果.
+
+\item 只需求该平面的法向量. 考虑向量$\bs v = \begin{bmatrix}
+				1 \\  1\\  0
+			\end{bmatrix} - \begin{bmatrix}
+				0 \\  1\\  1
+			\end{bmatrix} = \begin{bmatrix}
+				1 \\  0\\  -1
+			\end{bmatrix} ,$ $ \bs w = \begin{bmatrix}
+				1 \\  1\\  0
+			\end{bmatrix}-\begin{bmatrix}
+				1 \\  0\\  1
+			\end{bmatrix} = \begin{bmatrix}
+				0 \\  1\\  -1
+			\end{bmatrix}.$ 于是, 该平面的法方向为$\bs v\times \bs w = \begin{bmatrix}
+				1 \\  1\\  1
+			\end{bmatrix}.$ 因此, 与该平面垂直的向量为$k\begin{bmatrix}
+				1 \\  1\\  1
+			\end{bmatrix},$ $k\in \mathbb{R}.$
+
+\end{enumerate}
+\end{proof}
+
+\begin{ex}[$\heartsuit $]
+\begin{enumerate}
+\item $A\in M_{m\times n}(\mathbb{R}),$ 如果对任意的$\bs x \in \mathbb{R}^n,$ 都有$A \bs x = \bs 0,$ \replaced{证明}{则}$A = O$.
+
+\item 如果\replaced{对任意的$\bs b\in\mathbb{R}^m$, 线性方程组$A  \bs x =  \bs b$和$C  \bs x = \bs b$都有相同的解集}{线性方程组$A  \bs x =  \bs b$和$C  \bs x = \bs b$, 对任意的$\bs b$都有相同的解集},证明$A = C$.
+\end{enumerate}
+\end{ex}
+\begin{proof}[解答]
+\begin{enumerate}
+\item 取$\bs x$为标准坐标向量组的向量$\bs e_j, $ 则由假设, $\bs 0 = A \bs e_j = \bs a_j$为$A$的第$j$列. 因此, $A$的每一列为$\bs 0,$ $A= O.$
+
+ \item 首先注意到$A,C$为同阶矩阵. 取$\bs b = \bs a_j$为$A$的第$j$列. 方程组$A \bs x = \bs a_j$有解$\bs e_j.$ 由假设, $\bs e_j$满足方程$C \bs e_j = \bs a_j.$ 由于$C \bs e_j = \bs c_j$为$C$的第$j$列, 因此, $\bs a_j = \bs c_j,~\forall j.$ 于是$A = C.$
+ 
+ \comment{也可以这样写：对任意的$\bs x\in\mathbb{R}^n$, 取$\bs b=A\bs x$. 则$x$显然为方程组$A\bs x=\bs b$的解. 由假设，$C\bs x=\bs b=A\bs x$. 因此$(A-C)\bs x=0, \forall \bs x$. 由1知$A=C$.}
+\end{enumerate}
+\end{proof}
+
+\begin{ex}[$\heartsuit $]
+设线性映射$\bs F: \mathbb{R}^n \to \mathbb{R}^m.$ 当$n>m$时, $\bs F$是否可能是单射? 当$n < m$时, $\bs F$是否可能是满射?
+\end{ex}
+\begin{proof}[解答1]
+设$A  \in M_{m\times n}(\mathbb{R})$为线性映射$\bs F$的表示矩阵. 将线性映射$\bs F$是否为单射或满射的性质转化为关于系数矩阵$A$给出的方程求解问题. 而对方程组做初等行变换不改变方程组的解, 我们转化为考虑关于系数矩阵$R$给出的方程求解问题, 其中$R=rref(A)$为$A$的行简化阶梯形矩阵.
+
+当$n>m$时, 考虑方程$R \bs x = \bs 0.$ 由于主元个数小于等于$\min(m,n),$ \highlight[id=err,comment={这似乎不对。虽然$R$是行简化阶梯形矩阵，但其后$n-m$列仍可能含有主元，如矩阵$\begin{bmatrix}
+    1&2&0&0 \\  0&0&1&0\\  0&0&0&1
+\end{bmatrix}$.}]{$R$的后$n-m$列}. 因此, $\bs x$的后$n-m$个变量为自由变量. 方程$R \bs x = \bs 0$有不止一个解. $\bs F$不可能是单射.
+
+当$n<m$时, 由于主元个数小于等于$\min(m,n)$, $R$的后$n-m$行为零行. 取$\bs b \in \mathbb{R}^n$满足$b_n=1.$ 那么方程$R \bs x = \bs b$无解. 因此, $\bs F$不可能是满射.
+\end{proof}
+
+\begin{proof}[解答2]
+使用第二章的知识. $n = \dim \mathcal{N}(f) + \dim \mathcal{R}(f).$ 当$n>m$时, $\dim \mathcal{R}(f) \leq m,$ 于是$\dim \mathcal{N}(f)>0,$ $f$不可能是单射. 当$n < m$时, $\dim \mathcal{R}(f) \leq {\rm rank}(A) \leq n <m,$ 于是$f$不可能是满射.
+\end{proof}
+\comment{这两种解答似乎本质上是一回事？}
+
+\clearpage
+\listofchanges
+\end{document}

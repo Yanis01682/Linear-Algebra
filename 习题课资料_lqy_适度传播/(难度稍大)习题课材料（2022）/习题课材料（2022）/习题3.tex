@@ -1,0 +1,301 @@
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+%\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+\newcommand\bs[1]{\boldsymbol{ #1}}
+
+\newenvironment{bmatriX}[1]{\left[\hskip -\arraycolsep \begin{array}{#1}}{\end{array}\hskip -\arraycolsep\right]}
+
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+\newif\ifhideproofs
+\hideproofstrue
+\newif\iffinalver
+%\finalvertrue        
+\ifhideproofs
+\usepackage[final]{changes}
+\definechangesauthor[name=Error, color=red]{err}
+\usepackage{environ}
+\NewEnviron{hide}{}
+\let\proof\hide
+\let\endproof\endhide
+\else
+\iffinalver
+\usepackage[final]{changes}
+\else
+\usepackage{changes}
+\fi
+\definechangesauthor[name=Error, color=red]{err}
+\fi
+
+
+		
+\begin{document}
+
+
+\title{习题课材料（三）}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+
+
+
+
+
+% \begin{ex}[$\heartsuit $]
+%假设 $i\neq j$. 我们把单位矩阵 $I$ 的 $(i,j)$ 项改成 $1$, 其他项保持不变, 这样得到的矩阵记作 $E_{ij}$. 单位矩阵 $I$ 的 $(i,i)$ 项和 $(j,j)$ 项改成零, 再把 $(i,j)$ 项和 $(j,i)$ 项改成 $1$, 这样得到的矩阵记作 $P_{ij}$.
+%\begin{itemize}	
+%	\item[(a)] 证明: 对于矩阵 $P_{ij} (i<j)$, 以下性质成立:
+%	\begin{enumerate}
+%		\item 若 $\forall i<k<j$, 则
+%		\begin{itemize}
+%			\item $P_{ik}P_{ij}=P_{kj}P_{ik}=P_{ij}P_{kj}$;
+%			\item $P_{ij}P_{ik}=P_{kj}P_{ij}=P_{ik}P_{kj}$;
+%			\item $(P_{ik}P_{ij})^3=I$.
+%		\end{itemize}
+%		\item 若 $i,j,k,\ell$ 互不相等，则
+%		\begin{itemize}
+%			\item $P_{k\ell}P_{ij}=P_{ij}P_{k\ell}$;
+%			\item$(P_{k\ell}P_{ij})^2=I$.
+%		\end{itemize}
+%	\end{enumerate}
+	
+%	\item[(b)] 对于任意两个矩阵 $A,B$, 我们定义 $[A,B]=AB-BA$.
+%	\begin{enumerate}
+%		\item 假设 $i,j,k$ 两两不同, 计算 $[E_{ij},E_{jk}], [E_{ij},P_{jk}]$ 和 $[P_{ij},P_{jk}]$. (除生算外, 也可以直接考虑作为行操作或列操作, 两个矩阵的顺序调换后, 到底差别在哪里.)
+%		\item 令 $D={\rm diag}(d_1,...,d_n)$ 为对角矩阵; 假设 $i\neq j$, 计算 $[E_{ij},E_{ji}], [E_{ij},D]$ 和 $[P_{ij},D]$. (除生算外, 也可以直接考虑作为行操作或列操作, 两个矩阵的顺序调换后, 到底差别在哪里.)
+%	\end{enumerate}
+%	\end{itemize}
+%\end{ex}
+\begin{ex}
+写出线性空间的定义。
+\end{ex}
+
+
+\begin{ex}
+设$Ax = b$，证明：
+\begin{enumerate}
+\item
+$\mathcal{R}(A) = \mathcal{R}([A, b])$;
+\item
+$\mathcal{N}(A^\mathrm{T}) = \mathcal{N}([A, b]^{\mathrm{T}})$.
+\end{enumerate}
+\end{ex}
+
+\begin{proof}
+\begin{enumerate}
+\item{(采用定义)}
+任取$y \in \mathcal{R}(A)$，即存在$x_0$满足$y = Ax_0$。于是，
+\[
+[A, b] \begin{bmatrix}
+x_0 - x \\
+1
+\end{bmatrix} = A(x_0 - x) + b = Ax_0 - Ax + b = Ax_0 = y \in \mathcal{R}([A, b]).
+\]
+
+换句话说，$\mathcal{R}(A) \subset \mathcal{R}([A, b])$。另一方面，任取$ y \in \mathcal{R}([A, b])$，即存在$\begin{bmatrix}
+x_1\\
+k
+\end{bmatrix}, k\in \mathbb{R}$满足$y = [A, b]\begin{bmatrix}
+x_1\\
+k
+\end{bmatrix} = Ax_1 + bk$。于是：
+\[
+y = Ax_1 + kb = Ax_1 + kAx = A(x_1+kx) \in \mathcal{R}(A).
+\]
+故$\mathcal{R}([A, b]) \subset \mathcal{R}(A)$，所以$\mathcal{R}(A) = \mathcal{R}([A, b])$。
+\item{(采用矩阵的语言)}
+注意到：$[A, b]^{\mathrm{T}} = \begin{bmatrix}
+A^{\mathrm{T}} \\
+b^{\mathrm{T}}
+\end{bmatrix} = \begin{bmatrix}
+A^{\mathrm{T}} \\
+x^{\mathrm{T}}A^{\mathrm{T}}
+\end{bmatrix}= \begin{bmatrix}
+\mathrm{I}_n  & 0\\
+x^{\mathrm{T}} & 1
+\end{bmatrix}\begin{bmatrix}
+A^{\mathrm{T}} \\
+0
+\end{bmatrix}$。由于$\begin{bmatrix}
+\mathrm{I}_n  & 0\\
+x^{\mathrm{T}} & 1
+\end{bmatrix}$可逆，故
+\[
+\mathcal{N}([A, b]^{\mathrm{T}}) = \mathcal{N}([A, 0]^{\mathrm{T}}) = \mathcal{N}(A^\mathrm{T}).
+\] 
+其中第二个等式可从方程组的角度来理解：
+$\mathcal{N}(A^\mathrm{T})$对应于方程组$A^\mathrm{T}x = 0$的解集，同样$\mathcal{N}([A, 0]^{\mathrm{T}})$对应于方程组$[A, 0]^{\mathrm{T}}x = 0$的解集。而这两个方程组相差的是只是$0^{\mathrm{T}}x = 0$，即无效的方程。
+\end{enumerate}
+\end{proof}
+\begin{rmk}
+\replaced{尝试用定义解决第1问，并用矩阵的语言解决第2问。}{分别尝试用矩阵的语言（定义）解决第1（2）问。}
+\end{rmk}
+
+\begin{ex}
+如果向量组$\{a, b, c\}$中的任何两个向量都线性无关，试问该向量组是否一定线性无关？
+\end{ex}
+\begin{proof}
+不一定。在$\mathbb{R}^2$中，取$[1,0]^{\mathrm{T}}, [0,1]^{\mathrm{T}}$以及$[1,1]^{\mathrm{T}}$。
+\end{proof}
+
+
+
+\begin{ex}
+证明：向量组$\{a_1, \cdots, a_m\}$的秩为$r$的充要条件为：其中有$r$个向量线性无关，且向量组中任何多于$r$个向量所组成的向量组都线性相关。
+\end{ex}
+\begin{proof}
+设向量组$\{a_1, \cdots, a_m\}$的秩为$r$，由定义，向量组中存在一个极大线性无关组，记为$S$，包含向量的个数为$r$。再由极大线性无关组的定义可知，这$r$个向量线性无关。若向量组中还存在多于$r$个线性无关的向量所组成的子向量组，记为$T$，\replaced{则由$S$是极大无关组可知，向量组$\{a_1, \cdots, a_m\}$可由$S$表示，进而}{则由极大无关组的定义可知，}$T$可以被$S$线性表示。结合习题8，有:\replaced{$
+r < \mathrm{rank}(T) \leq \mathrm{rank}(S) = r,$}{$r < \mathrm{rank}(S) \leq \mathrm{rank}(T) = r,$}矛盾。
+\
+
+反之，假设向量组$\{a_1, \cdots, a_m\}$满足有$r$个向量线性无关，且向量组中任何多于$r$个向量所组成的向量组都线性相关。任意由线性无关向量组成的向量组都可以扩充为极大线性无关组，因此向量组$\{a_1, \cdots, a_m\}$的秩大于等于$r$。将向量组$\{a_1, \cdots, a_m\}$的秩记为$s$，若$s > r$，则存在由$s$个向量构成的极大无关组，与原向量组中任何多于$r$个向量所组成的向量组都线性相关相矛盾。所以$s = r$。
+\end{proof}
+
+
+
+
+\begin{ex}
+证明： 对任意$\mathbb{R}^m$的非平凡子空间$M, N$，都有$M \cup N \neq \mathbb{R}^m$。
+\end{ex}
+\begin{proof}
+采用反证法，即假设$M \cup N = \mathbb{R}^m$。首先若$M \subseteq N$，则$M \cup N = N = \mathbb{R}^m$，矛盾。所以不妨设$M \nsubseteq N$，即存在$a \in N \backslash M$。注意到对于任意$m \in M$，$a+m \notin M$。（为什么？）由条件可知，$a+m \in N$。结合$a \in N$，我们发现$m \in N$，换句话$M \subseteq N$，矛盾。
+\end{proof}
+
+
+
+\begin{ex}[子空间上的运算]
+设$M, N$是$\mathbb{R}^m$的两个子空间。
+\begin{enumerate}
+\item
+证明交集$M \cap N$是$\mathbb{R}^m$的子空间，称为$M$与$N$的交。
+\item
+定义集合：
+\[
+M + N = \{m+n \mid m \in M, n \in N\}.
+\]
+证明$M+N$是$\mathbb{R}^m$的子空间，称为$M$与$N$的和。
+\item
+$M \cup N$是否为$\mathbb{R}^m$的子空间？
+\end{enumerate}
+\end{ex}
+\begin{proof}
+\begin{enumerate}
+\item
+前两问直接验证线性空间的公理即可。
+\item
+不一定。仿照上一题的思路不难发现，$M \cup N$为$\mathbb{R}^m$的子空间当且仅当$M \subseteq N$或$N \subseteq M$。
+\end{enumerate}
+\end{proof}
+
+
+
+\begin{ex}
+证明：如果向量组$S$可以被向量组$T$线性表示，则$\mathrm{rank}(S) \leq \mathrm{rank}(T)$。
+\end{ex}
+\begin{proof}
+设$S = \{a_1, \cdots, a_n\}, T = \{b_1, \cdots, b_m\}$。令$S_1$（resp. $T_1$）为$S$（resp. $T$）的任意极大线性无关组，则$\mathrm{rank}(S) = \mathrm{rank}(S_1), \mathrm{rank}(T) = \mathrm{rank}(T_1)$，且由条件，$S_1$ 可以被向量组$T_1$线性表示。由课本命题2.2.10可知，\replaced{$\mathrm{rank}(S_1) \leq \mathrm{rank}(T_1)$}{$\mathrm{rank}(S_1) \leq \mathrm{rank}(S_1)$}。因此$\mathrm{rank}(S) \leq \mathrm{rank}(T)$。
+\end{proof}
+
+
+\begin{ex}
+给定$\mathbb{R}^m$的子空间$M$的一组基$a_1, a_2, \cdots, a_r$以及一个$r$阶方阵$P$。令
+\[
+[b_1, b_2, \cdots, b_r] = [a_1, a_2, \cdots, a_r] P,
+\]
+证明：$b_1, b_2, \cdots, b_r$是$M$的一组基当且仅当$P$可逆。
+\end{ex}
+\begin{proof}
+假设$b_1, b_2, \cdots, b_r$是$M$的一组基。于是由$a_1, a_2, \cdots, a_r$可以被$b_1, b_2, \cdots, b_r$线性表示可知：存在一个$r$阶方阵$Q$，使得
+\[
+[a_1, a_2, \cdots, a_r] = [b_1, b_2, \cdots, b_r] Q.
+\]
+因此：$[a_1, a_2, \cdots, a_r] = [a_1, a_2, \cdots, a_r] (PQ)$。因为$M$中任意向量被基线性表示的方法是唯一的，且$[a_1, a_2, \cdots, a_r] = [a_1, a_2, \cdots, a_r] \mathrm{I}_r$，所以$PQ = \mathrm{I}_r$。同理可证$QP = \mathrm{I}_r$，换句话说$P$可逆。
+\
+
+反之，假设$P$可逆，设其逆为$Q$，那么
+\[
+[b_1, b_2, \cdots, b_r] Q = [a_1, a_2, \cdots, a_r] PQ =  [a_1, a_2, \cdots, a_r],
+\]
+换言之，$M$中的任意向量可以被由$r$个向量组成的向量组$\{b_1, b_2, \cdots, b_r\}$线性表示，因此由课本命题2.2.17.2可得结论。
+\end{proof}
+
+
+\begin{ex}[维数公式$\heartsuit $]
+设$M, N$是$\mathbb{R}^m$的两个子空间，求证维数公式：
+\[
+\dim(M+N) = \dim M + \dim N - \dim (M \cap N).
+\]
+\end{ex}
+\begin{proof}
+取$M \cap N$的一组基$c_1, \cdots, c_r$。由基扩充定理，将$c_1, \cdots, c_r$分别扩充为$M$和$N$的一组基，记为
+\[
+M: c_1, \cdots, c_r, a_1, \cdots, a_s
+\]
+和
+\[
+N: c_1, \cdots, c_r, b_1, \cdots, b_t.
+\]
+下证：$c_1, \cdots, c_r, a_1, \cdots, a_s, b_1, \cdots, b_t$组成$M+N$的一组基。
+\
+
+首先易知$M+N$中的任意元素可由$c_1, \cdots, c_r, a_1, \cdots, a_s, b_1, \cdots, b_t$线性表示。其次设实数$k_1, \cdots, k_r, m_1, \cdots, m_s, n_1, \cdots, n_t$满足：
+\begin{equation} \label{eq10.1}
+k_1c_1 + \cdots + k_sc_s + m_1 a_1 + \cdots + m_s a_s + n_1 b_1 + \cdots + n_tb_t = 0.
+\end{equation}
+于是
+\[
+k_1c_1 + \cdots + k_sc_s + m_1 a_1 + \cdots + m_s a_s = -(n_1 b_1 + \cdots + n_tb_t) \in M \cap N.
+\]
+由于$c_1, \cdots, c_r$是$M \cap N$的一组基，故$-(n_1 b_1 + \cdots + n_tb_t0)$可写为$c_1, \cdots, c_r$的线性组合，但在$N$中，\replaced{向量组$\{c_1, \cdots, c_r, b_1, \cdots, b_t\}$}{$c_1, \cdots, c_r$与$b_1, \cdots, b_t$}线性无关，因此
+\[
+n_1 = n_2 = \cdots = n_t = 0.
+\]
+代入（\ref{eq10.1}），可知：
+\[
+k_1c_1 + \cdots + k_sc_s + m_1 a_1 + \cdots + m_s a_s = 0.
+\]
+由于$c_1, \cdots, c_r, a_1, \cdots, a_s$构成$M$的一组基，所以
+\[
+k_1 = \cdots = k_s = m_1 = \cdots =m_s = 0,
+\]
+即$c_1, \cdots, c_r, a_1, \cdots, a_s, b_1, \cdots, b_t$线性无关。综上$c_1, \cdots, c_r, a_1, \cdots, a_s, b_1, \cdots, b_t$组成$M+N$的一组基。
+\
+
+因此我们有：
+\[
+\dim(M+N) = r+s+t = (r+s) + (r+t) - r = \dim M + \dim N - \dim (M \cap N).
+\]
+\end{proof}
+
+
+
+\clearpage
+\listofchanges
+\end{document}

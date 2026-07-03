@@ -1,0 +1,712 @@
+%!TEX program=xelatex
+\documentclass{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+%\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+\newtheorem{thm}{定理}
+\newtheorem{cor}[thm]{推论}
+\newtheorem{lem}[thm]{引理}
+\newtheorem{prop}[thm]{命题}
+\newtheorem{defn}[thm]{定义}
+\newtheorem{ques}[thm]{问题}
+\newtheorem{eg}[thm]{例题}
+\newtheorem{ex}[thm]{习题}
+\newtheorem{rmk}[thm]{注释}
+\newtheorem{ntn}[thm]{记号}
+
+\newtheorem{exercise}[thm]{习题}
+
+\allowdisplaybreaks
+\raggedbottom
+
+\usepackage{mathdots}
+\usepackage{extarrows}
+\usepackage{amsbsy}
+\newcommand\bs[1]{\boldsymbol{ #1}}
+\newcommand\hint[1]{\par {\footnotesize\kaishu 提示：#1}}
+\newcommand\note[1]{\par {\footnotesize\kaishu 注意：#1}}
+		
+\def\hard{$\heartsuit$}
+\def\zero{O}
+\def\dps{\displaystyle}
+\def\wtd{\widetilde}
+\def\what{\widehat}
+\DeclareMathOperator{\T}{T}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\toep}{toep}
+\DeclareMathOperator{\range}{\mathcal{R}}
+\DeclareMathOperator{\nullspace}{\mathcal{N}}
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\DeclareMathOperator{\subspan}{span}
+
+\usepackage{mathtools}
+\providecommand\given{\:\vert\:}
+\DeclarePairedDelimiterXPP\set[1]{}{\{}{\}}{}{
+\renewcommand\given{\nonscript\:\delimsize\vert\nonscript\:\mathopen{}}
+#1}
+\DeclarePairedDelimiter\abs{|}{|}
+\DeclarePairedDelimiter\N{\|}{\|}
+\DeclarePairedDelimiter\spanbasic{(}{)}
+\newcommand\lspan[1]{\subspan\spanbasic*{#1}}
+
+\newif\ifhideproofs
+%\hideproofstrue
+\newif\iffinalver
+%\finalvertrue        
+\ifhideproofs
+    \usepackage[final]{changes}
+    \definechangesauthor[name=Error, color=red]{err}
+    \usepackage{environ}
+    \NewEnviron{hide}{}
+    \let\proof\hide
+    \let\endproof\endhide
+\else
+    \iffinalver
+        \usepackage[final]{changes}
+    \else
+        \usepackage{changes}
+    \fi
+    \definechangesauthor[name=Error, color=red]{err}
+\fi
+
+\begin{document}
+
+
+\title{习题课材料（九）}
+\author{}
+\date{}
+\maketitle
+
+\begin{exercise}
+设$A, B$是$n$阶方阵, 且满足$AB=BA$. 
+\begin{enumerate}
+\item 证明, 若$A$有$n$个不同的特征值, 则$B$可对角化. 
+\item 若$A$有代数重数大于$1$的特征值, $B$是否一定可对角化？
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+	\begin{enumerate}
+		\item $A$有$n$个不同特征值, 则$A$可对角化, 令$A=X\Lambda X^{-1}$. 
+			则$AB=BA\Rightarrow \Lambda X^{-1}BX=X^{-1}BX\Lambda$. 
+			记$\wtd B=X^{-1}BX$, 
+			$\Lambda \wtd B=\wtd B\Lambda$ 说明$\wtd B$是对角矩阵. 
+			（事实上, 逐个元素计算, 有$(\lambda_i-\lambda_j)\wtd B_{ij}=0\Rightarrow \wtd B_{ij}=0,i\ne j$. ）
+			因此$B=X\wtd BX^{-1}$可对角化. 
+			\item 不一定. 例如$A=I$, 则$B$可以是任意矩阵, 包括不可对角化的矩阵. 
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise} \hard
+给定$n$阶方阵$A, B$满足$AB=BA$. 
+\begin{enumerate}
+\item 证明, 若$A$有$n$个不同的特征值, 则存在次数不超过$n-1$的多项式$f(x)$, 使得$B=f(A)$. 
+\item 证明, 若$A=J_n(\lambda)$, 则存在次数不超过$n-1$的多项式$f(x)$, 使得$B=f(A)$. 
+\item  举例说明, 存在$A, B$满足$AB=BA$, 但不存在多项式$f(x)$, 使得$B=f(A)$. 
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+	\begin{enumerate}
+		\item 利用上题, $A,B$可以同时对角化, 令$A=X\Lambda X^{-1},B=XMX^{-1}$. 
+			则$B=f(A)\Leftrightarrow M=f(\Lambda) \Leftrightarrow \mu_i=f(\lambda_i),i=1,\dots,n$. 这是例4.2.13讲过的插值问题, 解存在唯一. 
+		\item $A=J_n(\lambda)=\lambda I +J_n(0)$, 因此$J_n(0)B=BJ_n(0)$, 即
+			\begin{align*}
+				\begin{bmatrix}
+					b_{21} & b_{22} & \cdots & b_{2n}\\
+					\vdots & \vdots &  & \vdots \\
+					b_{n1} & b_{n2} & \cdots & b_{nn}\\
+					\\
+				\end{bmatrix}
+				&=\begin{bmatrix}
+					& 1\\ && \ddots \\ &&& 1\\ \\
+				\end{bmatrix}\begin{bmatrix}
+					b_{11} & b_{12} & \cdots & b_{1n}\\
+					b_{21} & b_{22} & \cdots & b_{2n}\\
+					\vdots & \vdots &  & \vdots \\
+					b_{n1} & b_{n2} & \cdots & b_{nn}\\
+				\end{bmatrix}
+				\\&=\begin{bmatrix}
+					b_{11} & b_{12} & \cdots & b_{1n}\\
+					b_{21} & b_{22} & \cdots & b_{2n}\\
+					\vdots & \vdots &  & \vdots \\
+					b_{n1} & b_{n2} & \cdots & b_{nn}\\
+				\end{bmatrix}\begin{bmatrix}
+					& 1\\ && \ddots \\ &&& 1\\ \\
+				\end{bmatrix}
+				=\begin{bmatrix}
+                    & b_{11} & b_{12} & \cdots \\
+                    & 	b_{21} & b_{22} & \cdots \\
+                    & 	\vdots & \vdots &   \\
+                    & 	b_{n1} & b_{n2} & \cdots \\
+                    \end{bmatrix}
+			\end{align*}
+          %  \comment[id=err]{以上蓝色部分原先元素下标有误}
+			比较得到
+			\[
+				B=\begin{bmatrix}
+				b_{11} & b_{12} & \cdots & b_{1n}\\
+				 & b_{11} & \cdots & b_{1,n-1}\\
+				 &  & \ddots & \vdots \\
+				 &  &  & b_{11}\\
+			 \end{bmatrix}=b_{11}I+b_{12}J_n(0)+\dots+b_{1n}J_n(0)^{n-1}
+			 =b_{11}I+b_{12}(A-\lambda I)+\dots +b_{1n}(A-\lambda I)^{n-1}
+			 .
+			\]
+		 \item 类似上题, 取$A=I,B=J_n(0)$, 则二者可交换, 但对任意多项式$f$, $f(A)$是对角矩阵, 不可能等于$B$. 
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}
+\hard\hard 证明, 任意迹为$0$的方阵相似于一个对角元素全为$0$的方阵. 
+
+%\hint{利用数学归纳法. 
+%先取非零向量$\bs q$且$\bs q$不是$A$的特征向量, 再把$\bs q,A\bs q$扩充成一组基做相似变换. }
+\end{exercise}
+\begin{proof}
+	记迹为$0$的方阵为$A$. 
+	阶数为$1$时显然. 用数学归纳法. 目标是求$Q$使得$AQ=Q\begin{bmatrix}
+		0 & *\\ * & \wtd A
+	\end{bmatrix}$. 
+	展开计算, 先观察$Q=\begin{bmatrix}
+		\bs q_1 & Q_2
+	\end{bmatrix}$, 可知$A\bs q_1=Q_2*$. 也就是说, $A\bs q_1$可用$Q_2$的列线性表示, 而不含$\bs q_1$. 
+	这提示我们如下构造$Q$：若存在向量$\bs q$, 它不是$A$的特征向量, 则$\bs q,A\bs q$线性无关. 将之扩充为空间的一组基, 按列组成矩阵$\wtd Q$, 就有$A\wtd Q=\wtd Q\begin{bmatrix}
+		0 &*\\ \bs e_1 & \what A
+	\end{bmatrix}$. 
+	利用归纳假设, 存在$P$使得$\what AP=P\wtd A$, 其中$\wtd A$的对角元素全是$0$. 令$Q = \wtd Q \begin{bmatrix}
+		1 & \\ & P
+	\end{bmatrix}.$ 那么
+	$AQ = Q \begin{bmatrix}
+	0 & *\\ P^{-1}\bs e_1 &\wtd A
+	\end{bmatrix}$, 也满足条件. 
+	另一方面, 如果不存在这样的$\bs q$, 那么任意向量都是$A$的特征向量. 
+	$A\bs e_i=\lambda_i\bs e_i$, 即$A$是对角阵. 
+	再看$A(\bs e_1+\dots+\bs e_n)=\lambda(\bs e_1+\dots+\bs e_n)$, 可知$\lambda_1=\dots=\lambda_n=\lambda$, 即$A=\lambda I$. 
+	但$\trace(A)=n\lambda=0$, 于是$A=0$. 
+\end{proof}
+
+\begin{exercise}\label{excs:similar:transpose}
+利用Jordan标准形证明, $A$与$A^{\T}$相似. 
+\end{exercise}
+\begin{proof}
+	设$A=XJX^{-1}$, 其中$X$可逆, $J$是$A$的Jordan标准形. 
+	则$A^T=X^{-\T}J^TX^T$. 只要能证明对任意Jordan块$J_n(\lambda)$, $J_n(\lambda)$与$J_n(\lambda)^T$相似, 就有$J$与$J^T$相似, 从而$A$与$A^T$相似. 
+
+	下证对Jordan块$J_n(\lambda)$命题成立. 事实上证明对特殊Jordan块$J_n(0)$成立即可. 
+	取$F=\begin{bmatrix}
+		&& 1\\ & \iddots\\ 1\\
+	\end{bmatrix}$, 不难验证, 
+	\[
+		FJ_n(0)F^{-1}=\begin{bmatrix}
+		&& 1\\ & \iddots\\ 1\\
+	\end{bmatrix}\begin{bmatrix}
+				& 1\\ && \ddots \\ &&& 1\\ \\
+	\end{bmatrix}\begin{bmatrix}
+		&& 1\\ & \iddots\\ 1\\
+	\end{bmatrix}=\begin{bmatrix}
+				\\ 1\\ & \ddots \\ && 1&\\ 
+			\end{bmatrix}=J_n(0)^T.
+	\]
+\end{proof}
+
+\begin{exercise}\label{exc:jordan-simplify}
+给定$m$阶方阵$A_1$, $n$阶方阵$A_2$和$m\times n$矩阵$B$. 
+证明：
+\begin{enumerate}
+\item 如果$A_1$和$A_2$没有相同的特征值, 则关于$m\times n$矩阵$X$的Sylvester方程$A_1X-XA_2=B$有唯一解. 
+\item 如果$A_1$和$A_2$没有相同的特征值, 则存在唯一的矩阵$X$满足
+\[
+\begin{bmatrix}
+I_m & X\\ \zero & I_n\\
+\end{bmatrix}\begin{bmatrix}
+A_1 & B\\ \zero &A_2\\
+\end{bmatrix}\begin{bmatrix}
+I_m & X\\ \zero & I_n\\
+\end{bmatrix}^{-1}=\begin{bmatrix}
+A_1 & \zero\\ \zero &A_2\\
+\end{bmatrix}.
+\]
+\item \label{itm:exc:jordan-simplify:3}
+	对$n$阶方阵$A$, 存在可逆矩阵$X$, 使得
+\[
+X^{-1}AX=\begin{bmatrix}
+	\lambda_1I+N_1 &&        &                \\
+&\lambda_1I+N_2 &        &                \\
+&               & \ddots &                \\
+&               &        & \lambda_sI+N_s \\
+\end{bmatrix},
+\]
+其中$N_1,N_2,\dots,N_s$是严格上三角矩阵. 
+\item \hard 如果$m>n$且$A_1=J_m(0),A_2=J_n(0),B=\bs e_1\bs b^{\T}$, 即$B$除第一行外元素全为$0$, 则关于$m\times n$矩阵$X$的Sylvester方程$A_1X-XA_2=B$有解, 于是存在矩阵$X$满足
+\[
+\begin{bmatrix}
+I_m & X\\ \zero & I_n\\
+\end{bmatrix}\begin{bmatrix}
+A_1 & B\\ \zero &A_2\\
+\end{bmatrix}\begin{bmatrix}
+I_m & X\\ \zero & I_n\\
+\end{bmatrix}^{-1}=\begin{bmatrix}
+A_1 & \zero\\ \zero &A_2\\
+\end{bmatrix}.
+\]
+\item \label{itm:exc:jordan-simplify:5}
+对$n$阶方阵$A=\begin{bmatrix}
+		J_{k_1}(0) & \bs e_1\bs a_2^{\T} & \cdots & \bs  e_1\bs a_r^{\T}\\
+		&J_{k_2}(0) \\
+		&& \ddots \\
+		&&&J_{k_r}(0)\\
+	\end{bmatrix}$, 其中$k_1> k_2\ge\dots\ge k_r$（即$A$是一个Jordan标准形与除第一行外元素全为$0$的矩阵的和）, 
+存在可逆矩阵$X$, 使得
+\[
+X^{-1}AX=\begin{bmatrix}
+		J_{k_1}(0) \\
+		&J_{k_2}(0)  \\
+		&& \ddots \\
+		&&&J_{k_r}(0)\\
+\end{bmatrix}.
+\]
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+	\begin{enumerate}
+		\item 习题课材料8第7题已经证明过$A_2$上三角的特殊情形. 注意到, 对任意矩阵$A_2$, 存在可逆矩阵$Y$, 使得$Y^{-1}A_2Y=T$是上三角矩阵. 因此$A_1X-XA_2=B\Leftrightarrow A_1X-XYTY^{-1}=B\Leftrightarrow (Y^{-1}A_1Y)(Y^{-1}XY)-(Y^{-1}XY)T=Y^{-1}BY$, 就转化为已知情形. 
+			\item $\begin{bmatrix}
+					A_1 & \\ & A_2
+			\end{bmatrix}=\begin{bmatrix}
+			I & X\\& I
+			\end{bmatrix}\begin{bmatrix}
+			A_1 & B\\ & A_2
+			\end{bmatrix}\begin{bmatrix}
+			I & -X \\ & I
+			\end{bmatrix}=\begin{bmatrix}
+			A_1 & B+XA_2-A_1X\\ & A_2
+			\end{bmatrix}\Leftrightarrow B+XA_2-A_1X=0
+			$, 就化为上一小题. 
+		\item 先利用可逆矩阵$X_1$把$A$上三角化, 即$X_1^{-1}AX_1=\begin{bmatrix}
+				\lambda_1I+N_1 & A_{12}& \cdots & A_{1s} \\ 
+				& \lambda_2I+N_2 & \ddots &  \vdots\\ 
+				&&\ddots & A_{s-1,s} \\
+				&&&\lambda_sI+N_s \\ 
+			\end{bmatrix}$. 取$A_1=\lambda_1I+N_1,A_2=\begin{bmatrix}
+				 \lambda_2I+N_2 & \ddots &  \vdots\\ 
+				&\ddots & A_{s-1,s} \\
+				&&\lambda_sI+N_s \\ 
+			\end{bmatrix},B=\begin{bmatrix}
+			A_{12} & \cdots & A_{1s}
+			\end{bmatrix}$, 由于$A_1,A_2$没有相同的特征值, 由上一小题, 存在$X_2=\begin{bmatrix}
+			I & \wtd X_2\\ & I
+			\end{bmatrix}^{-1}$, 使得$X_2X_1^{-1}AX_1X_2^{-1}=\begin{bmatrix}
+				\lambda_1I+N_1 & & &  \\ 
+				& \lambda_2I+N_2 & * &  *\\ 
+				&&\ddots & A_{s-1,s} \\
+				&&&\lambda_sI+N_s \\ 
+			\end{bmatrix}$. 类似进行下去, 则有$X_s^{-1}\dots X_2^{-1} X_1^{-1}AX_1X_2\dots X_s=\begin{bmatrix}
+				\lambda_1I+N_1 & & &  \\ 
+				& \lambda_2I+N_2 & & \\ 
+				&&\ddots &  \\
+				&&&\lambda_sI+N_s \\ 
+			\end{bmatrix}$. 令$X=X_1X_2\dots X_s$, 即得结论. 
+          %  \comment{为何不直接使用Jordan标准型的结论？还是说还没教到Jordan标准型？}
+		\item 记$X=\begin{bmatrix}
+				X_1\\ X_2
+				\end{bmatrix}$, 其中$X_2$是方阵. 记$\bs e_{1,t}=\begin{bmatrix}
+				1 \\ 0 \\\vdots
+			\end{bmatrix}_{t\times 1}$. 
+		则方程
+		\[
+			J_m(0)X-XJ_n(0)=\bs e_1\bs b^T \Leftrightarrow
+		\begin{bmatrix}
+			J_{m-n}(0) & \bs e_{m-n}\bs e_{1,n}^T\\
+			& J_n(0)
+		\end{bmatrix}\begin{bmatrix}
+			X_1\\ X_2
+		\end{bmatrix}-\begin{bmatrix}
+			X_1\\ X_2
+		\end{bmatrix}J_n(0)=\begin{bmatrix}
+		\bs e_{1,m-n}\bs b^T\\ \zero
+		\end{bmatrix},
+		\]
+		可得
+		\[
+			J_{m-n}(0)X_1-\bs e_{m-n}\bs e_{1,n}^TX_2-X_1J_n(0)=\bs e_{1,m-n}\bs b^T,J_n(0)X_2-X_2J_n(0)=\zero.
+		\]
+		根据之前习题, $J_n(0)X_2-X_2J_n(0)=\zero$的解为
+		\[
+			X_2=t_1I+t_2J_n(0)+\dots+t_nJ_n(0)^{n-1}=\begin{bmatrix}
+			t_1 & t_2 & \cdots & t_n\\ & t_1 & \ddots & \vdots\\
+			&&\ddots &t_2\\ &&& t_1\\
+		\end{bmatrix}=:\toep(\begin{bmatrix}
+			t_1 & t_2 & \cdots & t_n\\
+		\end{bmatrix})
+		,
+		\]
+		由其第一行决定, 而第一行受前一方程约束. 
+		前一方程得到$J_{m-n}(0)X_1-X_1J_n(0)=\bs e_{1,m-n}\bs b^T+\bs e_{m-n}\bs e_{1,n}^TX_2$. 
+		如果$m-n=1$, 则有$\bs e_{1,n}^TX_2=-X_1J_n(0)-\bs b^T$, 
+		任意选择$X_1$, 即$X$的第一行, 即可得到方程的解. 
+
+		否则, 有
+		\begin{align*}
+			\bs b^T&=\bs e_{1,m-n}^TJ_{m-n}(0)X_1-\bs e_{1,m-n}^TX_1J_n(0)=\bs e_{2}^TX_1-\bs e_{1,m-n}^TX_1J_n(0),\\
+			\bs 0^T&=\bs e_{p}^TJ_{m-n}(0)X_1-\bs e_{p}^TX_1J_n(0)=\bs e_{p+1}^TX_1-\bs e_{p}^TX_1J_n(0),(p=2,\dots,m-n-1)\\
+			\bs e_{1,n}^TX_2&=\bs e_{m-n}^TJ_{m-n}(0)X_1-\bs e_{m-n}^TX_1J_n(0) =-\bs e_{m-n}^TX_1J_n(0).
+		\end{align*}
+		亦即, 
+		\begin{align*}
+			\bs e_{2}^TX_1&=\bs e_{1,m-n}^TX_1J_n(0)+\bs b^T,\\
+			\bs e_{p}^TX_1&=\bs e_{p-1}^TX_1J_n(0),(p=3,\dots,m-n),\\
+			\bs e_{1,n}^TX_2 &=-\bs e_{m-n}^TX_1J_n(0)
+		.
+		\end{align*}
+		任意选择$X_1$的第一行, 即$X$的第一行, 即可逐行算出$X_1$以及$X_2$的第一行, 从而得到$X_2$, 从而完全得到$X$. 
+
+		综上, 方程的解被其可任选的第一行所决定. 
+		特别地, 第一行选作$\bs 0^T$, 则当$m-n=1$时, $X=\begin{bmatrix}
+			\bs 0^T\\ \toep(\bs b^T)\\ 
+		\end{bmatrix}$; 当$m-n>1$时, 
+$X=\begin{bmatrix}
+			I_{m-n}&\\& -I_n
+		\end{bmatrix}\begin{bmatrix}
+			\bs 0^T\\ \toep(\bs b^T)\\ \zero
+		\end{bmatrix}$. 
+			
+			\item 取$A_1=J_{k_1}(0),A_2=J_{k_2}(0),\bs b=\bs a_2$, 由上一小题, 
+				存在$\wtd X_2$, 使得
+                \begin{align*}
+                    X_2^{-1}AX_2=&\begin{bmatrix}
+                        I & \wtd X_2 \\ & I \\ & &\ddots\\&&&I 
+                    \end{bmatrix}
+                    \begin{bmatrix}
+            J_{k_1}(0) & \bs e_1\bs a_2^{\T} & \cdots & \bs  e_1\bs a_r^{\T}\\
+            &J_{k_2}(0) \\
+            && \ddots \\
+            &&&J_{k_r}(0)\\
+                    \end{bmatrix}\begin{bmatrix}
+                        I & \wtd X_2 \\ & I \\ & &\ddots\\&&&I 
+                    \end{bmatrix}^{-1}\\
+                    =&\begin{bmatrix}
+            J_{k_1}(0) & \zero & \cdots & \bs  e_1\bs a_r^{\T}\\
+            &J_{k_2}(0) \\
+            && \ddots \\
+            &&&J_{k_r}(0)\\
+                    \end{bmatrix}
+                    .
+                \end{align*}
+				类似地, 
+				存在$\wtd X_3$, 使得
+                \begin{align*}
+                    X_3^{-1}X_2^{-1}AX_2X_3=&\begin{bmatrix}
+                        I & &\wtd X_3 \\ & I \\ & &I\\&&&\ddots 
+                    \end{bmatrix}
+                    \begin{bmatrix}
+                        J_{k_1}(0) & \zero & \bs  e_1\bs a_3^{\T}&\cdots \\
+            &J_{k_2}(0) \\
+            && J_{k_3}(0)\\
+            &&&\ddots \\
+                    \end{bmatrix}\begin{bmatrix}
+                        I & &\wtd X_3 \\ & I \\ & &I\\&&&\ddots 
+                    \end{bmatrix}^{-1}\\
+                    =&\begin{bmatrix}
+                    J_{k_1}(0) & \zero & \zero & \cdots \\
+            &J_{k_2}(0) \\
+            && J_{k_3}(0)\\
+            &&&\ddots \\
+        \end{bmatrix}
+        .
+                \end{align*}
+				进行下去, 有$X_r^{-1}\dotsm X_2^{-1}AX_2\dotsm X_r=\begin{bmatrix}
+		J_{k_1}(0) \\
+		&J_{k_2}(0)  \\
+		&& \ddots \\
+		&&&J_{k_r}(0)\\
+	\end{bmatrix}$. 令$X=X_2\dotsm X_r$, 即得结论. 
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}
+设实对称矩阵$A=\begin{bmatrix}
+a&1&1&-1 \\ 1&a&-1&1 \\ 1&-1&a&1 \\ -1&1&1&a \\
+\end{bmatrix}$, 有一个单特征值$-3$, 求$a$的值和$A$的谱分解. 
+\end{exercise}
+\begin{proof}[解]
+	关键是解出特征值, 并选择$a$使得$-3$是一个单特征值. 最朴素的做法是计算特征多项式
+	\begin{align*}
+		p_A(\lambda)=\det(\lambda I -A)
+		&=\begin{vmatrix}
+		\lambda-a & -1 & -1 & 1\\
+		-1 & \lambda-a & 1 & -1\\
+		-1 & 1 & \lambda-a & -1 \\
+		 1& -1 & -1 & \lambda-a\\
+		 \end{vmatrix}
+		 \\&\xlongequal{\text{四行相加}}\begin{vmatrix}
+		\lambda-a-1 & \lambda-a-1  & \lambda-a-1  & \lambda-a-1 \\
+		-1 & \lambda-a & 1 & -1\\
+		-1 & 1 & \lambda-a & -1 \\
+		 1& -1 & -1 & \lambda-a\\
+		 \end{vmatrix}
+		 \\&=(\lambda-a-1)\begin{vmatrix}
+		 1 & 1 & 1 & 1\\
+		-1 & \lambda-a & 1 & -1\\
+		-1 & 1 & \lambda-a & -1 \\
+		 1& -1 & -1 & \lambda-a\\
+		 \end{vmatrix}
+		 \\&=(\lambda-a-1)\begin{vmatrix}
+		 1 & 1 & 1 & 1\\
+		 0 & \lambda-a+1 & 2 & 0\\
+		 0 & 2 & \lambda-a+1 & 0 \\
+		 2& 0 & 0 & \lambda-a+1\\
+		 \end{vmatrix}
+		 \\&\xlongequal{\text{对换二四行、二四列}}(\lambda-a-1)\begin{vmatrix}
+		 1 & 1           & 1           & 1           \\
+		 2 & \lambda-a+1 & 0           & 0           \\
+		 0 & 0           & \lambda-a+1 & 2           \\
+		 0 & 0           & 2           & \lambda-a+1 \\
+		 \end{vmatrix}
+		 \\&\xlongequal{\text{分块}}(\lambda-a-1)\begin{vmatrix}
+		 1 & 1           \\
+		 2 & \lambda-a+1 \\
+		 \end{vmatrix}
+		 \begin{vmatrix}
+		 \lambda-a+1 & 2           \\
+		 2           & \lambda-a+1 \\
+	\end{vmatrix}
+	\\&=(\lambda-a-1)(\lambda-a+1-2)\left((\lambda-a+1)^2-4\right)
+	\\&=(\lambda-a-1)(\lambda-a+1-2)(\lambda-a+1+2)(\lambda-a+1-2)
+	\\&=(\lambda-a-1)^3(\lambda-a+3)
+	.
+	\end{align*}可知特征值为$a+1,a+1,a+1,a-3$, 只有$a-3=-3,a+1\ne -3$, 即$a=0$时, $-3$是一个单特征值. 
+	此时简单计算谱分解即得
+	\[
+		A=\begin{bmatrix}
+		1 & 1& 1& 1\\
+		-1 & 1 & 0 & 0\\
+		-1 & 0 & 1 & 0\\
+		1 & 0 & 0 & -1\\
+	\end{bmatrix}\begin{bmatrix}
+	-3 \\ & 1\\ && 1\\&&&1
+	\end{bmatrix}\begin{bmatrix}
+		1 & 1& 1& 1\\
+		-1 & 1 & 0 & 0\\
+		-1 & 0 & 1 & 0\\
+		1 & 0 & 0 & -1\\
+	\end{bmatrix}^{-1}
+	.
+\]	
+一个稍微简化一点的做法是考虑$A$的特殊性, 得到$A=aI+B$, 其中$B=\begin{bmatrix}
+1&1&1&-1 \\ 1&1&-1&1 \\ 1&-1&1&1 \\ -1&1&1&1 \\
+\end{bmatrix}$. 已知条件转化为$B$有一个单特征值$-a-3$. 其他如上. 
+
+第三种做法是利用定义, $A$有一个单特征值$-3$, 说明特征子空间$\nullspace(-3I-A)$的维数是$1$, 即$\rank(-3I-A)=3$. 于是
+\begin{align*}
+    -3I-A=&
+	\begin{bmatrix}
+			-3-a & -1 & -1 & 1\\
+			-1 & -3-a & 1 & -1\\
+			-1 & 1 & -3-a & -1 \\
+			 1& -1 & -1 & -3-a\\
+	\end{bmatrix}
+	\to\begin{bmatrix}
+			 1& -1 & -1 & -3-a\\
+			0 & -4-a & 0 & -4-a\\
+			0 & 0 & -4-a & -4-a \\
+			0 & -4-a & -4-a & %1-(3+a)^2=
+			(4+a)(-2-a)\\
+	\end{bmatrix}\\
+	&\quad\quad\to\begin{bmatrix}
+			 1& -1 & -1 & -3-a\\
+			0 & -4-a & 0 & -4-a\\
+			0 & 0 & -4-a & -4-a \\
+			0 & 0 & -4-a & %-(4+a)(2+a)+(4+a)=
+			-(4+a)(1+a)\\
+	\end{bmatrix}
+	\to\begin{bmatrix}
+			 1& -1 & -1 & -3-a\\
+			0 & -4-a & 0 & -4-a\\
+			0 & 0 & -4-a & -4-a \\
+			0 & 0 & 0 & %-(4+a)(1+a)+(4+a)=
+			-(4+a)a\\
+	\end{bmatrix}
+\end{align*}
+容易看出：$a=0,\rank=3;a=-4,\rank=1$; $a$为其他值, 满秩. 
+于是$a$只能是$0$. 
+\end{proof}
+
+\begin{exercise}
+设三阶实对称矩阵$A$的各行元素之和均为$3$, $\bs a_1=\begin{bmatrix}
+-1 \\ 2 \\ -1 \\
+\end{bmatrix}, \bs a_2=\begin{bmatrix}
+0 \\ -1 \\ 1 \\
+\end{bmatrix}\in \nullspace(A)$, 求$A$及其谱分解. 
+\end{exercise}
+\begin{proof}[解]
+	%记$A=\begin{bmatrix}
+		%a_{11} & a_{12} & a_{13}\\
+		%a_{21} & a_{22} & a_{23}\\
+		%a_{31} & a_{32} & a_{33}\\
+	%\end{bmatrix}$. 
+	最朴素做法是直接利用已知条件, 然后求解$6$个未知数的方程组！
+	好的做法是先动眼再动手. 稍微观察一下结构, 
+	令$\bs 1=\begin{bmatrix}
+		1\\1\\1
+	\end{bmatrix}$, 则有$A\bs 1=3\cdot\bs 1, A\bs a_1=0,A\bs a_2=0$. 
+	其中$\bs a_1,\bs a_2$线性无关. 
+	于是$3$是一个几何重数至少为$1$的特征值, $0$是一个几何重数至少为$2$的特征值
+	这就可以得到$A$的非对称谱分解
+	\[
+		A\begin{bmatrix}
+			1 & -1 & 0\\
+			1 & 2 & -1\\
+			1 & -1 & 1\\
+		\end{bmatrix}=\begin{bmatrix}
+			1 & -1 & 0\\
+			1 & 2 & -1\\
+			1 & -1 & 1\\
+		\end{bmatrix}\begin{bmatrix}
+		3 \\ & 0 \\ &&0\\
+		\end{bmatrix}.
+	\]
+		标准正交化后可得
+		$A=\begin{bmatrix}
+			\frac{1}{\sqrt{3}} & -\frac{1}{\sqrt{2}} & 0\\
+			\frac{1}{\sqrt{3}} & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}\\
+			\frac{1}{\sqrt{3}} & 0 & \frac{1}{\sqrt{2}}\\
+		\end{bmatrix}\begin{bmatrix}
+		3 \\ & 0 \\ &&0\\
+		\end{bmatrix}\begin{bmatrix}
+			\frac{1}{\sqrt{3}} & -\frac{1}{\sqrt{2}} & 0\\
+			\frac{1}{\sqrt{3}} & \frac{1}{\sqrt{2}} & -\frac{1}{\sqrt{2}}\\
+			\frac{1}{\sqrt{3}} & 0 & \frac{1}{\sqrt{2}}\\
+		\end{bmatrix}^{\T}
+		=\begin{bmatrix}
+			1 & 1 & 1\\
+			1 & 1 & 1\\
+			1 & 1 & 1\\
+		\end{bmatrix}
+		$. 
+\end{proof}
+
+\begin{exercise}
+求下列实对称矩阵$A$的谱分解：
+\begin{enumerate}
+\item $A$满足$A^3=\zero$. 
+\item $A=a_1\bs x_1\bs x_1^{\T}+a_2\bs x_2\bs x_2^{\T}$, 其中$\bs x_1,\bs x_2$是$\mathbb{R}^2$的一组标准正交基, $a_1,a_2$为实数. 
+\item $A=\begin{bmatrix}\zero&M\\M&\zero\end{bmatrix}$, 其中$M$是$n$阶对称矩阵, 有谱分解$M=Q\Lambda Q^{\T}$. 
+\end{enumerate}
+\end{exercise}
+\begin{proof}[解]
+	\begin{enumerate}
+		\item 设$A=Q\Lambda Q^T$为谱分解, 其中$\Lambda$对角, $Q$正交. 则$A^3=Q\Lambda^3Q^T=\zero\Rightarrow \Lambda^3=\zero\Rightarrow \Lambda=\zero\Rightarrow A=\zero$. 
+			\item $A=\begin{bmatrix}
+					\bs x_1 & \bs x_2
+			\end{bmatrix}\begin{bmatrix}
+			a_1 & \\ & a_2\\
+			\end{bmatrix}\begin{bmatrix}
+					\bs x_1 & \bs x_2
+			\end{bmatrix}^T$. 
+		\item 
+        \begin{align*}
+            A=&\begin{bmatrix}
+				\zero & Q\Lambda Q^T\\Q\Lambda Q^T & \zero
+		\end{bmatrix}\\
+        =&\begin{bmatrix}
+			 Q & \\ & Q
+		\end{bmatrix}\begin{bmatrix}
+		\zero & \Lambda \\ \Lambda & \zero
+		\end{bmatrix}\begin{bmatrix}
+			 Q & \\ & Q
+		\end{bmatrix}^T\\
+        =&\begin{bmatrix}
+			 Q & \\ & Q
+		\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}
+		I & I \\ I & -I
+		\end{bmatrix}\begin{bmatrix}
+		 \Lambda & \\ & -\Lambda  
+		\end{bmatrix}\frac{1}{\sqrt{2}}\begin{bmatrix}
+		I & I \\ I & -I
+		\end{bmatrix}^T\begin{bmatrix}
+			 Q & \\ & Q
+		\end{bmatrix}^T.
+        \end{align*}
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}
+设矩阵$A=\begin{bmatrix}2&b\\1&0\end{bmatrix}$. 
+计算满足下列条件的$b$的取值范围：
+\begin{enumerate}
+\item $A$不可逆. 
+\item $A$可以正交对角化. 
+\item $A$不可对角化. 
+\end{enumerate}
+\end{exercise}
+\begin{proof}[解]
+	$A$不可逆, $A\ne0$, 说明$\rank(A)=1$. 第二列只能是第一列的倍数, 于是$b=0$. 
+	另一种思路是$A$不可逆$\Leftrightarrow \det(A)=0$. 
+
+	$A$可以正交对角化, 则$A$对称, 于是$b=1$. \note{如果在复数域上考虑, 则不能直接得到$A$对称, 只能得到$A$正规, 即$A^TA=AA^T$, 也可计算得到$b$. }
+
+	$A$不可对角化, 则$A$有亏损特征值. 由于$A$最多两个不同特征值, 因此$A$只能是一个代数重数$2$几何重数$1$的特征值. 先计算$A$的特征多项式$p_A(\lambda)=\lambda^2-2\lambda-b$, 它有二重根时, $b=-1$, 此时重根为$1$. 然后再验证$\dim\nullspace(I-A)=1$, 或$\rank(I-A)=1$. 事实上, $\rank(I-A)=\rank\left(\begin{bmatrix}
+		-1 & 1\\
+		-1 & 1\\
+	\end{bmatrix}\right)=1$. 
+\end{proof}
+
+\begin{exercise} \hard
+设$A_1, A_2, \dots, A_m$是$m$个两两可交换的实对称矩阵, 证明它们可以同时正交对角化. 
+\end{exercise}
+\begin{proof}[证一]
+	取$A_1$的一个特征值$\lambda_1$和特征子空间的一组标准正交基$\bs q_1,\dots,\bs q_t$, 将后者扩充成线性空间的一组标准正交基, 并按列组成正交矩阵$Q$, 则$Q^TA_1Q,\dots,Q^TA_mQ$两两可交换, 且$Q^TA_1Q=\begin{bmatrix}
+		\lambda_1I & \\ &  A_{1,22}
+	\end{bmatrix}$. 记$Q^TA_iQ=\begin{bmatrix}
+	A_{i,11} & A_{i,21}^T \\ A_{i,21}^T & A_{i,22}
+	\end{bmatrix}$, 由$A_1A_i=A_iA_1$知, $\begin{bmatrix}
+	\lambda_1A_{i,11} & A_{i,21}^T\lambda_1 \\  A_{1,22}A_{i,21} &  A_{1,22}A_{i,22}
+	\end{bmatrix}=\begin{bmatrix}
+	\lambda_1A_{i,11} & A_{i,21}^T A_{1,22} \\ \lambda_1A_{i,21} & A_{i,22} A_{1,22}
+	\end{bmatrix}$. 
+	于是$ A_{1,22}A_{i,21}=\lambda_1A_{i,21}$. 
+	而$\lambda_1$不是$ A_{1,22}$的特征值, 可得$ A_{1,22}-\lambda_1I$满秩, 因此$A_{i,21}=0$. 
+	即$Q^TA_iQ=\begin{bmatrix}
+	A_{i,11} &  \\  & A_{i,22}
+	\end{bmatrix}$. 
+	问题转化为$\lambda_1I, A_{2,11},\dots,A_{m,11}$和$ A_{1,22},A_{2,22},\dots,A_{m,22}$两个低阶问题, 对矩阵的阶利用数学归纳法即可证明. 
+\end{proof}
+\begin{proof}[证二]
+	不妨假定$A_i$都不是对角阵. 对$m$用数学归纳法. $m=1$时显然. 
+	假设任意$m-1$个两两可交换的实对称矩阵可以同时对角化. 则存在$Q$使得$Q^TA_2Q=\begin{bmatrix}
+		\lambda_{2,1}I \\ & \ddots\\ && \lambda_{2,t}I
+	\end{bmatrix},\dots,Q^TA_mQ=\begin{bmatrix}
+		\lambda_{m,1}I \\ & \ddots\\ && \lambda_{m,t}I
+	\end{bmatrix}$, 其中分块满足至少有两个矩阵的对应对角块不同. 
+	记$Q^TA_1Q=\begin{bmatrix}
+		A_{11} & \cdots & A_{t1}^T\\
+		\vdots && \vdots \\
+		A_{t1} & \cdots & A_{tt}
+	\end{bmatrix}$, 利用交换性, 可知$(\lambda_{k,i}-\lambda_{k,j})A_{ij}=0,\forall k$. 当$i\ne j$时, 至少存在一个$k$, 使得$\lambda_{k,i}\ne \lambda_{k,j}$. （不然$Q^TA_kQ$的$(i,i)$块和$(j,j)$块全相同, 与之前假设矛盾. ）
+	因此$A_{ij}=0$, 即$Q^TA_1Q=\begin{bmatrix}
+		A_{11} \\ & \ddots \\ &&A_{tt}
+	\end{bmatrix}$. 再对$A_{ii}$做谱分解$A_{ii}=P_{ii}^T\Lambda_i P_{ii}$, 其中$P_{ii}$正交, $\Lambda_i$对角. 
+	记$P=\begin{bmatrix}
+		P_{11} \\ &\ddots \\ && P_{tt}
+	\end{bmatrix}$, 则$(QP)^TA_1(QP)=\begin{bmatrix}
+		\Lambda_1 \\ &\ddots \\ && \Lambda_t
+	\end{bmatrix},(QP)^TA_k(QP)=\begin{bmatrix}
+		\lambda_{k,1}I \\ & \ddots\\ && \lambda_{k,t}I
+	\end{bmatrix}$. 
+\end{proof}
+
+\clearpage
+%\listofchanges
+\end{document}

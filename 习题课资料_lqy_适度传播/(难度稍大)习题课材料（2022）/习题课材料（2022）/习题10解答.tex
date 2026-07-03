@@ -1,0 +1,548 @@
+%!TEX program=xelatex
+\documentclass{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+%\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+\newtheorem{thm}{定理}
+\newtheorem{cor}[thm]{推论}
+\newtheorem{lem}[thm]{引理}
+\newtheorem{prop}[thm]{命题}
+\newtheorem{defn}[thm]{定义}
+\newtheorem{ques}[thm]{问题}
+\newtheorem{eg}[thm]{例题}
+\newtheorem{ex}[thm]{习题}
+\newtheorem{rmk}[thm]{注释}
+\newtheorem{ntn}[thm]{记号}
+
+\newtheorem{exercise}[thm]{习题}
+
+\allowdisplaybreaks
+\raggedbottom
+
+\usepackage{mathdots}
+\usepackage{extarrows}
+\usepackage{amsbsy}
+\newcommand\bs[1]{\boldsymbol{ #1}}
+\newcommand\hint[1]{\par {\footnotesize\kaishu 提示：#1}}
+\newcommand\note[1]{\par {\footnotesize\kaishu 注意：#1}}
+		
+\def\hard{$\heartsuit$}
+\def\zero{O}
+\def\dps{\displaystyle}
+\def\wtd{\widetilde}
+\def\what{\widehat}
+\DeclareMathOperator{\T}{T}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\toep}{toep}
+\DeclareMathOperator{\range}{\mathcal{R}}
+\DeclareMathOperator{\nullspace}{\mathcal{N}}
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\DeclareMathOperator{\subspan}{span}
+
+\usepackage{mathtools}
+\providecommand\given{\:\vert\:}
+\DeclarePairedDelimiterXPP\set[1]{}{\{}{\}}{}{
+\renewcommand\given{\nonscript\:\delimsize\vert\nonscript\:\mathopen{}}
+#1}
+\DeclarePairedDelimiter\abs{|}{|}
+\DeclarePairedDelimiter\N{\|}{\|}
+\DeclarePairedDelimiter\spanbasic{(}{)}
+\newcommand\lspan[1]{\subspan\spanbasic*{#1}}
+
+\begin{filecontents*}{qi.eps}
+%!PS-Adobe-3.0 EPSF-3.0
+%%Creator: cairo 1.16.0 (https://cairographics.org)
+%%CreationDate: Fri Aug 26 14:05:21 2022
+%%Pages: 1
+%%DocumentData: Clean7Bit
+%%LanguageLevel: 2
+%%BoundingBox: 0 0 83 83
+%%EndComments
+%%BeginProlog
+50 dict begin
+/q { gsave } bind def
+/Q { grestore } bind def
+/cm { 6 array astore concat } bind def
+/w { setlinewidth } bind def
+/J { setlinecap } bind def
+/j { setlinejoin } bind def
+/M { setmiterlimit } bind def
+/d { setdash } bind def
+/m { moveto } bind def
+/l { lineto } bind def
+/c { curveto } bind def
+/h { closepath } bind def
+/re { exch dup neg 3 1 roll 5 3 roll moveto 0 rlineto
+      0 exch rlineto 0 rlineto closepath } bind def
+/S { stroke } bind def
+/f { fill } bind def
+/f* { eofill } bind def
+/n { newpath } bind def
+/W { clip } bind def
+/W* { eoclip } bind def
+/BT { } bind def
+/ET { } bind def
+/BDC { mark 3 1 roll /BDC pdfmark } bind def
+/EMC { mark /EMC pdfmark } bind def
+/cairo_store_point { /cairo_point_y exch def /cairo_point_x exch def } def
+/Tj { show currentpoint cairo_store_point } bind def
+/TJ {
+  {
+    dup
+    type /stringtype eq
+    { show } { -0.001 mul 0 cairo_font_matrix dtransform rmoveto } ifelse
+  } forall
+  currentpoint cairo_store_point
+} bind def
+/cairo_selectfont { cairo_font_matrix aload pop pop pop 0 0 6 array astore
+    cairo_font exch selectfont cairo_point_x cairo_point_y moveto } bind def
+/Tf { pop /cairo_font exch def /cairo_font_matrix where
+      { pop cairo_selectfont } if } bind def
+/Td { matrix translate cairo_font_matrix matrix concatmatrix dup
+      /cairo_font_matrix exch def dup 4 get exch 5 get cairo_store_point
+      /cairo_font where { pop cairo_selectfont } if } bind def
+/Tm { 2 copy 8 2 roll 6 array astore /cairo_font_matrix exch def
+      cairo_store_point /cairo_font where { pop cairo_selectfont } if } bind def
+/g { setgray } bind def
+/rg { setrgbcolor } bind def
+/d1 { setcachedevice } bind def
+/cairo_data_source {
+  CairoDataIndex CairoData length lt
+    { CairoData CairoDataIndex get /CairoDataIndex CairoDataIndex 1 add def }
+    { () } ifelse
+} def
+/cairo_flush_ascii85_file { cairo_ascii85_file status { cairo_ascii85_file flushfile } if } def
+/cairo_image { image cairo_flush_ascii85_file } def
+/cairo_imagemask { imagemask cairo_flush_ascii85_file } def
+%%EndProlog
+%%BeginSetup
+%%EndSetup
+%%Page: 1 1
+%%BeginPageSetup
+%%PageBoundingBox: 0 0 83 83
+%%EndPageSetup
+q 0 0 83 83 rectclip
+1 0 0 -1 0 83 cm q
+0 g
+61.438 27.773 m 74.094 27.07 l 73.156 24.727 72.219 22.734 71.281 21.094
+ c 72.336 20.742 l 75.148 23.32 77.082 25.488 78.137 27.246 c 79.191 29.004
+ 79.016 30.586 77.609 31.992 c 76.203 33.398 75.383 33.457 75.148 32.168
+ c 74.914 30.879 74.68 29.648 74.445 28.477 c 66.477 29.648 61.438 31.055
+ 59.328 32.695 c 56.516 27.773 l 57.688 27.305 58.859 26.602 60.031 25.664
+ c 61.203 24.727 63.195 22.266 66.008 18.281 c 62.492 18.75 59.797 19.57
+ 57.922 20.742 c 55.812 16.172 l 56.984 15.703 58.566 13.828 60.559 10.547
+ c 62.551 7.266 64.016 3.75 64.953 0 c 69.875 3.867 l 67.766 5.273 l 65.891
+ 8.086 63.195 11.719 59.68 16.172 c 67.062 16.172 l 68.469 14.297 69.992
+ 11.602 71.633 8.086 c 76.906 12.305 l 74.445 13.359 l 70.93 17.578 66.594
+ 22.383 61.438 27.773 c h
+73.742 50.977 m 70.695 56.836 67.648 62.109 64.602 66.797 c 67.883 70.781
+ 71.867 73.711 76.555 75.586 c 79.367 64.336 l 80.773 64.688 l 80.539 67.5
+ 80.422 70.312 80.422 73.125 c 80.422 75.938 80.773 78.457 81.477 80.684
+ c 82.18 82.91 79.953 82.734 74.797 80.156 c 69.641 77.578 65.422 74.297
+ 62.141 70.312 c 56.75 75.703 50.305 79.688 42.805 82.266 c 42.453 80.859
+ l 49.25 77.344 54.992 72.773 59.68 67.148 c 58.273 64.336 56.926 60.82 
+55.637 56.602 c 54.348 52.383 53.352 47.812 52.648 42.891 c 32.609 42.891
+ l 30.266 42.891 28.039 43.125 25.93 43.594 c 22.766 40.43 l 52.297 40.43
+ l 51.594 35.039 51.008 28.242 50.539 20.039 c 50.07 11.836 49.719 5.156
+ 49.484 0 c 56.516 2.812 l 54.055 5.273 l 54.523 21.211 55.344 32.93 56.516
+ 40.43 c 66.711 40.43 l 66.711 39.492 66.359 38.203 65.656 36.562 c 64.953
+ 34.922 64.133 33.516 63.195 32.344 c 63.898 31.641 l 66.008 32.578 67.766
+ 33.809 69.172 35.332 c 70.578 36.855 70.578 38.555 69.172 40.43 c 73.039
+ 40.43 l 76.555 36.914 l 82.18 42.891 l 56.867 42.891 l 58.039 51.094 59.914
+ 57.773 62.492 62.93 c 65.773 57.305 68.469 51.211 70.578 44.648 c 76.906
+ 49.219 l h
+31.555 51.68 m 31.555 59.766 l 37.18 59.766 l 37.18 51.68 l h
+41.047 51.68 m 41.047 59.766 l 46.32 59.766 l 46.32 51.68 l h
+31.555 62.227 m 31.555 69.961 l 37.18 69.961 l 37.18 62.227 l h
+41.047 62.227 m 41.047 69.961 l 46.32 69.961 l 46.32 62.227 l h
+45.969 15.469 m 41.984 21.094 37.648 26.367 32.961 31.289 c 45.266 30.586
+ l 44.328 28.477 43.156 26.367 41.75 24.258 c 42.453 23.555 l 46.438 26.602
+ 48.84 28.887 49.66 30.41 c 50.48 31.934 50.363 33.398 49.309 34.805 c 48.254
+ 36.211 47.551 36.504 47.199 35.684 c 46.848 34.863 46.438 33.75 45.969 
+32.344 c 36.828 33.516 31.555 34.922 30.148 36.562 c 26.984 31.641 l 28.625
+ 31.172 30.207 30.234 31.73 28.828 c 33.254 27.422 35.539 24.492 38.586 
+20.039 c 33.664 20.977 30.617 22.031 29.445 23.203 c 26.281 18.281 l 27.688
+ 18.281 29.504 16.523 31.73 13.008 c 33.957 9.492 35.773 5.391 37.18 0.703
+ c 42.805 4.57 l 40.695 5.977 l 38.586 9.023 35.539 13.125 31.555 18.281
+ c 39.289 18.281 l 40.695 16.172 42.102 13.359 43.508 9.844 c 48.43 14.062
+ l h
+50.539 52.734 m 50.539 60.938 50.656 67.852 50.891 73.477 c 46.32 75.234
+ l 46.32 72.422 l 31.555 72.422 l 31.555 75.234 l 26.984 77.344 l 27.219
+ 72.656 27.336 67.676 27.336 62.402 c 27.336 57.129 27.219 51.914 26.984
+ 46.758 c 31.555 49.219 l 45.969 49.219 l 48.43 46.055 l 53 50.273 l h
+26.367 55.07 m 12.305 62.336 5.039 67.023 4.57 69.133 c 0.352 62.805 l 
+3.633 61.867 7.031 60.812 10.547 59.641 c 10.547 29.055 l 8.203 29.055 5.742
+ 29.406 3.164 30.109 c 0 26.945 l 10.547 26.945 l 10.547 15.461 10.43 6.906
+ 10.195 1.281 c 17.93 4.797 l 15.117 7.609 l 15.117 26.945 l 18.281 26.945
+ l 21.445 23.781 l 26.719 29.055 l 15.117 29.055 l 15.117 57.883 l 25.664
+ 53.664 l h
+26.367 55.07 m f
+Q Q
+showpage
+%%Trailer
+end
+%%EOF    
+\end{filecontents*}
+\newif\ifhideproofs
+%\hideproofstrue
+\newif\iffinalver
+%\finalvertrue        
+\ifhideproofs
+    \usepackage[final]{changes}
+    \definechangesauthor[name=Error, color=red]{err}
+    \usepackage{environ}
+    \NewEnviron{hide}{}
+    \let\proof\hide
+    \let\endproof\endhide
+\else
+    \iffinalver
+        \usepackage[final]{changes}
+    \else
+        \usepackage{changes}
+    \fi
+    \definechangesauthor[name=Error, color=red]{err}
+\fi
+
+\begin{document}
+
+
+\title{习题课材料（十）}
+\author{}
+\date{}
+\maketitle
+
+\begin{exercise}
+设$A$对称正定, $B$是实矩阵. 
+\begin{enumerate}
+\item 证明, 对任意整数, $A^k$也正定. 
+\item 若存在正整数$r$, 使得$A^rB=BA^r$, 证明$AB=BA$. 
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+	\begin{enumerate}
+		\item $A$对称正定, 故$A=U\Lambda U^T$, 其中$U$正交, $\Lambda$对角, 且对角元素都是正数. 于是$A^k=U\Lambda^k U^T$, 显然正定. 
+
+			另证：
+			$A$对称正定, 故$\forall \bs x\ne 0,\bs x^TA\bs x>0$, 且$A$满秩. 
+			若$k=2m+1$是奇数, 则$\bs x^TA^k\bs x=(A^m\bs x)^TA(A^m\bs x)>0$; 
+			若$k=2m$是偶数, 则$\bs x^TA^k\bs x=(A^m\bs x)^T(A^m\bs x)>0$. 
+		\item $A^rB=BA^r \Leftrightarrow U\Lambda^r U^TB=BU\Lambda^r U^T \Leftrightarrow \Lambda^r (U^TBU)=(U^TBU)\Lambda^r \Leftrightarrow \forall i,j (\lambda_i^r-\lambda_j^r)(U^TBU)_{ij}=0 \xLeftrightarrow{\text{因式分解！}}
+			\forall i,j (\lambda_i-\lambda_j)(U^TBU)_{ij}=0 \Leftrightarrow \Lambda (U^TBU)=(U^TBU)\Lambda \Leftrightarrow AB=BA$. 
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}[{{Hadamard不等式}}]
+给定$n$阶对称正定矩阵$A$, 求证：
+\begin{enumerate}
+\item 对任意$\bs y$, $\det\left(\begin{bmatrix}
+A & \bs y  \\ \bs y^{\T} & 0
+\end{bmatrix}\right)\le0$; 
+\item 记$A=\begin{bmatrix}
+a_{ij}
+\end{bmatrix}$, 则$\det(A) \le a_{nn} \det(A_{n-1})$, 其中$A_{n-1}$是$A$的$n-1$阶顺序主子阵; 
+\item $\det(A) \le a_{11}a_{22}\cdots a_{nn}$. 
+\end{enumerate}
+利用上述结论证明：如果实矩阵$T=\begin{bmatrix}
+t_{ij}
+\end{bmatrix}$可逆, 那么$\det(T)^2 \le \prod\limits_{i=1}^{n}(t_{1i}^2+t_{2i}^2+\cdots+t_{ni}^2)$. 
+
+%\note{%\Cref{excs:hadamard-ineq}
+%用不同方法证明了相同结论. }
+\end{exercise}
+\begin{proof}
+	\begin{enumerate}
+		\item $A$正定, 故可逆, 因此$\begin{bmatrix}
+				A & \bs y\\ \bs y^T & 0
+		\end{bmatrix}=\begin{bmatrix}
+		I & \\ -\bs y^TA& 1
+		\end{bmatrix}\begin{bmatrix}
+		A & \\ & -\bs y^TA\bs y
+		\end{bmatrix}\begin{bmatrix}
+		I & \\ -\bs y^TA& 1
+	\end{bmatrix}$, 于是$\det\left( \begin{bmatrix}
+				A & \bs y\\ \bs y^T & 0
+		\end{bmatrix} \right)=-(\bs y^TA\bs y)\det(A)\le 0$. 
+	\item 记$A=\begin{bmatrix}
+			A_{n-1} & \bs a\\ \bs a^T & a_{nn}
+			\end{bmatrix}$, 则$\det(A)=\det\left(\begin{bmatrix}
+			A_{n-1} & \bs a\\ \bs a^T & 0
+		\end{bmatrix}\right)+\det\left(\begin{bmatrix}
+		A_{n-1} & \bs a\\ \bs 0^T & a_{nn}
+\end{bmatrix}\right)\le 0+a_{nn}\det(A_{n-1})$. 
+\item 注意到对称正定矩阵$A$对顺序主子阵也对称正定, 递归可得. 
+\item $\det(T)^2=\det(T^TT)$, 应用上面结论立得. 
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}
+\hard\hard 证明$A=\begin{bmatrix}
+\frac{1}{i+j}
+\end{bmatrix}_{n\times n}$正定. 
+
+%\hint{法一：考虑$\dps\int_0^1 t(x_1+x_2t+\dots+x_nt^{n-1})^2\diff t$. 
+%法二：证明$\det(A)=\dps\prod_{1\le i \le n\atop 1\le j\le n}\frac{1}{i+j}\dps\prod_{1\le i<j\le n}(i-j)^2$. }
+\end{exercise}
+\begin{proof}[证一]
+	记$n$阶的$A$为$A_n$. 
+	直接方案是计算所有$\det(A_n)$. 由于$A_n$对应了一系列顺序主子阵, 因此若对任意$n$, 都有$\det(A_n)>0$, 则$A$正定. 
+	\begin{align*}
+		\det(A_n)&=\begin{vmatrix}
+				\frac{1}{1+1} & \frac{1}{1+2} & \cdots & \frac{1}{1+n}\\
+				\frac{1}{2+1} & \frac{1}{2+2} & \cdots & \frac{1}{2+n}\\
+				\vdots &\vdots & &\vdots \\
+				\frac{1}{n+1} & \frac{1}{n+2} & \cdots & \frac{1}{n+n}\\
+			\end{vmatrix}
+			\\&=\begin{vmatrix}
+				\frac{1}{1+1}-\frac{1}{n+1} & \frac{1}{1+2}-\frac{1}{n+2} & \cdots & \frac{1}{1+n}-\frac{1}{n+n}\\
+				\frac{1}{2+1}-\frac{1}{n+1} & \frac{1}{2+2}-\frac{1}{n+2} & \cdots & \frac{1}{2+n}-\frac{1}{n+n}\\
+				\vdots &\vdots & &\vdots \\
+				\frac{1}{n+1} & \frac{1}{n+2} & \cdots & \frac{1}{n+n}\\
+			\end{vmatrix}
+			\\&=\begin{vmatrix}
+			\frac{n-1}{(1+1)(n+1)} & \frac{n-1}{(1+2)(n+2)} & \cdots & \frac{n-1}{(1+n)(n+n)}\\
+			\frac{n-2}{(2+1)(n+1)} & \frac{n-2}{(2+2)(n+2)} & \cdots & \frac{n-2}{(2+n)(n+n)}\\
+				\vdots &\vdots & &\vdots \\
+				\frac{1}{n+1} & \frac{1}{n+2} & \cdots & \frac{1}{n+n}\\
+				\end{vmatrix}
+				\\&=\frac{(n-1)(n-2)\dotsm1}{(n+1)(n+2)\dotsm(n+n)}\begin{vmatrix}
+			\frac{1}{1+1} & \frac{1}{1+2} & \cdots & \frac{1}{1+n}\\
+			\frac{1}{2+1} & \frac{1}{2+2} & \cdots & \frac{1}{2+n}\\
+				\vdots &\vdots & &\vdots \\
+				1& 1& \cdots  &1\\
+			\end{vmatrix}
+			\\&=\frac{(n-1)(n-2)\dotsm1}{(n+1)(n+2)\dotsm(n+n)}\begin{vmatrix}
+			\frac{1}{1+1}-\frac{1}{1+n} & \frac{1}{1+2}-\frac{1}{1+n} & \cdots & \frac{1}{1+n}\\
+			\frac{1}{2+1}-\frac{1}{2+n} & \frac{1}{2+2}-\frac{1}{2+n} & \cdots & \frac{1}{2+n}\\
+				\vdots &\vdots & &\vdots \\
+				1-1& 1-1& \cdots  &1\\
+			\end{vmatrix}
+			\\&=\frac{(n-1)(n-2)\dotsm1}{(n+1)(n+2)\dotsm(n+n)}\frac{(n-1)(n-2)\dotsm1}{(1+n)(2+n)\dotsm(n-1+n)}\begin{vmatrix}
+			\frac{1}{1+1}& \frac{1}{1+2}& \cdots & 1\\
+			\frac{1}{2+1}& \frac{1}{2+2}& \cdots & 1\\
+				\vdots &\vdots & &\vdots \\
+				& &   &1\\
+			\end{vmatrix}
+			\\&=\frac{(n-1)^2(n-2)^2\dotsm1^2}{(n+1)(n+2)\dotsm(n+n)(1+n)(2+n)\dotsm(n-1+n)}\det(A_{n-1}).
+	\end{align*}
+	由此递推公式即可得证. 
+\end{proof}
+\begin{proof}[证二]
+	我们来证明对任意$\bs x\ne\bs0$, $\bs x^TA\bs x>0$. 
+	事实上, $\bs x^TA\bs x=\sum_{i,j}x_ix_j\frac{1}{i+j}
+	=\sum_{i,j}x_ix_j\int_0^1t^{i+j+1}\diff t
+	=\int_0^1\sum_{i,j}x_ix_jt^{i+j+1}\diff t
+	=\int_0^1t\sum_{i,j}x_it^ix_jt^j\diff t
+	=\int_0^1t(\sum_{i}x_it^i)^2\diff t
+	\ge0
+	$. 
+\end{proof}
+
+\begin{exercise}
+举例说明, 实对称矩阵$A$的所有顺序主子式都非负, 但$A$并不半正定. 
+\end{exercise}
+\begin{proof}[解]
+	令$A=\begin{bmatrix}
+		0 & \\ & \wtd A
+	\end{bmatrix}$, 则无论$\wtd A$是什么, $A$的顺序主子式都是零, 满足条件. 
+\end{proof}
+
+\begin{exercise}
+\hard\hard 证明, 实对称矩阵半正定, 当且仅当它的所有主子式都非负. 
+
+%\hint{法一：利用数学归纳法. 
+%法二：考虑矩阵$A$的微小变化得到的正定矩阵$A+\varepsilon I$. }
+\end{exercise}
+\begin{proof}[证一]
+	对阶$n$用数学归纳法. 
+	阶为$1$时显然. 设阶为$n-1$时命题成立, 下证阶为$n$的情形. 
+
+	``$\Rightarrow$''：
+	$n$阶对称半正定矩阵$A=\begin{bmatrix}
+		A_{11} & \bs a_{12}\\
+		\bs a_{12}^T & a_{22}
+	\end{bmatrix}$的主子式分三种：整个行列式$\det(A)$; 
+	$A_{11}$的主子式; 含有$a_{22}$的非$n$阶主子式. 
+	$\det(A)$非负显然. 
+	根据归纳假设, $A_{11}$的主子式都非负. 如果主子式含有$a_{22}$, 那么可以利用置换矩阵$P$把主子式中的项换到左上角. 注意到$P^TAP$仍然半正定, 而$P^TAP$的左上角半正定矩阵就可以再次利用归纳假设. 
+	``$\Leftarrow$''：
+$n$阶对称矩阵$A=\begin{bmatrix}
+		a_{11} & \bs a_{21}^T\\
+		\bs a_{21} & A_{22}
+	\end{bmatrix}$的主子式都非负. 根据归纳假设, $A$的任意主子阵除$A$外都半正定. 
+	若$a_{11}=0$, 则利用二阶主子式不难判断$\bs a_{21}=\bs 0$, 因此$A=\begin{bmatrix}
+		0 & \\ & A_{22}
+	\end{bmatrix}$, 由$A_{22}$半正定可得$A$半正定. 
+	不然$a_{11}>0$, 注意$\begin{bmatrix}
+		1 & \\ -\frac{1}{a_{11}}\bs a_{21} & I\\
+	\end{bmatrix}\begin{bmatrix}
+		a_{11} & \bs a_{21}^T\\
+		\bs a_{21} & A_{22}
+	\end{bmatrix}\begin{bmatrix}
+		1 & \\ -\frac{1}{a_{11}}\bs a_{21} & I\\
+	\end{bmatrix}^T=\begin{bmatrix}
+	a_{11} & \\ & A_{22}-\frac{1}{a_{11}}\bs a_{21}\bs a_{21}^T
+\end{bmatrix}$, 可得$\det(A)=a_{11}\det(A_{22}-\frac{1}{a_{11}}\bs a_{21}\bs a_{21}^T)$. 
+于是$\det(A_{22}-\frac{1}{a_{11}}\bs a_{21}\bs a_{21}^T)\ge0$. 
+利用类似计算可以得到$A_{22}-\frac{1}{a_{11}}\bs a_{21}\bs a_{21}^T
+$的任意主子式都非负. 根据归纳假设, $A_{22}-\frac{1}{a_{11}}\bs a_{21}\bs a_{21}^T
+$半正定. 
+而$A$与$\begin{bmatrix}
+	a_{11} & \\ & A_{22}-\frac{1}{a_{11}}\bs a_{21}\bs a_{21}^T
+\end{bmatrix}$合同, 因此$A$也半正定. 
+\end{proof}
+\begin{proof}[证二]
+	考虑矩阵$A+\varepsilon I$, 其中$\varepsilon>0$. 
+	``$\Rightarrow$''：
+	若$A$半正定, 则$A+\varepsilon I$正定. 因此$A+\varepsilon I$的主子式都是正数, 再取$\varepsilon \to 0$即得. 
+
+	``$\Leftarrow$''：
+	注意到$\det (A+\varepsilon I)=\varepsilon^n+a_{n-1}\varepsilon^{n-1}+\dots+a_0$, 其中$a_i$是$A$的所有$i$阶主子式的和（这需要利用行列式的展开来证明）. 
+	因此对任意$\varepsilon>0,\det(A+\varepsilon I)>0$. 
+	若$A$有两个及以上负特征值（计重数）, 选择$-\varepsilon$为最小两个负特征值的平均数, 则$A+\varepsilon I$只有一个%\highlight[id=err,comment={要考虑到的$A$的最小（负）特征值重数大于$1$的情况. }]
+非正特征值, 其余特征值都是正数, $\det(A+\varepsilon I)\leq0$, 矛盾. 
+	若$A$有唯一负特征值, 则取$-\varepsilon$为负特征值与$0$的平均数, 类似可得矛盾. 
+\end{proof}
+
+\begin{exercise}\label{excs:6.2.18}
+\hard 设$A, B$是$n$阶实对称矩阵, $A$正定. 
+证明, 存在可逆矩阵$T$, 使得$T^{\T}AT$和$T^{\T}BT$同时是对角矩阵. 
+\end{exercise}
+\begin{proof}
+	由$A$正定, 存在可逆矩阵$X$使得$A=X^TX$. 因此$X^{-\T}AX^{-1}=I,X^{-\T}BX^{-1}$对称. 设$X^{-\T}BX^{-1}=Q\Lambda Q^T$为谱分解, 则$Q^TX^{-\T}AX^{-1}Q=I,Q^TX^{-\T}BX^{-1}Q=\Lambda$. 
+\end{proof}
+
+\begin{exercise}
+\hard\hard  设$A, B$是$n$阶实对称矩阵, $A,B$半正定. 
+证明, 存在可逆矩阵$T$, 使得$T^{\T}AT$和$T^{\T}BT$同时是对角矩阵. 
+
+\end{exercise}
+\begin{proof}
+	若$\nullspace(A)\cap\nullspace(B)=\set{\bs 0}$, 则存在$k>0$, 使得$A+kB$可逆. 
+	这是因为若$(A+kB)\bs x=\bs 0$, 则$\bs x^T(A+kB)\bs x=0$, 则$0\le \bs x^TA\bs x=-k \bs x^TB\bs x\le 0$, 于是$\bs x^TA\bs x=\bs x^TB\bs x=0$. 
+	由半正定矩阵性质, $A\bs x=B\bs x=\bs 0$, $\bs x\in \nullspace(A)\cap\nullspace(B)$, 可得$\bs x=\bs 0$. 
+
+	考察$A,A+kB$, 归于上一题. 
+	否则$\nullspace(A)\cap\nullspace(B)\ne\set{\bs 0}$. 
+	取其一组基$\bs q_1,\dots,\bs q_s$, 并扩充成线性空间一组基, 按列组成$Q$, 可得$Q^TAQ=\begin{bmatrix}
+		0 &\\ & \wtd A
+	\end{bmatrix},Q^TBQ=\begin{bmatrix}
+	0 & \\ & \wtd B
+	\end{bmatrix}$. 而$\wtd A,\wtd B$满足$\nullspace(\wtd A)\cap\nullspace(\wtd B)=\set{\bs 0}$, 归于前一种情形. 
+  %  \comment{我有一个未成功的做法如左侧蓝字所示：}
+   % {\color{blue}对任意$\epsilon>0$, 由$A,B$半正定知$A+\epsilon I,B+\epsilon I$正定. 由上一题, 存在可逆矩阵$T_\epsilon$, 使得$T_\epsilon^{\mathrm{T}}AT_\epsilon$和$T_\epsilon^{\mathrm{T}}B T_\epsilon$同时是对角矩阵. 令$\epsilon\rightarrow 0$, 则$T=\lim_{\epsilon\rightarrow 0}T_\epsilon$使得$T^{\T}AT$和$T^{\T}BT$同时是对角矩阵. 但我不知道如何说明$T$是可逆的. }
+\end{proof}
+
+\begin{exercise}
+\hard\hard 证明矩阵的广义逆唯一. 
+
+%\hint{耐心计算. }
+\end{exercise}
+\begin{proof}
+	对任意矩阵$A$的简化奇异值分解$A=U_r\Sigma_rV_r^T$, 都可定义广义逆$V_r\Sigma_r^{-1}U_r^T$. 所谓广义逆唯一, 就是不同的简化奇异值分解定义出的广义逆都相等. 
+注意奇异值是$A^TA$的特征值的算术平方根, 因此不同的简化奇异值分解中对角矩阵可以选作相同的. 
+设
+\[
+	A=\begin{bmatrix}
+	U_1 & \cdots & U_s
+\end{bmatrix}\begin{bmatrix}
+\sigma_1I\\ & \vdots \\ && \sigma_sI
+\end{bmatrix}\begin{bmatrix}
+V_1 & \cdots &V_s
+\end{bmatrix}^T
+=\begin{bmatrix}
+	\wtd U_1 & \cdots & \wtd U_s
+\end{bmatrix}\begin{bmatrix}
+\sigma_1I\\ & \vdots \\ && \sigma_sI
+\end{bmatrix}\begin{bmatrix}
+\wtd V_1 & \cdots &\wtd V_s
+\end{bmatrix}^T,
+\]
+其中$\sigma_1,\dots,\sigma_s$均非零且两两不同. 
+则$A=\sigma_1U_1V_1^T+\dots+\sigma_sU_sV_s^T=\sigma_1\wtd U_1\wtd V_1^T+\dots+\sigma_s\wtd U_s\wtd V_s^T$. 
+注意$\range(V_i)=\range(\wtd V_i)$是$A^TA$的属于$\sigma_i$的特征子空间, 且$V_i,\wtd V_i$是两组标准正交基, 
+因此不难得到$U_iV_i^T=\wtd U_i\wtd  V_i^T$. 
+注意两个分解定义的广义逆为
+\[
+	\begin{bmatrix}
+	U_1 & \cdots & U_s
+\end{bmatrix}\begin{bmatrix}
+\sigma_1^{-1}I\\ & \vdots \\ && \sigma_s^{-1}I
+\end{bmatrix}\begin{bmatrix}
+V_1 & \cdots &V_s
+\end{bmatrix}^T,
+\begin{bmatrix}
+	\wtd U_1 & \cdots & \wtd U_s
+\end{bmatrix}\begin{bmatrix}
+\sigma_1^{-1}I\\ & \vdots \\ && \sigma_s^{-1}I
+\end{bmatrix}\begin{bmatrix}
+\wtd V_1 & \cdots &\wtd V_s
+\end{bmatrix}^T
+.
+\]
+容易验证二者相等. 
+\end{proof}
+
+\begin{exercise} \hard
+证明矩阵任意特征值的绝对值不大于其最大的奇异值. 
+\end{exercise}
+\begin{proof}
+	任取特征值及其特征向量$A\bs x=\lambda\bs x$, 则$\sigma_{\max}=\max_{\bs y\ne 0}\frac{\N{A\bs y}}{\N{\bs y}}\ge \frac{\N{A\bs x}}{\N{\bs x}}= \frac{\N{\lambda\bs x}}{\N{\bs x}}=\abs{\lambda}$. 
+\end{proof}
+
+\begin{exercise}
+证明或者举出反例. 
+\begin{enumerate}
+\item $n$阶方阵$A$为正交矩阵当且仅当它的$n$个奇异值都是$1$. 
+\item $n$阶方阵的$n$个奇异值的乘积等于所有特征值的乘积. 
+\item 设$n$阶方阵$A$和$A+I_n$的奇异值分解分别为$A=U\Sigma V^{\T},A+I_n=U(\Sigma+I_n)V^{\T}$. 
+证明$A$是对称矩阵. 
+\item \hard 如果$n$阶方阵$A$的$n$个奇异值就是它的$n$个特征值, 则$A$是对称矩阵. 
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+	\begin{enumerate}
+		\item ``$\Rightarrow$''：$A^TA=I$, 立得. 
+			``$\Leftarrow$''：设$A$的奇异值分解为$A=UIV^T$, 故$A$正交. 
+		\item 不正确, 奇异值乘积一定非负, 特征值乘积可以是负数. 任选一个对角矩阵使其对角元素乘积是负数即可. 
+			\item $I=A+I-A=UV^T\Rightarrow U=V\Rightarrow A=U\Sigma U^T$对称. 
+			\item 
+				设$A=U\Sigma V^T$, 其中$U,V$正交, $\Sigma$对角. 
+				注意$\trace(\Sigma V^TU)=\trace(A)=\text{特征值之和}=\trace(\Sigma)$. 
+				故$\trace(\Sigma[I-V^TU])=0$. 
+				设非零奇异值为$\sigma_1\ge\dots\ge\sigma_r>0$, 对应奇异向量为$\bs u_i,\bs v_i$. 则$\sigma_1(1-\bs v_1^T\bs u_1)+\dots+\sigma_r(1-\bs v_r^T\bs u_r)=0$. 
+				由于$\bs u_i,\bs v_i$是单位向量, $1-\bs v_i^T\bs u_i\ge 0$, 故$1-\bs v_i^T\bs u_i=0$. 
+				因此$\bs u_i=\bs v_i$. 即得$A=U_r\Sigma_rV_r^T=U_r\Sigma_rU_r^T$对称. 
+
+				另证：设$A=U\Sigma V^T$, 其中$U,V$正交, $\Sigma$对角. 根据命题5.4.6, $A=XTX^{-1}$, 其中$X$可逆, $T$上三角, 对角部分是$\Sigma$. 
+				做QR分解$X=QR$, 则$A=QRTR^{-1}Q^T=Q\wtd TQ^T$, 其中$Q$正交, $\wtd T=RTR^{-1}$上三角, 对角部分是$\Sigma$. 
+				则$A^TA=Q\wtd T^T\wtd TQ^T=V\Sigma^2V^T\Rightarrow \trace(\wtd T^T\wtd T)=\trace(\Sigma^2)$, 可得$\wtd T$是对角矩阵, 故$A=Q\wtd TQ^T$对称. 
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}[{{樊\raisebox{-0.4ex}{\includegraphics[scale=0.12]{qi.eps}}迹定理}}]\label{excs:Fan-trace}
+\hard 对任意$n$阶对称矩阵$A\in \mathbb{R}^{n\times n}$, 假设特征值为$\lambda_1\ge\lambda_2\ge\dots\ge\lambda_n$, 对应特征向量为$\bs u_1,\bs u_2,\dots,\bs u_n$, 则$\max\limits_{\text{$n\times m$矩阵$Q$：}\atop Q^{\T}Q=I}\trace(Q^{\T}AQ)=\sum\limits_{i=1}^m\lambda_i$, 且$Q=\begin{bmatrix}
+\bs u_1&\bs u_2&\cdots&\bs u_m\\
+\end{bmatrix}$时取得最大值. 
+\end{exercise}
+\begin{proof}
+	书上定理6.3.13, 已经得到$\max\limits_{\text{$n\times m$矩阵$Q$：}\atop Q^{\T}Q=I}\trace(Q^{\T}BB^TQ)=\sum\limits_{i=1}^m\lambda_i(BB^T)$, 且$Q$的列是$\lambda_1(BB^T),\dots,\lambda_m(BB^T)$对应的特征向量时取得最大值. 
+	与本题对照, 只有一个简单差别, $BB^T$是实对称半正定矩阵, 而$A$是实对称矩阵. 
+	只需先对$A$做一平移, 考虑$A-\lambda_{\min}(A)I$即可. 
+\end{proof}
+
+%\clearpage
+%\listofchanges
+\end{document}

@@ -1,0 +1,344 @@
+\documentclass[UTF8]{ctexart}
+
+%\RequirePackage{amsmath} \RequirePackage{amssymb}
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{fullpage}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+%\usetikzlibrary{quotes,angles}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{decorations.pathreplacing}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+
+
+\newcommand{\BC}{{\mathbb {C}}}
+
+\newcommand{\BN}{{\mathbb {N}}}
+\newcommand{\BQ}{{\mathbb {Q}}}
+\newcommand{\BR}{{\mathbb {R}}}
+\newcommand{\BZ}{{\mathbb {Z}}}
+\newcommand{\bv}{{\bm v}}
+\newcommand{\bw}{{\bm w}}
+\newcommand{\bu}{{\bm u}}
+\newcommand{\bx}{{\bm x}}
+\newcommand{\by}{{\bm y}}
+
+\newcommand{\bb}{{\bm b}}
+\newcommand{\Coker}{{\mathrm{Coker}}}
+
+
+
+\newcommand{\End}{{\mathrm{End}}}
+\newcommand{\GL}{{\mathrm{GL}}}
+
+\newcommand{\SO}{{\mathrm{GSO}}}
+\newcommand{\Hom}{{\mathrm{Hom}}}
+
+\renewcommand{\Im}{{\mathrm{Im}}}
+
+\newcommand{\Isom}{{\mathrm{Isom}}}
+\newcommand{\Id}{{\mathrm{Id}}}
+
+
+
+\newcommand{\Ker}{{\mathrm{Ker}}}
+
+
+
+\newcommand{\rank}{{\mathrm{rank}}}
+
+
+\newcommand{\SU}{{\mathrm{SU}}}
+\newcommand{\Sym}{{\mathrm{Sym}}}
+
+\newcommand{\sub}{{\mathrm{sub}}}
+
+\newcommand{\tr}{{\mathrm{tr}}}
+
+\newcommand{\matrixx}[4]{\begin{pmatrix}
+		#1 & #2 \\ #3 & #4
+	\end{pmatrix} }
+	
+	
+	
+	\newcommand{\wt}{\widetilde}
+	\newcommand{\wh}{\widehat}
+	\newcommand{\pp}{\frac{\partial\bar\partial}{\pi i}}
+	\newcommand{\pair}[1]{\langle {#1} \rangle}
+	\newcommand{\wpair}[1]{\left\{{#1}\right\}}
+	\newcommand{\intn}[1]{\left( {#1} \right)}
+	\newcommand{\norm}[1]{\|{#1}\|}
+	\newcommand{\sfrac}[2]{\left( \frac {#1}{#2}\right)}
+	\newcommand{\ds}{\displaystyle}
+	\newcommand{\ov}{\overline}
+	\newcommand{\incl}{\hookrightarrow}
+	\newcommand{\lra}{\longrightarrow}
+	\newcommand{\lla}{\longleftarrow}
+	\newcommand{\ra}{\rightarrow}
+	\newcommand{\imp}{\Longrightarrow}
+	\newcommand{\lto}{\longmapsto}
+	\newcommand{\bs}{\backslash}
+	
+	
+	
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+	\newcommand{\sk}{\medskip}\newcommand{\bsk}{\bigskip}
+	\newcommand{\s}{\sk\noindent}\newcommand{\bigs}{\bsk\noindent}
+	
+	
+	%accented words
+
+	\def\mat(#1,#2,#3,#4){
+		\left[\begin{array}{cc}
+			#1 & #2 \\ #3 & #4\end{array}
+		\right]
+	}
+		\def\clm(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ #2 \end{array}
+\right]
+	}
+		\def\clmn(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ \vdots\\ #2 \end{array}
+\right]
+	}
+		\def\clmt(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ #3\end{array}
+\right]
+	}
+		\def\clmf(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ \vdots \\ #3\end{array}
+\right]
+	}
+
+
+		
+\begin{document}
+
+\title{习题课材料（二）}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+
+\noindent{\Large\textbf{注: 带 $\heartsuit  $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+
+
+\begin{ex}[矩阵的对角化]
+	计算：
+	\begin{enumerate}
+		\item$
+		\begin{bmatrix}
+		2&3\\5&7\\
+		\end{bmatrix}
+		\begin{bmatrix}
+		2&0\\0&3\\
+		\end{bmatrix}
+		\begin{bmatrix}
+		-7 & 3\\5&-2
+		\end{bmatrix}$;
+		\item$
+		\begin{bmatrix}
+		-7 & 3\\5&-2
+		\end{bmatrix}
+		\begin{bmatrix}
+		2&3\\5&7\\
+		\end{bmatrix}$;
+		\item$
+		\begin{bmatrix}
+		17&-6\\35&-12\\
+		\end{bmatrix}^5$.
+		\item$
+		\begin{bmatrix}
+		1&3&1\\2&2&1\\3&4&2\\
+		\end{bmatrix}
+		\begin{bmatrix}
+		1&&\\&2&\\&&1\\
+		\end{bmatrix}
+		\begin{bmatrix}
+		0&2&-1\\1&1&-1\\-2&-5&4\\
+		\end{bmatrix}$;
+		\item$
+		\begin{bmatrix}
+		8&6&-6\\4&6&-4\\8&8&-6\\
+		\end{bmatrix}^6$.
+	\end{enumerate}
+\end{ex}
+
+\begin{ex}
+	对 $n$ 阶方阵 $A$, 设 ${\rm Com}(A)=\{ n\text{ 阶方阵 }B: AB=BA\}$. ({\rm Com}表示Commutator.)
+	\begin{enumerate}	
+		\item 证明: 任取 $B, C \in {\rm Com}(A)$, 都有 $I_n, kB+\ell C, BC \in {\rm Com}(A)$, 其中$k,\ell \in \mathbb{R}$.
+		\item 设 $A=\begin{bmatrix}
+		1& 1& 0\\
+		0& 1& 1\\
+		0& 0& 1\\
+		\end{bmatrix}$. 证明：$J_3=\begin{bmatrix}
+		0& 1& 0\\
+		0& 0& 1\\
+		0& 0& 0\\
+		\end{bmatrix} \in {\rm Com}(A)$, 而且 ${\rm Com}(A)=\{k_1I_3+k_2J_3+k_3J_3^2:k_1, k_2, k_3 \in \mathbb{R}\}$.
+	\end{enumerate}		
+\end{ex}
+
+
+
+\begin{ex}
+	是否存在矩阵 $A$ 满足：存在矩阵 $X$ 使得 $XA=I$, 但不存在 $Y$ 使得 $AY=I$? 有没有方阵满足上述条件？
+\end{ex}
+
+
+
+
+\begin{ex}
+	定义函数 $\tr: M_n(\mathbb{R}) \to \mathbb{R}, A \mapsto \tr(A):=a_{11}+ \cdots + a_{nn}$, 为取方阵的对角线元素之和. $\tr(A)$ 称为方阵 $A$ 的迹.
+	\begin{enumerate}
+		\item 证明 $\tr$ 满足如下三个条件：
+		\begin{itemize}
+			\item $\tr(kA+\ell B)=k\tr(A)+\ell\tr(B)$, $k,\ell \in \mathbb{R}.$
+			\item $\tr(AB)=\tr(BA)$；
+			\item $\tr(I_n)=n$.
+		\end{itemize}
+		\item 说明是否存在 $A, B$, 使得 $AB-BA=I_n$.
+        \item ($\heartsuit$)  在$n=2$时证明满足上述三个条件的函数一定是 $\tr$. 		\item ($\heartsuit$) 对一般的$n$证明满足上述三个条件的函数一定是 $\tr$.
+	\end{enumerate}	
+\end{ex}
+
+
+
+
+\begin{ex}\label{ex-14}
+	\begin{enumerate}
+		\item 任取 $m \times n$ 矩阵 $X$; 证明: 分块矩阵
+		$\left( \begin{array}{cc}
+		I_m & X \\
+		0 & I_n
+		\end{array} \right)$
+		可逆, 并求其逆矩阵.
+		\item 对分块矩阵 $\left( \begin{array}{cc}
+		A & B \\
+		C & D
+		\end{array} \right)$, 计算 $\left( \begin{array}{cc}
+		I_m & X \\
+		0 & I_n
+		\end{array} \right)\left( \begin{array}{cc}
+		A & B \\
+		C & D
+		\end{array} \right)$. 由此判断矩阵
+		$$	\begin{bmatrix}
+		1& 0& 0&\cdots&0&c_1\\
+		0& 1& 0&\cdots&0&c_2\\
+		0& 0& 1&\cdots&0&c_3\\
+		\vdots& \vdots& \vdots&\ddots&\vdots&\vdots\\
+		0 & 0 & 0 & \cdots & 1 & c_{n-1}\\
+		b_1& b_2& b_3&\cdots& b_{n-1}&a\\
+		\end{bmatrix}$$ 何时可逆, 并在它可逆时计算它的逆.
+		\item 设 $A \in M_m(\mathbb R)$, $B \in M_{m \times n}(\mathbb R)$,
+		$C \in M_n(\mathbb R)$,	证明：若 $A, C$ 可逆,	则分块矩阵
+		$\left( \begin{array}{cc}
+		A & B \\
+		0 & C
+		\end{array} \right)$
+		也可逆, 并求其逆矩阵.
+	\end{enumerate}
+\end{ex}
+
+
+\begin{ex}
+	\begin{enumerate}
+		\item 对 $n$ 阶可逆矩阵 $A$ 和 $n$ 维列向量 $\bu, \bv$, 设 $1+\bv^TA^{-1}\bu \ne 0$, 证明：$A+\bu\bv^T$ 可逆, 且
+		$$(A+\bu\bv^T)^{-1}=A^{-1}-\dfrac{1}{1+\bv^TA^{-1}\bu}A^{-1}\bu\bv^TA^{-1}.$$ (这称为Sherman-Morrison-Woodbury公式.)
+		
+		\item 设 $a_i > 0(1 \le i\le n),$ 求矩阵：
+		$$\begin{bmatrix}
+		a_1+1& 1& 1&\cdots&1\\
+		1& a_2+1& 1&\cdots&1\\
+		1& 1& a_3+1&\cdots&1\\
+		\vdots& \vdots& \vdots&\cdots&\vdots\\
+		1& 1& 1&\cdots& a_n+1\\
+		\end{bmatrix}$$
+		的逆矩阵.
+	\end{enumerate}	
+\end{ex}
+
+
+
+
+
+\begin{ex}
+	如果矩阵 $A=\begin{bmatrix}
+	a_{ij}
+	\end{bmatrix}_{n\times n}$ 满足: 对于任意 $i=1,\dots,n$, 都有 $|a_{ii}|>\sum_{j\ne i}|a_{ij}|$, 则称其为(行)对角占优的. 证明：对角占优矩阵一定可逆.
+\end{ex}
+
+
+
+
+\begin{ex}
+	证明：
+	\begin{enumerate}
+		\item 任意方阵 $A$ 都可以唯一地表为 $A=B+C$, 其中 $B$ 是对称矩阵, $C$ 是反对称矩阵．
+		\item ($\heartsuit$) $n$ 阶方阵 $A$ 是反对称矩阵当且仅当任取 $n$ 维列向量 $\bx$, 都有 $\bx^{T}A\bx=0$.
+		\item 设 $A, B$ 是对称矩阵, 则$A=B$ 当且仅当任取 $n$ 维列向量 $\bx$, 都有 $\bx^{T}A\bx=\bx^{T}B\bx$.
+	\end{enumerate}
+\end{ex}
+
+
+
+\begin{ex}[$\heartsuit$]
+	$A$ 为 $n$ 阶实方阵. 证明以下结论：
+	\begin{enumerate}
+		\item 若对于任意的 $n$ 维实列向量 $\bx$, 都有 $(A\bx)\cdot (A\bx)=\bx\cdot\bx$, 则 $A$ 必须是正交矩阵．
+		\item 若对于任意两个 $n$ 维实列向量 $\bx,\by$, 都有 $(A\bx)\cdot \by=\bx\cdot(A\by)$, 则 $A$ 必须是对称矩阵．
+	\end{enumerate}
+\end{ex}
+
+
+
+\vspace{2cm}
+
+
+\noindent{\itshape 思考题}:
+对于$n$阶方阵$A$试说明下列几条为何等价：
+\begin{enumerate}
+		\item $A$可逆．
+		\item 任取$n$维向量$\bb$，方程组$A \bx = \bb$ 的解唯一，且解为$\bx = A^{-1}\bb$.
+\item 齐次方程组$A\bx = {\bf 0}$只有零解．
+\item $A$对应的阶梯型矩阵有$n$个主元.
+\item $A$对应的行简化阶梯形矩阵一定是$I_n$.
+\item $A$是有限个初等矩阵的乘积．
+	\end{enumerate}
+
+
+
+\end{document}

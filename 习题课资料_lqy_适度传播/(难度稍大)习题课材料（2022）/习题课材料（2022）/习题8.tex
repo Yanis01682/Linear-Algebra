@@ -1,0 +1,403 @@
+%!TEX program=xelatex
+\documentclass{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+%\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+\newtheorem{thm}{定理}
+\newtheorem{cor}[thm]{推论}
+\newtheorem{lem}[thm]{引理}
+\newtheorem{prop}[thm]{命题}
+\newtheorem{defn}[thm]{定义}
+\newtheorem{ques}[thm]{问题}
+\newtheorem{eg}[thm]{例题}
+\newtheorem{ex}[thm]{习题}
+\newtheorem{rmk}[thm]{注释}
+\newtheorem{ntn}[thm]{记号}
+
+\newtheorem{exercise}[thm]{习题}
+
+\allowdisplaybreaks
+\raggedbottom
+
+\usepackage{mathdots}
+\usepackage{extarrows}
+\usepackage{amsbsy}
+\newcommand\bs[1]{\boldsymbol{ #1}}
+\newcommand\hint[1]{\par {\footnotesize\kaishu 提示：#1}}
+\newcommand\note[1]{\par {\footnotesize\kaishu 注意：#1}}
+		
+\def\hard{$\heartsuit$}
+\def\zero{O}
+\def\dps{\displaystyle}
+\def\wtd{\widetilde}
+\def\what{\widehat}
+\DeclareMathOperator{\T}{T}
+\DeclareMathOperator{\trace}{trace}
+\DeclareMathOperator{\rank}{rank}
+\DeclareMathOperator{\toep}{toep}
+\DeclareMathOperator{\range}{\mathcal{R}}
+\DeclareMathOperator{\nullspace}{\mathcal{N}}
+\newcommand{\diff}{\mathop{}\!\mathrm{d}}
+\DeclareMathOperator{\subspan}{span}
+
+\usepackage{mathtools}
+\providecommand\given{\:\vert\:}
+\DeclarePairedDelimiterXPP\set[1]{}{\{}{\}}{}{
+\renewcommand\given{\nonscript\:\delimsize\vert\nonscript\:\mathopen{}}
+#1}
+\DeclarePairedDelimiter\abs{|}{|}
+\DeclarePairedDelimiter\N{\|}{\|}
+\DeclarePairedDelimiter\spanbasic{(}{)}
+\newcommand\lspan[1]{\subspan\spanbasic*{#1}}
+
+\newif\ifhideproofs
+\hideproofstrue
+\newif\iffinalver
+%\finalvertrue        
+\ifhideproofs
+    \usepackage[final]{changes}
+    \definechangesauthor[name=Error, color=red]{err}
+    \usepackage{environ}
+    \NewEnviron{hide}{}
+    \let\proof\hide
+    \let\endproof\endhide
+\else
+    \iffinalver
+        \usepackage[final]{changes}
+    \else
+        \usepackage{changes}
+    \fi
+    \definechangesauthor[name=Error, color=red]{err}
+\fi
+
+\begin{document}
+
+
+\title{习题课材料（八）}
+\author{}
+\date{}
+\maketitle
+
+\begin{exercise}
+构造符合要求的矩阵$A$：
+\begin{enumerate}
+\item $A$的特征多项式为$\lambda^2-9\lambda+20$, 构造三个不同的$A$. 
+\item $A=\begin{bmatrix}0&1\\ *&*\end{bmatrix}$, 且$A$的特征值为$4,7$. 
+\item $A=\begin{bmatrix}0&1&0\\0&0&1\\ *&*&*\end{bmatrix}$, 且$A$的特征值为$1,2,3$. 
+\end{enumerate}
+\end{exercise}
+\begin{proof}[解]
+	\begin{enumerate}
+		\item $A$的特征多项式是二次的, 说明$A$是二阶方阵. 记$A=\begin{bmatrix}
+				a_{11} & a_{12}\\ a_{21} & a_{22}\\
+			\end{bmatrix}$, 并计算其特征多项式$p_A(\lambda)$为$(\lambda-a_{11})(\lambda-a_{22})-a_{12}a_{21}=\lambda^2-(a_{11}+a_{22})\lambda+a_{11}a_{22}-a_{12}a_{21}$. （这一步也可以用$p_A(\lambda)=\lambda^2-\lambda\trace(A)+\det(A)$来得出. ）
+			于是$a_{11}+a_{22}=9,a_{11}a_{22}=20+a_{12}a_{21}$. 任意指定$a_{12}$和$a_{21}$, 利用一元二次方程即可解出$a_{11}$和$a_{22}$. 
+			例如, $A=\begin{bmatrix}
+				4 & 1 \\ 0 & 5\\
+			\end{bmatrix}$ 或$\begin{bmatrix}
+				4 & 2 \\ 0 & 5\\
+			\end{bmatrix}$ 或$\begin{bmatrix}
+				4 & 3 \\ 0 & 5\\
+			\end{bmatrix}$. 
+            \comment{直接使用书上例5.2.6即可}
+			\item 记$A=\begin{bmatrix}
+					0 & 1 \\ a_{21} & a_{22}
+				\end{bmatrix}$. 考虑到特征值是特征多项式的根, 可知特征多项式为$(\lambda-4)(\lambda-7)=\lambda^2-11\lambda+28$. 化为与上一小题同类的题. 
+				利用特征多项式系数和行列式与迹的关系更容易计算：$4+7=0+a_{22}; -a_{21}=4\times 7$. 
+				总之, $A=\begin{bmatrix}
+					0 & 1 \\ -28 & 11
+				\end{bmatrix}$. 
+				　\item 做法和上面类似. 更简单的做法是利用多项式与其友矩阵的特征多项式相等, 可得$(\lambda-1)(\lambda-2)(\lambda-3)=-a_{31}-a_{32}\lambda-a_{33}\lambda^2+\lambda^3$. 
+			可得$A=\begin{bmatrix}
+				0& 1& 0\\ 0&0& 1\\ 6 & -11  & 6\\
+			\end{bmatrix}$. 
+            \comment{在以上矩阵中空白位置补了$0$}
+	\end{enumerate}
+\end{proof}
+
+\begin{exercise}
+设$\lambda_1, \lambda_2$是$A$的两个不同特征值, $\bs x_1, \bs x_2$是分别属于$\lambda_1, \lambda_2$的特征向量. 
+证明, $\bs x_1+\bs x_2$不是$A$的特征向量. 
+\end{exercise}
+\begin{proof}
+	带否定词的命题首先考虑反证法. 若$\bs x_1+\bs x_2$是属于$\lambda$的特征向量, 即$A(\bs x_1+\bs x_2)=\lambda(\bs x_1+\bs x_2)$. 而$A\bs x_1=\lambda_1\bs x_1, A\bs x_2=\lambda_2\bs x_2$, 于是$(\lambda_1-\lambda)\bs x_1+(\lambda_2-\lambda)\bs x_2=0$. 
+	注意$\lambda_1\ne\lambda_2$, 因此$\lambda_1-\lambda,\lambda_2-\lambda$不全为零, 可得$\bs x_1,\bs x_2$线性相关, 这与二者是不同特征值的特征向量矛盾. 
+\end{proof}
+
+\begin{exercise} \hard
+设$A, B$分别是$m\times n, n\times m$矩阵, 证明\added{对任意复数$\lambda$, 有}
+\[
+\lambda^n\det(\lambda I_m-AB)=\lambda^m\det(\lambda I_n-BA).
+\]
+特别地, 当$m=n$时, $\det(\lambda I_n-AB)=\det(\lambda I_n-BA)$. 
+\end{exercise}
+\begin{proof}[证一]
+	$\lambda=0$显然. 
+	$\lambda\ne 0$时, 命题等价于$
+\det(I_m-\frac{A}{\lambda}B)=\det(I_n-B\frac{A}{\lambda})
+$. 故只需证明, 对任意$A,B$, $
+\det(I_m-AB)=\det(I_n-BA)
+$. 
+	\[
+		\det\left( \begin{bmatrix}
+			 I_m & A \\ B &  I_n
+	\end{bmatrix} \right)
+	=\det\left( \begin{bmatrix}
+		I_{\color{blue}m} & \\ -B & I_{\color{blue}n}
+	\end{bmatrix}\begin{bmatrix}
+			 I_m & A \\ B &  I_n
+	\end{bmatrix} \right)
+	=\det\left( \begin{bmatrix}
+			 I_m & A \\  &  I_n-BA
+	\end{bmatrix} \right)
+	=\det(I_n-BA),
+	\]另一方面, 
+	\[
+		\det\left( \begin{bmatrix}
+				 I_m & A \\ B &  I_n
+		\end{bmatrix} \right)
+		=\det\left( \begin{bmatrix}
+			I_{\color{blue}m} & -A\\  & I_{\color{blue}n}
+		\end{bmatrix}\begin{bmatrix}
+				 I_m & A \\ B &  I_n
+		\end{bmatrix} \right)
+		=\det\left( \begin{bmatrix}
+				 I_m-AB &  \\ B &  I_n
+		\end{bmatrix} \right)
+		=\det(I_m-AB).
+	\]
+\end{proof}
+\begin{proof}[证二]
+	先考虑$m=n$的情形. 
+	当$A$可逆时, $\det(\lambda I-AB)=\det(A)\det(\lambda A^{-1}-B)=\det(\lambda A^{-1}-B)\det(A)=\det(\lambda I-BA)$. 
+	而对任意矩阵$A=P\begin{bmatrix}
+		I_r & \zero\\ \zero & \zero
+		\end{bmatrix}Q$, 都存在$A_t=P\begin{bmatrix}
+		I_r & \zero\\ \zero & \frac{1}{t}I_{n-r} 
+	\end{bmatrix}Q\to A$. 
+	注意到$\det(\lambda I_n-AB)$是关于$A,B$元素的连续函数. 
+	因此, 由$\det(\lambda I-A_tB)=\det(\lambda I-BA_t)$得到$\det(\lambda I-AB)=\det(\lambda I-BA)$. 
+
+	当$m>n$时, 令$\wtd A=\begin{bmatrix}
+		A & \zero
+		\end{bmatrix}_{m\times m},\wtd B=\begin{bmatrix}
+		B\\ \zero
+	\end{bmatrix}_{m\times m}$, 则
+	\[
+		\det(\lambda I_m -AB)=\det(\lambda I_m-\wtd A\wtd B)
+		=\det(\lambda I_m -\wtd B\wtd A)
+		=\det\left( \begin{bmatrix}
+				\lambda I_n-BA & \\& \lambda I_{m-n}
+		\end{bmatrix} \right)
+		=\lambda^{m-n}\det(\lambda I_n-BA )
+		.
+	\]
+
+	$m<n$类似. 
+\end{proof}
+
+\begin{exercise}
+\hard\hard 如果复矩阵$A, B$可交换, 证明$A, B$至少有一个公共的特征向量. 
+
+%\hint{法一：任取$A$的特征向量$\bs x$, 随$k$增加逐个考察子空间$\lspan{{\bs x},B{\bs x},\dots,B^k{\bs x}}$, 当添加新的向量后维数不增加时, 子空间中必含有$B$的特征向量. 
+%法二：利用%\cref{thm:hamilton-cayley}
+%. }
+\end{exercise}
+\begin{proof}[证一]
+	先取一个$A$的特征向量, 设$A\bs x=\lambda\bs x$. 那么$AB\bs x=BA\bs x=\lambda B\bs x$. 可见$B\bs x$也是$A$的属于相同特征\replaced{值}{子}的特征向量. 
+	（如果$\lambda$是单特征值, 问题就很简单, 因为特征子空间是$1$维的, 立得$B\bs x=\mu \bs x$, 即结论. 因此我们从这里开始. ）
+	如果$B\bs x=\mu \bs x$, 即得结论. 下设$B\bs x\notin\lspan{\bs x}$. 
+	类似地, $AB^2\bs x=B^2 A\bs x=\lambda B^2\bs x$. 如果$B^2\bs x\in\lspan{\bs x,B\bs x}$, 则存在$k_1,k_2$使得$B^2\bs x+k_1B\bs x+k_2\bs x=0$. 设$\lambda^2+k_1\lambda+k_2=(\lambda+\mu_1)(\lambda+\mu_2)$, 则$(B+\mu_1I)(B+\mu_2I)\bs x=0$. 注意$(B+\mu_2I)\bs x\ne0$（不然与假设矛盾）, 于是$B(B+\mu_2I)\bs x=-\mu_1(B+\mu_2I)\bs x$. 而$A(B+\mu_2I)\bs x=\lambda(B+\mu_2I)\bs x$, 因此$(B+\mu_2I)\bs x$是$A,B$的公共特征向量. 
+	另一方面, 如果$B^2\bs x\notin\lspan{\bs x,B\bs x}$, 则继续考察$B^3\bs x$. 如此进行下去. 
+	由于$\bs x,B\bs x,\dots,B^n\bs x$一定线性相关, 因此这论证会在有限步内终止. 
+\end{proof}
+\begin{proof}[证二]
+	思想与上面类似, 写起来更简洁些. 
+	记$B$的特征多项式为$p_B(\lambda)=(\lambda-\lambda_1)(\lambda-\lambda_2)\dots(\lambda-\lambda_n)$, 根据Hamilton-Cayley定理, 有$p_B(B)=(B-\lambda_1I)(B-\lambda_2I)\dots(B-\lambda_nI)=0$. 
+	任取$A$的特征对$(\lambda_0,\bs x)$, 则$p_B(B)\bs x=0$. 
+	\highlight[id=err,comment={这个貌似不对？如取$A=B=\mu I_n$, 则$p_B(\lambda)=(\lambda-\mu)^n$,$\lambda_1=\cdots=\lambda_n=\mu$. 此时对任意$x$和$k$, 都有$(B-\lambda_{k+1}I)\dots(B-\lambda_nI)\bs x=0$.}]{一定存在$k$}, 使得$(B-\lambda_{k+1}I)\dots(B-\lambda_nI)\bs x\ne0,(B-\lambda_kI)(B-\lambda_{k+1}I)\dots(B-\lambda_nI)\bs x=0$. 
+	那么$(B-\lambda_{k+1}I)\dots(B-\lambda_nI)\bs x$是$B$的属于$\lambda_k$的特征向量, 同时它也是$A$的属于$\lambda_0$的特征向量. 
+\end{proof}
+
+\begin{exercise}
+设$M_{11},M_{12},M_{21},M_{22}$为二阶方阵, 如果分块矩阵$M=\begin{bmatrix}M_{11}&M_{12}\\M_{21}&M_{22}\end{bmatrix}$满足每一行、每一列以及四个二阶子方阵中的四个元素都是$1,2,3,4$, 则称$M$为四阶数独矩阵. 
+
+设$A$是四阶数独矩阵, 证明其\highlight[comment={这里的绝对值想说的是复数的模长吧？}]{绝对值}最大的特征值为$10$, 且属于该特征值的特征向量的所有分量都相等. 
+\end{exercise}
+\begin{proof}
+	显然对所有元素都等于$k$的向量$k\cdot\bs 1$, 有$M(k\cdot \bs 1)=kM\bs 1=k(1+2+3+4)\bs 1=10k\cdot \bs 1$, 即它是属于特征值$10$的特征向量. 
+	还有其他特征值的绝对值不大于$10$尚未证明. 
+	设有特征对$(\lambda,\bs x)$, 则$M\bs x=\lambda \bs x$. 
+	设$\bs x=\begin{bmatrix}
+		x_i
+	\end{bmatrix}$中$x_j$绝对值最大, 则$\lambda x_j=M_{j1}x_1+M_{j2}x_2+M_{j3}x_3+M_{j,4}x_4$, 
+	$\abs{\lambda}\abs{x_j}
+	\le \sum_{k}M_{jk}\abs{x_k}
+	\le  \sum_{k}M_{jk}\abs{x_j}
+	=10\abs{x_j}$. 即得$\abs{\lambda}\le 10$. 
+
+	\note{想想看, 哪些条件没有用到？}
+    \comment[id=err]{证明不完整. 并没有证明“属于该特征值的特征向量的所有分量都相等”. 详见左侧蓝字：}
+
+    \textcolor{blue}{要证属于特征值$10$的特征向量各分量皆相等, 仅需讨论上文中不等式的取等号条件即可. 注意到上文中不等式的第一个$\leq$取等号的条件是$x_1,x_2,x_3,x_4$幅角相同, 而第二个$\leq$的取等号条件是$\mid x_1\mid=\mid x_2\mid=\mid x_3\mid=\mid x_4\mid$. 这两个条件放在一起就是$x_1=x_2=x_3=x_4$.}
+\end{proof}
+
+\begin{exercise}
+\hard\hard 设方阵$A$的每个元素都是整数, 证明$\frac{1}{2}$一定不是$A$的特征值. 
+
+%\hint{法一：利用特征多项式. 
+%法二：考察特征向量元素的奇偶性. }
+\end{exercise}
+\begin{proof}[证一]
+	设$(\frac{1}{2},\bs x)$是$A$的特征对, 则$\bs x=2A\bs x$, 即$\bs x\in\nullspace(I-2A)$, 可知$\bs x$的元素都是有理数. 
+	不妨设$\bs x$的元素都是整数. 
+	于是由$\bs x=2A\bs x$知, $\bs x$的元素全是偶数, 因此$\frac{1}{2}\bs x$是元素全为整数的特征向量. 
+	同样推理可知$\frac{1}{2}\bs x$的元素也全是偶数. 
+	如此进行下去, 有限步后向量的元素就不再全是偶数, 矛盾. 
+\end{proof}
+\begin{proof}[证二]
+	考虑$A$的特征多项式$p_A(\lambda)=\lambda^n+a_{n-1}\lambda^{n-1}+\dots+a_0$. 显然$a_0,\dots,a_{n-1}$都是整数. 
+	如果$\frac{1}{2}$是特征值, 则$\frac{1}{2^n}+\frac{a_{n-1}}{2^{n-1}}+\dots+a_0=0$. 
+	故$1+2a_{n-1}+\dots+2^na_0=0$. 
+	等式左边是奇数, 右边是偶数, 矛盾. 
+\end{proof}
+
+\begin{exercise}\label{excs:sylvester:triangular}
+\hard\hard 给定$m$阶方阵$A_1$, $n$阶上三角矩阵$A_2$和$m\times n$矩阵$B$. 
+证明如果$A_1$和$A_2$没有相同的特征值, 关于$m\times n$矩阵$X$的矩阵方程$A_1X-XA_2=B$有唯一解. 
+
+矩阵方程$A_1X-XA_2=B$称为{Sylvester方程}, 在控制论中有不少应用. 
+
+%\hint{逐列计算$X$. }
+\end{exercise}
+\begin{proof}
+	记$A_2=\begin{bmatrix}
+		 a_{11} & \bs a_{12}^T\\ 0 &  A_{22}
+	\end{bmatrix},X=\begin{bmatrix}
+	\bs x_1 & X_2
+	\end{bmatrix},B=\begin{bmatrix}
+	\bs b_1 & B_2
+	\end{bmatrix}$, 则方程为
+	$A_1\bs x_1- a_{11}\bs x_1=\bs b_1,A_1X_2-\bs x_1\bs a_{12}^T-X_2 A_{22}=B_2$. 
+	由于$ a_{11}$是$A_2$的特征值, 而不是$A_1$的特征值, 故$A_1- a_{11}I$可逆, $\bs x_1=(A_1- a_{11}I)^{-1}\bs b_1$. 
+	代入后一等式有$A_1X_2-X_2 A_{22}=B_2+(A_1- a_{11}I)^{-1}\bs b_1\bs a_{12}^T$. 
+	这化为了少一列的问题. 
+	逐列计算, 即可把$X$算出. 
+\end{proof}
+
+\begin{exercise}
+设$A=\begin{bmatrix}
+3 & 2 & -2\\ -k& -1 & k \\ 4& 2 &-3 \\
+\end{bmatrix}$. 
+当$k$取何值时, $A$可对角化？
+当$A$可对角化时, 写出其谱分解. 
+\end{exercise}
+\begin{proof}[解]
+	先计算$A$的特征值. 由于$A$的特征多项式$p_A(\lambda)=\lambda^3+\lambda^2-\lambda-1=(t-1)(t+1)^2$, 故$A$的特征值为$1,-1,-1$. 
+	而$A$可对角化当且仅当$A$的特征值均半单, 即代数重数等于几何重数. 因此就只需观察特征值$-1$的几何重数. 
+	计算特征子空间$\nullspace(-I-A)
+	=\nullspace\left(\begin{bmatrix}
+		-4 & -2 & 2\\ k & 0 & -k \\ -4 & -2 & 2 
+	\end{bmatrix}\right)
+	=\nullspace\left(\begin{bmatrix}
+		-4 & -2 & 2\\ k & 0 & -k \\ 0 & 0 &0  
+	\end{bmatrix}\right)$, 可以看到$k=0$时, $\dim \nullspace(-I-A)=2$; $k\ne 0$时, $\dim \nullspace(-I-A)=1$. 
+	因此$A$可对角化当且仅当$k=0$. 
+
+	下面计算$k=0$时的谱分解, 只剩下计算特征向量. 属于$-1$的特征子空间$\nullspace(-I-A)$的一组基是$\begin{bmatrix}
+		1 \\0\\2
+	\end{bmatrix},\begin{bmatrix}
+		0\\1\\1
+	\end{bmatrix}$. 属于$1$的特征向量可以是$\begin{bmatrix}
+		1\\0\\1
+	\end{bmatrix}$. 因此$A$的一个谱分解为
+	\[
+		A=\begin{bmatrix}
+			1 & 0 & 1\\ 0 & 1  &0\\ 2& 1& 1\\
+			\end{bmatrix}\begin{bmatrix}
+			-1 && \\ & -1&\\ && 1
+			\end{bmatrix}\begin{bmatrix}
+			1 & 0 & 1\\ 0 & 1  &0\\ 2& 1& 1\\
+		\end{bmatrix}^{-1}.
+	\]
+\end{proof}
+
+\begin{exercise}
+证明$A=\begin{bmatrix}
+I_r & \zero \\ B & -I_{n-r} \\
+\end{bmatrix}$可对角化. 
+\end{exercise}
+\begin{proof}[证一]
+	显然$A$有两个互异特征值：$1$, 代数重数为$r$; $-1$, 代数重数为$n-r$. 
+	要证明可对角化, 只需说明二者的几何重数等于代数重数. 事实上, 特征子空间$\nullspace(I-A)=\nullspace\left( \begin{bmatrix}
+			\zero & \zero \\ -B & 2I_{n-r}
+	\end{bmatrix} \right)$的维数是$r$, 特征子空间$\nullspace(-I-A)=\nullspace\left( \begin{bmatrix}
+			-2I_r & \zero \\ -B & \zero
+	\end{bmatrix} \right)$的维数是\replaced{$n-r$}{$r$}, 得证. 
+\end{proof}
+\begin{proof}[证二]
+	假设$A$可对角化, 我们来求对应的相似变换, 如果确实能计算出来, 就说明$A$可对角化. 显然与$A$相似的对角矩阵可选作$\begin{bmatrix}
+I_r & \zero \\  & -I_{n-r} \\
+	\end{bmatrix} $. 
+	考虑到$A$是下三角矩阵, 不妨设相似变换中的矩阵$T=\begin{bmatrix}
+		I & \\ S & I
+	\end{bmatrix}$也是下三角矩阵. 则
+	\[
+		\begin{bmatrix}
+	I & \\ B & -I
+	\end{bmatrix}=\begin{bmatrix}
+	I & \\ S & I
+	\end{bmatrix}\begin{bmatrix}
+		 I & \\ & -I 
+	\end{bmatrix}\begin{bmatrix}
+		 I & \\ S & I
+	 \end{bmatrix}^{-1}=\begin{bmatrix}
+	I & \\ S & I
+	\end{bmatrix}\begin{bmatrix}
+		 I & \\ & -I 
+	\end{bmatrix}\begin{bmatrix}
+		 I & \\ -S & I
+	 \end{bmatrix}=\begin{bmatrix}
+	 I & \\ -2S & -I
+	 \end{bmatrix}.
+	\]因此$S=-\frac{1}{2}B$对应构造的相似变换可以把$A$对角化. 
+\end{proof}
+\begin{exercise} \hard
+\begin{enumerate}
+\item 若$A^2=A$, 则$A$可对角化. 
+\item 若$A^2=\zero$, 且$A \ne \zero$, 则$A$不可对角化. 
+\item 若$A^2+A+I_n=\zero$, 则$A$在$\mathbb{R}$上不可对角化. 
+\end{enumerate}
+\end{exercise}
+\begin{proof}
+	\begin{enumerate}
+		\item 设$A$是$n$阶方阵. 任选特征对$(\lambda,\bs x)$, 则$\bs 0=(A^2 -A)\bs x=(\lambda^2-\lambda)\bs x$, 可得$\lambda^2-\lambda=0$, 即特征值只能是$0$或$1$. 
+			$A$可对角化$\Leftrightarrow \dim\nullspace(0I-A)+\dim\nullspace(1I-A)=n\Leftrightarrow n-\rank(A)+n-\rank(I-A)=n \Leftrightarrow \rank(A)+\rank(I-A)=n$. 
+			由于$A(I-A)=\zero$, \highlight[comment={Why???}]{故}$\rank(\zero)\ge \rank(A)+\rank(I-A)-n$; 
+			由于$A+(I-A)=I$, 故$\rank(A)+\rank(I-A)\ge \rank(I)=n$. 
+			因此$\rank(A)+\rank(I-A)=n$. 
+
+			另证：
+			$A$可对角化$\Leftrightarrow$ 两特征值几何重数之和为$n$, 即$n=\dim\nullspace(0I-A)+\dim\nullspace(1I-A)=\dim\nullspace(A)+\dim\nullspace(I-A)$. 
+			由于$A(I-A)=\zero\Rightarrow \range(I-A)\subset \nullspace(A)$. 
+			因此$\dim \nullspace(I-A)=n-\dim \range(I-A)\ge n-\dim \nullspace(A)$. 而几何重数之和不大于$n$是显然的. 
+		\item 类似上一小题, 特征值只能是$0$. 如果$A$可对角化, 则$A=T\zero T^{-1}=\zero$, 矛盾. 
+			\item 类似上面小题, 特征值满足$\lambda^2+\lambda+1=0$, 故$A$没有实数特征值, 显然在$\mathbb{R}$上不可对角化. 
+	\end{enumerate}
+\end{proof}
+
+\clearpage
+\listofchanges
+\end{document}

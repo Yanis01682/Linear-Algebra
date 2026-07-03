@@ -1,0 +1,394 @@
+\documentclass[UTF8]{ctexart}
+
+%\RequirePackage{amsmath} \RequirePackage{amssymb}
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+%\usepackage{fullpage}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+%\usetikzlibrary{quotes,angles}
+%\usetikzlibrary{calc}
+%\usetikzlibrary{decorations.pathreplacing}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+
+
+\newcommand{\BC}{{\mathbb {C}}}
+
+\newcommand{\BN}{{\mathbb {N}}}
+\newcommand{\BQ}{{\mathbb {Q}}}
+\newcommand{\BR}{{\mathbb {R}}}
+\newcommand{\BZ}{{\mathbb {Z}}}
+\newcommand{\bv}{{\bm v}}
+\newcommand{\bw}{{\bm w}}
+\newcommand{\bu}{{\bm u}}
+\newcommand{\bx}{{\bm x}}
+\newcommand{\by}{{\bm y}}
+
+\newcommand{\bb}{{\bm b}}
+\newcommand{\Coker}{{\mathrm{Coker}}}
+
+
+\newcommand{\End}{{\mathrm{End}}}
+\newcommand{\GL}{{\mathrm{GL}}}
+
+\newcommand{\SO}{{\mathrm{GSO}}}
+\newcommand{\Hom}{{\mathrm{Hom}}}
+
+\renewcommand{\Im}{{\mathrm{Im}}}
+
+\newcommand{\Isom}{{\mathrm{Isom}}}
+\newcommand{\Id}{{\mathrm{Id}}}
+
+
+
+\newcommand{\Ker}{{\mathrm{Ker}}}
+
+
+
+\newcommand{\rank}{{\mathrm{rank}}}
+
+
+\newcommand{\SU}{{\mathrm{SU}}}
+\newcommand{\Sym}{{\mathrm{Sym}}}
+
+\newcommand{\sub}{{\mathrm{sub}}}
+
+\newcommand{\tr}{{\mathrm{tr}}}
+
+\newcommand{\matrixx}[4]{\begin{pmatrix}
+		#1 & #2 \\ #3 & #4
+	\end{pmatrix} }
+	
+	
+	
+	\newcommand{\wt}{\widetilde}
+	\newcommand{\wh}{\widehat}
+	\newcommand{\pp}{\frac{\partial\bar\partial}{\pi i}}
+	\newcommand{\pair}[1]{\langle {#1} \rangle}
+	\newcommand{\wpair}[1]{\left\{{#1}\right\}}
+	\newcommand{\intn}[1]{\left( {#1} \right)}
+	\newcommand{\norm}[1]{\|{#1}\|}
+	\newcommand{\sfrac}[2]{\left( \frac {#1}{#2}\right)}
+	\newcommand{\ds}{\displaystyle}
+	\newcommand{\ov}{\overline}
+	\newcommand{\incl}{\hookrightarrow}
+	\newcommand{\lra}{\longrightarrow}
+	\newcommand{\lla}{\longleftarrow}
+	\newcommand{\ra}{\rightarrow}
+	\newcommand{\imp}{\Longrightarrow}
+	\newcommand{\lto}{\longmapsto}
+	\newcommand{\bs}{\backslash}
+	
+	
+	
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+	\newcommand{\sk}{\medskip}\newcommand{\bsk}{\bigskip}
+	\newcommand{\s}{\sk\noindent}\newcommand{\bigs}{\bsk\noindent}
+	
+	
+	%accented words
+
+	\def\mat(#1,#2,#3,#4){
+		\left[\begin{array}{cc}
+			#1 & #2 \\ #3 & #4\end{array}
+		\right]
+	}
+		\def\clm(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ #2 \end{array}
+\right]
+	}
+		\def\clmn(#1,#2){
+		\left[\begin{array}{c}
+			#1 \\ \vdots\\ #2 \end{array}
+\right]
+	}
+		\def\clmt(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ #3\end{array}
+\right]
+	}
+		\def\clmf(#1,#2,#3){
+		\left[\begin{array}{c}
+			#1 \\ #2  \\ \vdots \\ #3\end{array}
+\right]
+	}
+
+
+		
+\begin{document}
+
+
+\title{习题课材料（七）}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+
+
+
+
+
+\begin{ex}
+若$A_1, A_2, \ldots, A_{2020}$是$2020$个$2019$阶方阵，求证: 则关于$\mathbf{x}=(x_1,\ldots ,x_{2020})$的方程$$\det \left(x_1A_1+x_2A_2+\cdots +x_{2020}A_{2020}\right)=0$$存在非零解。
+\end{ex}
+\begin{proof}[证明]设$A_i=[\mathbf{v}_{i1}\ \mathbf{v}_{i2}\ \cdots\ \mathbf{v}_{i2019}]$
+则方阵
+$$
+x_1A_1+x_2A_2+\cdots +x_{2020}A_{2020}
+$$
+的第一个列向量为
+$$
+x_1\mathbf{v}_{11}+x_2\mathbf{v}_{21}+\cdots +x_{2020}\mathbf{v}_{2020}.
+$$
+而$\mathbf{v}_{11},\mathbf{v}_{21},\ldots ,\mathbf{v}_{2020}$为$2019$维向量，故其一定线性相关，存在
+$$
+{\bf x}=(x_1, x_2,\ldots, x_{2020})\ne\bf 0
+$$
+使得$[\mathbf{v}_{11}\ \mathbf{v}_{21}\ \cdots\ \mathbf{v}_{2020}]{\bf x}={\bf 0}$，这一${\bf x}$即为原方程的非零解。
+\end{proof}
+
+\begin{ex}[$\heartsuit $]
+	计算行列式
+$$\det A=\left|\begin{array}{ccccccc}
+                 1 & 2 & 3 & \cdots & n-2 & n-1 & n \\
+                 2 & 3 & 4 & \cdots & n-1 & n & n \\
+                 3 & 4 & 5 & \cdots & n & n & n \\
+                 \vdots & \vdots & \vdots &  & \vdots & \vdots & \vdots \\
+                 n-1 & n & n & n & n & n & n \\
+                 n & n & n & n & n & n & n
+               \end{array}
+\right|$$
+\end{ex}
+
+\begin{proof}[解]设$B$是由$A$的列按倒序排列得到的方阵. 将$B$的第$n$行的$(-1)$倍加到第$i$行上(这里$i=1,2,\cdots,n-1$),再按第$n$行展开可得:
+$$\det B=\left|\begin{array}{ccccccc}
+                 n & n-1 & n-2 & \cdots & 3 & 2 & 1 \\
+                 n & n & n-1 & \cdots & 4 & 3 & 2 \\
+                 n & n & n & \cdots & 5 & 4 & 3 \\
+                 \vdots & \vdots & \vdots &  & \vdots & \vdots & \vdots \\
+                 n & n & n & n & n & n & n-1 \\
+                 n & n & n & n & n & n & n
+               \end{array}
+\right|=\left|\begin{array}{ccccccc}
+                 0 & -1 & * & \cdots & * & * & * \\
+                 0 & 0 & -1 & \cdots & * & * & * \\
+                 0 & 0 & 0 & \cdots & * & * & * \\
+                 \vdots & \vdots & \vdots &  & \vdots & \vdots & \vdots \\
+                 0 & 0 & 0 & 0 & 0 & 0 & -1 \\
+                 n & n & n & n & n & n & n
+               \end{array}
+\right|=n$$
+故$\det A=(-1)^{\left[\frac{n}{2}\right]}\det B=(-1)^{\left[\frac{n}{2}\right]}n$
+\end{proof}
+
+
+
+\begin{ex}[$\heartsuit $]
+计算行列式
+$$\det A=\left|\begin{array}{cccccc}
+                 1 & 2 & 3 & \cdots & n-1 & n \\
+                 n & 1 & 2 & \cdots & n-2 & n-1 \\
+                 n-1 & n & 1 & \cdots & n-3 & n-2 \\
+                 \vdots & \vdots & \vdots &  & \vdots & \vdots \\
+                 2 & 3 & 4 & \cdots & n & 1
+               \end{array}
+\right|$$
+\end{ex}
+
+\begin{proof}[解]将第$2, 3, \cdots, n$行加到第1行, 提出公因子$\frac{n(n+1)}{2}$得
+$$\det A=\frac{n(n+1)}{2}\left|\begin{array}{cccccc}
+                 1 & 1 & 1 & \cdots & 1 & 1 \\
+                 n & 1 & 2 & \cdots & n-2 & n-1 \\
+                 n-1 & n & 1 & \cdots & n-3 & n-2 \\
+                 \vdots & \vdots & \vdots &  & \vdots & \vdots \\
+                 2 & 3 & 4 & \cdots & n & 1
+               \end{array}
+\right|$$
+第$n$行减去第$n-1$行, 第$n-1$行减去第$n-2$行,..., 第$3$行减去第$2$行得:
+$$\det A=\frac{n(n+1)}{2}\left|\begin{array}{cccccc}
+                 1 & 1 & 1 & \cdots & 1 & 1 \\
+                 n & 1 & 2 & \cdots & n-2 & n-1 \\
+                 -1 & n-1 & -1 & \cdots & -1 & -1 \\
+                 \vdots & \vdots & \vdots &  & \vdots & \vdots \\
+                 -1 & -1 & -1 & \cdots & n-1 & -1
+               \end{array}
+\right|$$
+第$1$行加到第$3, 4, \cdots, n$行得
+$$\det A=\frac{n(n+1)}{2}\left|\begin{array}{cccccc}
+                 1 & 1 & 1 & \cdots & 1 & 1 \\
+                 n & 1 & 2 & \cdots & n-2 & n-1 \\
+                 0 & n & 0 & \cdots & 0 & 0 \\
+                 \vdots & \vdots & \vdots &  & \vdots & \vdots \\
+                 0 & 0 & 0 & \cdots & n & 0
+               \end{array}
+\right|$$
+该行列式按第$n$列展开可得$\det A=(-1)^{n+1}\frac{n^{n-1}(n+1)}{2}$
+\end{proof}
+
+
+\begin{ex}
+	设 $n$阶方阵 $A$的第 $i$行第 $j$列的元素为 $\min(i,j)$. 求 $\det A$.
+\end{ex}
+
+[记号] 设$A=(a_{ij})$是$n$阶方阵,（$n\geq 2$）,$C=(C_{ij})$，其中$C_{ij}$为$a_{ij}$的代数余子式
+\begin{ex}
+设
+\begin{eqnarray*}
+D=\left |
+\begin{array}{cccc}
+ 1 &-1 &1 &2\\
+ 2 &1 &0 &-1\\
+ -2 & 2 &-2 &-3\\
+ -1 &2 &-2 &-3
+\end{array} \right|
+\end{eqnarray*}
+不直接计算$C_{ij}$, 求解以下各题：
+
+(1) $-2C_{11}+2C_{21}+3C_{31}+4C_{41};$
+
+(2) $C_{13}+C_{23}+C_{33}+C_{43}.$
+\end{ex}
+\begin{proof}[解]
+(1)将$D$的第一列换成$(-2, 2, 3, 4)$再求行列式，等于$1$；\\
+(2)将$D$的第三列换成$(1, 1, 1, 1)$再求行列式,等于$-1$；
+\end{proof}
+
+\begin{ex}
+设
+\begin{eqnarray*}
+ D=\left |
+\begin{array}{cccc}
+1 &-1 &1 &2 \\ 3 &6 &1 &1\\ 1 &2 &2 &2\\ -1 &2 & -2& -3
+\end{array}
+\right |
+\end{eqnarray*} 求$S_1=C_{21}+2C_{22}$ 和$S_2=C_{23}+C_{24}$.
+\end{ex}
+
+
+
+\begin{ex}
+设
+\begin{eqnarray*}
+D(x)=\left|
+\begin{array}{ccc}
+a_{11}(x) &a_{12}(x) &a_{13}(x)\\
+a_{21}(x) &a_{22}(x) &a_{23}(x)\\
+a_{31}(x) &a_{32}(x) &a_{33}(x)
+\end{array}
+\right|.
+\end{eqnarray*}
+其中函数$a_{ij}$可导.
+
+(1)求证:\begin{eqnarray*}
+D'(x)&=\left|
+\begin{array}{ccc}
+a'_{11}(x) &a'_{12}(x) &a'_{13}(x)\\
+a_{21}(x) &a_{22}(x) &a_{23}(x)\\
+a_{31}(x) &a_{32}(x) &a_{33}(x)
+\end{array}
+\right|+\left|
+\begin{array}{ccc}
+a_{11}(x) &a_{12}(x) &a_{13}(x)\\
+a'_{21}(x) &a'_{22}(x) &a'_{23}(x)\\
+a_{31}(x) &a_{32}(x) &a_{33}(x)
+\end{array}
+\right|\\&+\left|
+\begin{array}{ccc}
+a_{11}(x) &a_{12}(x) &a_{13}(x)\\
+a_{21}(x) &a_{22}(x) &a_{23}(x)\\
+a'_{31}(x) &a'_{32}(x) &a'_{33}(x)
+\end{array}
+\right|.
+\end{eqnarray*}
+
+(2)将上述结论推广到$n$阶的情形
+
+\end{ex}
+
+
+\begin{ex}
+	设$A$为可逆方阵， $D$为方阵， 证明：
+\begin{eqnarray*}
+\left|
+\begin{array}{cc}
+A &B\\
+C &D\\
+\end{array}
+\right|=|A||D-CA^{-1}B|.
+\end{eqnarray*}
+	\end{ex}
+
+
+
+\begin{ex}[$\heartsuit $]
+求如下的$n$阶范德蒙行列式：
+\begin{eqnarray*}
+\left|
+\begin{array}{ccccc}
+1 & x_1 & \cdots & x_1^{n-1}  \\
+1 & x_2 & \cdots & x_2^{n-1}\\
+\vdots & \vdots & \vdots & \vdots \\
+1 & x_n & \cdots & x_n^{n-1}
+\end{array}
+\right|.
+\end{eqnarray*}
+\end{ex}
+\begin{proof}[提示]参考《线性代数入门》p.164-165
+\end{proof}
+
+\begin{ex}[$\heartsuit $]
+设$Q$是$n$阶正交矩阵，即$Q^TQ=QQ^T=I_n$。
+
+(1) 若$|Q|<0$，求证：$|Q+I_n|=0$，因此存在非零向量$\mathbf{v} \in \mathbb{R}^n$，使得$Q\mathbf{v}=-\mathbf{v}$。
+
+(2) 设 $|Q|>0$. 证明当$n$是奇数时等式$|Q-I_n|=0$总成立. 当n是偶数时, 判断等式$|Q-I_n|=0$是否成立. 若成立, 请给出证明;若不成立, 请举出反例.
+\end{ex}
+
+(1)\begin{proof}[证法一]考虑$f(t)=|Q+tI_n|$，其为关于$t$的$n$次多项式，且首项系数为$1$。$f(0)<0, \lim_{t \rightarrow +\infty}f(t)=+\infty$，由连续函数介值定理，一定存在$\lambda >0$，使得$f(\lambda)=|Q+\lambda I_n|=0$，即$Q+\lambda I_n$不满秩。因此存在非零向量$\mathbf{v} \in \mathbb{R}^n$，使得$Q\mathbf{v}=-\lambda \mathbf{v}$。因为$Q$是正交矩阵，考虑$(Q\mathbf{v})^T(Q\mathbf{v})=\mathbf{v}^TQ^TQ\mathbf{v}=\mathbf{v}^T \mathbf{v}$。另一方面$(Q\mathbf{v})^T(Q\mathbf{v})= \lambda^2 \mathbf{v}^T \mathbf{v}$。因此$\lambda^2=1, \lambda=1$.
+\end{proof}
+\begin{proof}[证法二]由于$|Q|^2 = |Q^TQ | = |I_n| = 1$且$|Q|<0,$ 我们有$|Q| = -1.$ 于是$|Q + I_n| = |Q + Q Q^T| = |Q| |I_n + Q^T| = |Q| |Q +I_n | = - |Q+I_n|$。因此,$|Q+I_n| = 0.$
+\end{proof}
+(2) \begin{proof}[解]
+
+$n$为奇数时与(1)类似。
+当$n=2$时,
+\begin{eqnarray*}
+Q=\left(\begin{array}{cc}
+\cos \theta & \sin \theta\\
+-\sin \theta & \cos \theta
+\end{array}\right),
+\end{eqnarray*}
+$\theta \neq 2k\pi$时，$|Q-I_2| \neq 0$。
+\end{proof}
+
+
+
+\end{document}

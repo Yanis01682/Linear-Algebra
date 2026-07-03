@@ -1,0 +1,408 @@
+% !TEX program = xelatex
+\documentclass[UTF8]{ctexart}
+
+\usepackage{amscd,amsthm,amsfonts,amssymb,amsmath}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage[all]{xy}
+\usepackage{mathrsfs}
+\usepackage{tikz,mathpazo}
+\usepackage{bm}
+\usepackage{geometry}
+\usepackage{xcolor}
+\usepackage{eso-pic}
+%\usepackage{CJK}
+\usepackage{arydshln}
+\usepackage{mathptmx}
+\usepackage[11pt]{moresize}
+
+\newcommand\bs[1]{\boldsymbol{ #1}}
+
+\newenvironment{bmatriX}[1]{\left[\hskip -\arraycolsep \begin{array}{#1}}{\end{array}\hskip -\arraycolsep\right]}
+	
+	\newtheorem{thm}{定理}
+	\newtheorem{cor}[thm]{推论}
+	\newtheorem{lem}[thm]{引理}
+	\newtheorem{prop}[thm]{命题}
+	\newtheorem{defn}[thm]{定义}
+	\newtheorem{ques}[thm]{问题}
+	\newtheorem{eg}[thm]{例题}
+	\newtheorem{ex}[thm]{习题}
+	\newtheorem{rmk}[thm]{注释}
+		\newtheorem{ntn}[thm]{记号}
+
+
+\newif\ifhideproofs
+\hideproofstrue
+\newif\iffinalver
+%\finalvertrue        
+\ifhideproofs
+    \usepackage[final]{changes}
+    \definechangesauthor[name=Error, color=red]{err}
+    \usepackage{environ}
+    \NewEnviron{hide}{}
+    \let\proof\hide
+    \let\endproof\endhide
+\else
+    \iffinalver
+        \usepackage[final]{changes}
+    \else
+        \usepackage{changes}
+    \fi
+    \definechangesauthor[name=Error, color=red]{err}
+\fi
+
+		
+\begin{document}
+
+
+\title{习题课材料（二）}
+
+\date{}
+
+\maketitle
+
+\vspace{-1cm}
+
+
+
+\noindent{\Large\textbf{注: 带 $\heartsuit $号的习题有一定的难度、比较耗时, 请量力为之.}}
+
+\medskip
+
+本节考虑的矩阵均为实矩阵。
+
+\begin{ex}
+证明：
+\begin{enumerate}
+	\item 设 $n$ 维向量 $\bs x$ 的每个分量都是 $1$， 则 $n$ 阶方阵  $A$ 的各行元素之和为 $1$ 当且仅当 $A \bs x=\bs x$.
+	\item 若 $n$ 阶方阵 $A, B$ 的各行元素之和均为$1$, 则 $AB$ 的各行元素之和也均为 $1$.
+	\item 若 $n$ 阶方阵 $A, B$ 的各列元素之和均为$1$, 则 $AB$ 的各列元素之和也均为 $1$.
+\end{enumerate}
+\end{ex}
+\begin{proof}[解答]
+\begin{enumerate}
+\item 向量$A \bs x $的第$i$行元素为$\sum_j a_{ij} ,$ 于是$A$的各行元素之和为 $1$ 当且仅当 $A \bs x=\bs x$.
+
+\item 如果$A \bs x = \bs x,$ $B\bs x = \bs x,$ 则$(AB)\bs x = A (B \bs x) = A \bs x = \bs x.$
+
+\item 一个$n$阶方阵$A$的各列元素之和为$1$当且仅当$A^T$的各行元素之和为$1.$ 由$A, B$ 的各列元素之和均为$1$, \added{知} $A^T, B^T$的各行元素之和均为$1$. 由2, $(AB)^T = B^T A^T$的各行元素之和均为$1$, 于是$AB$的各列元素之和也为$1.$
+\end{enumerate}
+\end{proof}
+
+
+
+\begin{ex}
+设$A = \begin{bmatrix}
+				\lambda & 1 & 0 \\ 0 & \lambda & 1 \\ 0 & 0 & \lambda
+			\end{bmatrix},$ 求$A^k,$ 其中$k$为正整数.
+\end{ex}
+\begin{proof}[解答]
+令$N = \begin{bmatrix}
+				0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0
+			\end{bmatrix}.$ $N^2 = \begin{bmatrix}
+				0 & 0 & 1 \\ 0 & 0 & 0 \\ 0 & 0 & 0
+			\end{bmatrix},$ $N^3 = O.$ $A = \lambda I + N.$ 由于$\lambda I $与$N$可交换, 可以使用二项式展开公式, 得到
+\begin{align*}
+A^k & = \sum_{i=0}^k \binom{k}{i}(\lambda I)^{k-i}N^i = \binom{k}{0}(\lambda I)^{k}+\binom{k}{1}(\lambda I)^{k-1}N + \binom{k}{2}(\lambda I)^{k-2}N^2\\
+& = \begin{bmatrix}
+				\lambda^k & k\lambda^{k-1} & \frac{k(k-1)}{2}\lambda^{k-2} \\ 0 & \lambda^k & k\lambda^{k-1} \\ 0 & 0 & \lambda^k
+			\end{bmatrix}.
+\end{align*}
+\end{proof}
+
+\begin{ex}[$\heartsuit $]
+\begin{enumerate}
+\item 设$A$为$n$阶方阵, 求证: $A + A^T,$ $AA^T, $ $A^T A$都是对称矩阵, 而$A - A^T$是反对称矩阵.
+
+\item 求证: 任意方阵$A$都可唯一地表为$A = B+C, $ 其中$B$是对称矩阵, $C$是反对称矩阵.
+
+\item 求证: $n$阶方阵$A$是反对称矩阵当且仅当对任意的$n$维列向量$\bs x$, 都有$\bs x^T A \bs x = 0$.
+
+\item 求证: 设$A,B$是$n$阶对称矩阵, 则$A = B $当且仅当对任意$n$维列向量$\bs x$, 都有$\bs x^T A \bs x = \bs x^T B \bs x$.
+
+\item 给定$n$阶实反对称矩阵$A,$ 求证$I_n - A$可逆.
+\end{enumerate}
+\end{ex}
+\begin{proof}[解答]
+\begin{enumerate}
+\item 容易验证.
+
+\item $A = \frac{A+A^T}{2} + \frac{A-A^T}{2}.$
+
+\item 如果$A$反对称, 则$(\bs x^T A \bs x)^T = \bs x^T A^T \bs x = -\bs x^T A \bs x,$ 由于$\bs x^T A \bs x$是一个数, $\bs x^T A \bs x = (\bs x^T A \bs x)^T = -\bs x^T A \bs x.$ 于是$\bs x^T A \bs x=0.$ 反之, \replaced{对标准坐标向量组中的向量$e_i$及$e_j$}{$\forall i,j$}, 有$(\bs e_i + \bs e_j)^T A (\bs e_i + \bs e_j) = 0.$ 展开得到$\bs e_i^T A \bs e_j = -\bs e_j^T A \bs e_i,$ 即$a_{ij} = - a_{ji},$ $A$反对称.
+
+
+\item $A,B$对称得到$A-B$对称. 由上一小问, $\forall \bs x,$ $\bs x^T (A-B) \bs x = 0$当且仅当$A-B$是反对称矩阵. \replaced{而既}{即}对称又反对称的矩阵是零方阵.
+
+\item 考虑方程$(I_n - A)(\bs x) = \bs 0.$ 设$\bs x_0$是方程的一个解. $\bs x_0 = A \bs x_0$, 于是$\bs x_0^T \bs x_0 = \bs x_0^T A \bs x_0.$ 由于$A$实反对称, $\bs x_0^T A \bs x_0 = 0.$ 于是$\bs x_0^T \bs x_0 =  0.$ 由于$\bs x_0$为实向量, $\bs x_0 = \bs 0.$ 因此, $I_n - A$可逆.
+\end{enumerate}
+\end{proof}
+
+\begin{ex}
+证明: 如果$n$阶方阵$A$满足$A^2 = A,$ 则$I_n-2A$可逆.
+\end{ex}
+\begin{proof}[解答]
+考虑方程$(I_n - 2A)(\bs x) = \bs 0.$ 设$\bs x_0$是方程的一个解\replaced{,即}{.} $\bs x_0 = 2A \bs x_0.$ 由于$A^2 = A,$ $A \bs x_0 = 2A^2 \bs x_0 = 2A\bs x_0,$ 于是$A \bs x_0 = \bs 0.$ 由此得到$\bs x_0 = 2 A \bs x_0 = \bs 0.$ 因此, $I_n - 2A$可逆.
+\end{proof}
+
+
+
+
+
+
+
+
+\begin{ex}
+设$A = \begin{bmatrix} 1 & 2 & -1\\ 3 & a & -2 \\ 5 & -2 & 1  \end{bmatrix}$不可逆, 求$a.$
+\end{ex}
+\begin{proof}[解答]
+利用高斯消元判断$A$是否可逆.
+\[
+\begin{bmatrix} 1 & 2 & -1\\ 3 & a & -2 \\ 5 & -2 & 1  \end{bmatrix} \to \begin{bmatrix} 1 & 2 & -1\\ 0 & a-6 & 1 \\ 0 & -12 & 6  \end{bmatrix} \to \begin{bmatrix} 1 & 2 & -1\\ 0 & 1 & -1/2 \\ 0 & a-6 & 1  \end{bmatrix} \to \begin{bmatrix} 1 & 2 & -1\\ 0 & 1 & -1/2 \\ 0 & 0 & (a-4)/2  \end{bmatrix}
+\]
+因此, $A$不可逆当且仅当$a=4.$
+\end{proof}
+
+
+
+\begin{ex}
+求下列矩阵方程的解: $\begin{bmatrix} 2 & 2 & 3\\ 1 & -1 & 0 \\ -1 & 2 & 1  \end{bmatrix} X = \begin{bmatrix} 4 & -1 \\ 2 & 1  \\ 1 & 0  \end{bmatrix}$
+\end{ex}
+
+
+\begin{proof}[解答1]
+利用高斯-若当消元方法对下列矩阵进行初等行变换
+\[
+\begin{bmatriX}{ccc|ccc} 2 & 2 & 3 & 1 & 0 & 0 \\ 1 & -1 & 0 & 0 & 1 & 0 \\ -1 & 2 & 1& 0 & 0 &1 \end{bmatriX}
+\]
+将左侧$\begin{bmatrix} 2 & 2 & 3\\ 1 & -1 & 0 \\ -1 & 2 & 1  \end{bmatrix}$变为单位阵, 右侧单位阵变为$\begin{bmatrix} 2 & 2 & 3\\ 1 & -1 & 0 \\ -1 & 2 & 1  \end{bmatrix}^{-1}.$ 由此得到
+\[
+\begin{bmatrix} 2 & 2 & 3\\ 1 & -1 & 0 \\ -1 & 2 & 1  \end{bmatrix}^{-1} = \begin{bmatrix} 1 & -4 & -3\\ 1 & -5 & -3 \\ -1 & 6 & 4  \end{bmatrix}
+\]
+于是
+\[
+X = \begin{bmatrix} 2 & 2 & 3\\ 1 & -1 & 0 \\ -1 & 2 & 1  \end{bmatrix}^{-1}\begin{bmatrix} 4 & -1 \\ 2 & 1  \\ 1 & 0  \end{bmatrix} = \begin{bmatrix} -7 & -5 \\ -9 & -6  \\ 12 & 7  \end{bmatrix}
+\]
+\end{proof}
+
+
+\begin{proof}[解答2]
+对下列矩阵进行初等行变换
+\[
+\begin{bmatriX}{ccc|cc} 2 & 2 & 3 & 4 & -1  \\ 1 & -1 & 0 & 2 & 1  \\ -1 & 2 & 1& 1 & 0  \end{bmatriX}
+\]
+将左侧$\begin{bmatrix} 2 & 2 & 3\\ 1 & -1 & 0 \\ -1 & 2 & 1  \end{bmatrix}$变为单位阵, 右侧$3\times 2$矩阵变为矩阵方程的解
+\[
+X = \begin{bmatrix} 2 & 2 & 3\\ 1 & -1 & 0 \\ -1 & 2 & 1  \end{bmatrix}^{-1}\begin{bmatrix} 4 & -1 \\ 2 & 1  \\ 1 & 0  \end{bmatrix} = \begin{bmatrix} -7 & -5 \\ -9 & -6  \\ 12 & 7  \end{bmatrix}.
+\]
+\end{proof}
+
+
+
+\begin{ex}
+设$A$的行简化阶梯形为$R,$ 行变换对应的可逆矩阵是$P.$
+\begin{enumerate}
+\item 求 $\begin{bmatrix} A & 2A  \end{bmatrix}$的行简化阶梯形, 以及行变换对应的可逆矩阵.
+
+\item 求 $\begin{bmatrix} A \\  2A  \end{bmatrix}$的行简化阶梯形, 以及行变换对应的可逆矩阵.
+\end{enumerate}
+\end{ex}
+
+
+\begin{proof}[解答]
+\begin{enumerate}
+\item $PA = R,$ $P \begin{bmatrix} A & 2A  \end{bmatrix} = \begin{bmatrix} PA & 2PA  \end{bmatrix} = \begin{bmatrix} R & 2R  \end{bmatrix}$为$\begin{bmatrix} A & 2A  \end{bmatrix}$的行简化阶梯形.
+
+\item $\begin{bmatrix} I & O \\ -2I & I  \end{bmatrix} \begin{bmatrix} A \\  2A  \end{bmatrix} = \begin{bmatrix} A \\  O  \end{bmatrix}$, $\begin{bmatrix} P & O \\ O & I  \end{bmatrix}\begin{bmatrix} A \\  O  \end{bmatrix} = \begin{bmatrix} R \\  O  \end{bmatrix}.$ 行简化阶梯形为$\begin{bmatrix} R \\  O  \end{bmatrix},$ 行变换矩阵为$\begin{bmatrix} P & O \\ O & I  \end{bmatrix} \begin{bmatrix} I & O \\ -2I & I  \end{bmatrix}  = \begin{bmatrix} P & O \\ -2I & I  \end{bmatrix} .$
+\end{enumerate}
+\end{proof}
+
+\begin{ex}[矩阵的迹]\label{trace}
+方阵$A$的对角线元素的和称为它的{\bf 迹}, 记作${\rm trace}(A).$ 验证下列性质.
+\begin{enumerate}
+\item 对任意同阶方阵$A,B,$ ${\rm trace}(A + B) = {\rm trace}(A) + {\rm trace}(B).$
+
+\item 对任意方阵$A$与实数$k,$ ${\rm trace}(kA ) = k{\rm trace}(A) .$
+
+\item 对$m$阶单位阵$I_m,$ ${\rm trace}(I_m ) = m .$
+
+\item 对任意方阵$A$, ${\rm trace}(A ) = {\rm trace}(A^T) .$
+
+\item 设$A = \begin{bmatrix} a_1 & a_2 \\ a_3 & a_4  \end{bmatrix},$ $B = \begin{bmatrix} b_1 & b_2\\ b_3 & b_4  \end{bmatrix},$ 则${\rm trace}(A^T B) = \sum_{i=1}^4 a_i b_i.$ 如果$A,B$是$m$阶方阵呢?
+
+\item 设$A$是实对称矩阵, 如果${\rm trace}(A^2) = 0,$ 则$A = O.$
+
+\item 设$\bs v,\bs w$是$m$维向量, 则${\rm trace}(\bs v^T \bs w ) = {\rm trace}(\bs w \bs v^T) .$
+
+\item 设$A,B$分别是$m\times n$, $n\times m$矩阵, 则${\rm trace}(AB ) = {\rm trace}(BA) .$
+
+\item 设$A,B$是任意$m$阶方阵, 则$AB - BA \neq I_m.$
+\end{enumerate}
+\end{ex}
+\begin{proof}[解答]
+1-4 容易验证.
+
+5. ${\rm trace}(A^T B) = \sum_{i,j=1}^m a_{ij} b_{ij}.$
+
+6. 由于$A$实对称, $A^T A = A^2,$ 于是${\rm trace}(A^T A) = 0.$ 由5立得.
+
+7.8 直接验证.
+
+9. ${\rm trace}(AB- BA) = 0,$ 而${\rm trace}(I_m) = m.$ 因此, $AB - BA \neq I_m.$
+\end{proof}
+
+\begin{ex}[$\heartsuit $]
+设实分块方阵$X= \begin{bmatrix} A & C \\ O & B  \end{bmatrix} $, 其中$A$是方阵, 如果$X$与$X^T$可交换, 求证: $C = O.$
+\end{ex}
+\begin{proof}[解答]
+由$XX^T = X^T X$, 即$\begin{bmatrix} A & C \\ O & B  \end{bmatrix} \begin{bmatrix} A^T & O \\ C^T & B^T  \end{bmatrix}  = \begin{bmatrix} A^T & O \\ C^T & B^T  \end{bmatrix}  \begin{bmatrix} A & C \\ O & B  \end{bmatrix} ,$ 得到
+\[
+\begin{bmatrix} AA^T + CC^T & CB^T \\ BC^T & BB^T  \end{bmatrix}  = \begin{bmatrix} A^TA & A^T C \\ C^TA & C^T C + B^T B  \end{bmatrix}
+\]
+因此, $AA^T + CC^T = A^T A.$ 两边取迹, 由于${\rm trace}(AA^T) ={\rm trace}( A^T A),$ 得到${\rm trace}(CC^T) = 0.$ 由习题\ref{trace}-5, 得到$C=O.$
+\end{proof}
+
+
+\begin{ex}[$\heartsuit $]
+令
+$
+X_{\epsilon}=\begin{bmatrix}
+A& \epsilon B_1\\
+ B_2 &C\\
+\end{bmatrix}
+,
+$
+其中$\epsilon \in \mathbb{R}$, 而%$A$为以下$3\times 3$的矩阵，
+$
+A=\begin{bmatrix}
+1&2 &3 \\
+2&1 &3\\
+0&1&4\\
+\end{bmatrix},
+$
+$C$为$n$阶对角占优方阵，$B_1$为任意给定的$3\times n$矩阵，$B_2$为任意给定的$n\times 3$矩阵。
+\begin{enumerate}
+	\item  求$A$的$LU$分解。
+	\item  先说明$A$可逆，再试找一个常数$\epsilon_0 > 0$ (依赖于$C, B_1,B_2$)， 使得对任意 满足条件$   |\epsilon|\leq \epsilon_0 $的$\epsilon$, $X_\epsilon$ 均可逆。
+\end{enumerate}
+\end{ex}
+\begin{proof}[解答]
+\begin{enumerate}
+\item
+\[
+ \begin{bmatrix}
+1&2 &3 \\
+2&1 &3\\
+0&1&4\\
+\end{bmatrix}\longrightarrow \begin{bmatrix}
+1&2 &3 \\
+0&-3 &-3\\
+0&1&4\\
+\end{bmatrix}=:A_1, \quad E_1 A=A_1, \quad E_1=  \begin{bmatrix}
+1&0 &0 \\
+-2&1 &0\\
+0&0&1\\
+\end{bmatrix}
+\]
+\[
+\begin{bmatrix}
+1&2 &3 \\
+0&-3 &-3\\
+0&1&4\\
+\end{bmatrix}\longrightarrow \begin{bmatrix}
+1&2 &3 \\
+0&-3 &-3\\
+0&0&3\\
+\end{bmatrix}=:U, \quad E_2A_1=U, \quad E_2=  \begin{bmatrix}
+1&0 &0 \\
+0&1 &0\\
+0&1/3&1\\
+\end{bmatrix}
+\]
+\[
+A=LU,\quad L=(E_2E_1)^{-1}=E_1^{-1}E_2^{-1}= \begin{bmatrix}
+1&0 &0 \\
+ 2&1 &0\\
+0&0&1\\
+\end{bmatrix} \begin{bmatrix}
+1&0 &0 \\
+0&1 &0\\
+0&-1/3&1\\
+\end{bmatrix}
+\]
+\[
+= \begin{bmatrix}
+1&0 &0 \\
+ 2&1 &0\\
+0&-1/3&1\\
+\end{bmatrix}
+\]
+综上所述
+\[
+A=LU, \quad L= \begin{bmatrix}
+1&0 &0 \\
+ 2&1 &0\\
+0&-1/3&1\\
+\end{bmatrix}, \quad U=  \begin{bmatrix}
+1&2 &3 \\
+0&-3 &-3\\
+0&0&3\\
+\end{bmatrix}.
+\]
+
+\item
+因为$L,U$均可逆，所以$A$可逆。因为
+\[
+\begin{bmatrix}
+I_3& 0\\
+ -B_2 A^{-1}&I_n\\
+\end{bmatrix} \begin{bmatrix}
+A& \epsilon B_1\\
+ B_2 &C\\
+\end{bmatrix} = \begin{bmatrix}
+A& \epsilon B_1\\
+0 &C-\epsilon B_2 A^{-1}B_1\\
+\end{bmatrix}
+\]
+所以$X_{\epsilon}$可逆当且仅当$C-\epsilon B_2 A^{-1}B_1$可逆。
+
+记
+\[
+M:=B_2A^{-1}B_1, \quad M:=[m_{ij}]_{n\times n},\quad \Longrightarrow C-\epsilon M=[c_{ij}-\epsilon m_{ij}]_{n\times n}
+\]
+令
+\[
+\epsilon_{0}= \frac{1}{2(1+n\|M\|)}\inf_{i=1,\cdots, n} \big\{|c_{ii}|-\sum_{j\neq i} |c_{ij}|\big\}, \quad \| M\|:=\max\{{\color{blue}\mid}m_{ij}{\color{blue}\mid}:i,j\in\{1,\cdots, n\}\}
+\]
+\comment[id=err]{原先上述$\|M\|$的定义中矩阵元素未取绝对值, 应该是不对的.}
+
+因为$C$为对角占优矩阵，
+%\highlight[id=err,comment={这个可能不对。由于$C$是对角占优矩阵，所以$\inf_{i=1,\cdots, n} \big\{|c_{ii}|-\sum_{j\neq i} |c_{ij}|\big\}>0$. 如欲claim $\epsilon_0>0$, 还需说明$1+n\|M\|>0$, 即$\|M\|>-\frac{1}{n}$. 但这不一定成立. 如取$n=1, B_1=\begin{bmatrix}-1\\0\\0\end{bmatrix},B_2=\begin{bmatrix}0,2,0\end{bmatrix}$时，由计算可知$M=\begin{bmatrix}-\frac{16}{9}\end{bmatrix},\|M\|$<-1.}]{
+所以上述$\epsilon_0>0$.%}.
+
+
+因此对任何满足$ |\epsilon|\leq \epsilon_0$的$\epsilon$, $i\in\{1,\cdots, n\}$, 我们有
+\[
+|c_{ii}-\epsilon m_{ii}|-\sum_{j\neq i} |c_{ij}-\epsilon m_{ij}|
+\]
+\[
+\geq |c_{ii}|-\sum_{j\neq i} |c_{ij}|- \sum_{j=1}^n \epsilon |m_{ij}|{\color{red}\geq} \frac{1}{2} ( |c_{ii}|-\sum_{j\neq i} |c_{ij}|)> 0.
+\]
+\comment{上式中红色$\geq$没看懂怎么来的，遂重写.}
+
+{\color{blue}
+注意到$|c_{ii}|-\sum_{j\neq i} |c_{ij}| \geq 2(1+n\|M\|)\epsilon_0$ 及 $\sum_{j=1}^n \epsilon |m_{ij}|\leq n\|M\|\epsilon_0$, 于是
+\begin{align*}
+    |c_{ii}-\epsilon m_{ii}|-\sum_{j\neq i} |c_{ij}-\epsilon m_{ij}|\geq &2(1+n\|M\|)\epsilon_0-n\|M\|\epsilon_0\\
+    =&(2+n\|M\|)\epsilon_0\\
+    >&0.
+\end{align*}
+
+}
+因此$C-\epsilon M$仍然为对角占优矩阵，故$C-\epsilon M$可逆。 综上所述, $X_\epsilon$可逆。
+\end{enumerate}
+\end{proof}
+
+\clearpage
+\listofchanges
+\end{document}
